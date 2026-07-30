@@ -52,11 +52,6 @@
         
         .btn-restore { flex: 1; background-color: #2980b9; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; box-shadow: 0 4px 6px rgba(41, 128, 185, 0.2); display: flex; justify-content: center; align-items: center; gap: 8px;}
         .btn-restore:hover { background-color: #2471a3; }
-        
-        .btn-success { background-color: #27ae60; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;}
-        .btn-success:hover { background-color: #219653; }
-        .btn-warning { background-color: #f39c12; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s;}
-        .btn-warning:hover { background-color: #d68910; }
 
         /* NASIL KULLANILIR STİLLERİ */
         .info-section { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
@@ -85,8 +80,6 @@
         .butce-tablo input { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
         .toplam-satir { font-weight: bold; background: #e8f0fe; color: #0056b3;}
         
-        .raw-paste-box { background-color: #f4fce8; border-left: 5px solid #27ae60; font-family: monospace; white-space: pre; overflow-x: auto; height: 120px; }
-
         /* PDF ÇIKTI ALANI (GÖRÜNMEZ, DOKUNULMAZ) */
         #pdf-wrapper { display: none; width: 100%; position: absolute; top: 0; left: 0; z-index: 9999; background: white; }
         #pdf-content { width: 170mm; margin: 0 auto; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; padding: 15px 0; box-sizing: border-box; }
@@ -140,7 +133,6 @@
         <button class="tab-btn active" onclick="sekmeDegistir('genel', this)">📄 Genel Kurul Evrakları</button>
         <button class="tab-btn" onclick="sekmeDegistir('yonetim', this)">📁 Yönetim Kurulu</button>
         <button class="tab-btn" onclick="sekmeDegistir('denetim', this)">🔍 Denetim Kurulu</button>
-        <button class="tab-btn" style="background:#8e44ad; color:#fff; border-color:#8e44ad;" onclick="sekmeDegistir('duyuru', this)">📱 Veli Duyuru (WhatsApp)</button>
         <button class="tab-btn" style="background:#2980b9; color:#fff; border-color:#2980b9;" onclick="sekmeDegistir('nasil', this)">ℹ️ Nasıl Kullanılır?</button>
     </div>
 
@@ -171,18 +163,6 @@
             </div>
 
             <div class="info-card">
-                <h4>📱 Veli Duyuru (WhatsApp) Otomasyonu</h4>
-                <p>Tek tek mesaj atmak veya velilere ulaşmak artık çok kolay!</p>
-                <ol>
-                    <li>Veli Duyuru sekmesine tıkladığınızda sistem otomatik olarak okul adınızı, toplantı saati ve yerini içeren kurumsal bir duyuru mesajı oluşturur.</li>
-                    <li>Herhangi bir Excel dosyasından velilerinizin "Ad Soyad" ve "Telefon" sütununu kopyalayıp ilgili alana yapıştırın.</li>
-                    <li>Sistem tüm telefon numaralarını temizler ve WhatsApp formatına getirir.</li>
-                    <li>Sistemin metin içindeki <b>[VELİ_ADI]</b> etiketini otomatik olarak algılayıp mesajı her veliye özel olarak isimlendirdiğini göreceksiniz.</li>
-                    <li>Listeden her velinin yanındaki <b>Gönder</b> butonuna basarak tek tıkla mesajınızı web.whatsapp.com üzerinden o velinin sohbet ekranına düşürebilirsiniz. Gönderdiklerinizin butonu griye döner.</li>
-                </ol>
-            </div>
-
-            <div class="info-card">
                 <h4>✏️ Dinamik Metinler ve Tutanak Özelleştirme</h4>
                 <p>Evrakların hiçbir sabite bağlı kalmaması adına Yönetim ve Denetim Kurulu raporlarındaki tutanak metinleri sizin kontrolünüzdedir.</p>
                 <ol>
@@ -191,46 +171,20 @@
                     <li>Orijinal metninizde yer alan sıralama atlamalarını veya eklemek istediğiniz ilave kararları, PDF oluşturmadan önce bu metin kutusundan dilediğiniz gibi düzenleyebilirsiniz.</li>
                 </ol>
             </div>
+
+            <div class="info-card">
+                <h4>🖨️ Bütçe, Bilanço ve PDF Çıktı Alma</h4>
+                <ol>
+                    <li>Önceki dönem ve yeni dönem tahmini bütçe (Gelir-Gider) tablolarını doldurduğunuzda; sistem alt toplamları, devreden miktarları ve banka/kasa durumlarını saniyesinde hesaplar. Raporlara "Gelirler Toplamı" veya "Giderler Toplamı" olarak milimetrik yansıtır.</li>
+                    <li>Gerekli evrakı seçtikten sonra "Evrak Oluştur ve İndir" butonuna tıklamanız yeterlidir. Sistem cihazınıza formata ve hizalamalara sadık kalınmış bir PDF indirir.</li>
+                </ol>
+            </div>
             
             <div class="support-card">
                 <h4>Geri Bildirim ve Destek</h4>
                 <p><strong>Okul Aile Birliği Evrak Otomasyonu</strong>, siz değerli meslektaşlarımızın evrak yükünü hafifletmek ve idari süreçleri hızlandırmak amacıyla tasarlanmıştır.</p>
                 <p>Sistemin daha da iyileştirilmesi, karşılaştığınız olası hataların (bug) giderilmesi veya yeni modül fikirleriniz için benimle her zaman iletişime geçebilirsiniz.</p>
                 <div class="email-badge">✉️ gorkemkocaman.tr@gmail.com</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- VELİ DUYURU (WHATSAPP) ALANI -->
-    <div id="duyuruAlani" style="display: none;">
-        <div class="panel-card">
-            <h3>💬 1. Toplantı Duyuru Mesajı</h3>
-            <div class="info-box">
-                Aşağıdaki mesaj, "Genel Kurul Evrakları" sekmesindeki bilgilerinize göre otomatik olarak oluşturulmuştur. 
-                <br><br><b>ÖNEMLİ:</b> Metnin içindeki <code>[VELİ_ADI]</code> etiketini silmeyin. Sistem gönderim yaparken bu kısmı Excel'den kopyaladığınız veli ismiyle otomatik olarak değiştirecektir.
-            </div>
-            <textarea id="wpMesajMetni" rows="10"></textarea>
-            <button class="btn btn-warning" style="width:auto; margin-top:10px; display:flex; align-items:center; gap:5px;" onclick="kopyalaWpMesaji()">📋 Sadece Mesajı Kopyala (Grup İçin)</button>
-        </div>
-        
-        <div class="panel-card">
-            <h3>👥 2. Veli Listesi ve Tekli Gönderim (Toplu Mesaj Atma)</h3>
-            <div class="info-box">E-Okul'dan veya kendi listenizden <b>Ad Soyad</b> ve <b>Telefon Numarası</b> sütunlarını kopyalayıp aşağıdaki yeşil kutuya yapıştırın. Sistem numaraları otomatik algılayıp sizin için "Gönder" butonları oluşturacaktır.</div>
-            <textarea id="wpVeliListesi" class="raw-paste-box" placeholder="Örnek Format (Excel'den 2 sütun kopyalayın):&#10;Ahmet Yılmaz    0532 987 65 43&#10;Ayşe Demir      5551234567"></textarea>
-            <button class="btn btn-success" onclick="wpListeHazirla()">⚙️ Numaraları Çözümle ve Gönderim Listesi Oluştur</button>
-            
-            <div id="wpGonderimAlani" style="display:none; margin-top:20px; overflow-x:auto;">
-                <table class="butce-tablo" id="wpTablo">
-                    <thead>
-                        <tr>
-                            <th style="width:40px; text-align:center;">Sıra</th>
-                            <th>Veli Adı Soyadı</th>
-                            <th>Telefon Numarası</th>
-                            <th style="width:140px; text-align:center;">İşlem</th>
-                        </tr>
-                    </thead>
-                    <tbody id="wpTabloBody"></tbody>
-                </table>
             </div>
         </div>
     </div>
@@ -287,7 +241,7 @@
                 </div>
                 <div class="form-group full-width">
                     <label>Okul Adı</label>
-                    <input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi" oninput="updateWpMesaji()">
+                    <input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi">
                 </div>
                 <div class="form-group full-width">
                     <label>Eğitim Öğretim Yılı</label>
@@ -322,16 +276,16 @@
                 </div>
                 <div class="form-group genel-kurul-only">
                     <label>Toplantı Tarihi</label>
-                    <input type="date" id="toplantiTarihi" value="2025-10-30" onchange="validateTarihler(); updateWpMesaji();" oninput="validateTarihler(); updateWpMesaji();">
+                    <input type="date" id="toplantiTarihi" value="2025-10-30" onchange="validateTarihler();" oninput="validateTarihler();">
                     <span id="toplantiTarihiUyari" class="uyari"></span>
                 </div>
                 <div class="form-group genel-kurul-only">
                     <label>Toplantı Saati</label>
-                    <input type="time" id="toplantiSaati" value="10:15" onchange="updateWpMesaji()" oninput="updateWpMesaji()">
+                    <input type="time" id="toplantiSaati" value="10:15">
                 </div>
                 <div class="form-group genel-kurul-only">
                     <label>Toplantı Yeri</label>
-                    <input type="text" id="toplantiYeri" value="Konferans Salonu" oninput="updateWpMesaji()">
+                    <input type="text" id="toplantiYeri" value="Konferans Salonu">
                 </div>
                 <div class="form-group full-width erteleme-grubu genel-kurul-only" id="ertelemeTarihiGrubu">
                     <label>Erteleme Tarihi (1. Toplantı için)</label>
@@ -544,7 +498,7 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
 
 [OKUL_ADI] Okul Aile Birliği olarak, yukarıda kısaca izah etmeye çalıştığımız, tüm iş ve işlemler ve hedefler yönetim kurulu kararı alınarak gerçekleştirilecektir. Yapılan işlemlerin hepsi resmi kayıt altına alınacak olup gerek faturalar gerekse ödemelere ait evraklar muhafaza edilecektir.
 Yapılan iş ve işlemler ile ilgili alınan kararlar düzenli şekilde "Karar Defterine" yazılacak, ekleri dosyalarında muhafaza edilecektir.
-[OKUL_ADI] Okul Aile Birliği olarak, [EĞİTİM_YILI] eğitim-ö-ğretim yılında velilerimizin imkanları oranında alınan bağışlar karşılığında bağış makbuzları, bağış yapanlara zamanında verilecektir. Okulumuz yararına toplanan bağışlar Okul Aile Birliği hesabına yatırılacaktır.
+[OKUL_ADI] Okul Aile Birliği olarak, [EĞİTİM_YILI] eğitim-öğretim yılında velilerimizin imkanları oranında alınan bağışlar karşılığında bağış makbuzları, bağış yapanlara zamanında verilecektir. Okulumuz yararına toplanan bağışlar Okul Aile Birliği hesabına yatırılacaktır.
 Yönetim Kuruluna ait Gelir Gider Defterine bütün gelirler ile giderler düzenli şekilde işlenecektir.
 Yapılan işlerin paralarının ödemesi için, Okul Aile Birliğimizin [BANKA_ADI] hesabından para çekimi yönetim kurulumuzun bilgisi dahilinde yapılacaktır.
 Yapılan harcamalar kadar para çekilecektir ve Okul Aile Birliği Yönetim Kurulumuz tarafından yapılan çalışmaların hepsi yerinde ve zamanında yapılacaktır.
@@ -760,12 +714,12 @@ Sonuç olarak;
 
     // ---------- BAŞLANGIÇ AYARLARI VE TARİH OTOMASYONU ----------
     function initDefaultDates() {
-        if (localStorage.getItem('oab_egitimYili')) return; // Zaten veri varsa varsayılanları ezme
+        if (localStorage.getItem('oab_egitimYili')) return; 
 
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth() + 1; 
-        const startYear = month < 7 ? year - 1 : year; // Haziran'dan önceyse bir önceki döneme aittir
+        const startYear = month < 7 ? year - 1 : year; 
         const endYear = startYear + 1;
 
         document.getElementById('egitimYili').value = `${startYear}-${endYear}`;
@@ -818,27 +772,23 @@ Sonuç olarak;
                     }
                 }
                 
-                // Sayfayı yenilemek yerine DOM'u anında güncelliyoruz
                 loadFromStorage();
                 
-                // Logo varsa onu da çek
                 const savedOkul = localStorage.getItem('oab_okulLogoBase64');
                 if (savedOkul) { 
                     okulLogoBase64 = savedOkul; 
                     document.getElementById('okulLogoDosyaAdi').textContent = 'Okul logosu yüklendi'; 
                 }
                 
-                // Hesaplamaları tetikle
                 toplantiTuruDegisti(true);
                 yeterSayiHesapla();
                 hesaplaButce();
                 updateEgitimYiliOnceki();
                 updateDkTarihleri();
                 updateTutanakMetinleri();
-                updateWpMesaji();
 
                 alert("Yedek başarıyla yüklendi ve tüm veriler ekrana yansıtıldı!");
-                event.target.value = ''; // Dosya seçiciyi sıfırla
+                event.target.value = ''; 
             } catch (err) {
                 alert("Yedek dosyası okunamadı. Lütfen geçerli bir JSON dosyası seçtiğinizden emin olun.");
             }
@@ -846,150 +796,17 @@ Sonuç olarak;
         reader.readAsText(file);
     }
 
-    // ---------- WHATSAPP DUYURU SİSTEMİ (ÖZELLEŞTİRİLMİŞ & ASİSTANLI) ----------
-    function updateWpMesaji() {
-        const okul = document.getElementById('okulAdi').value || 'Okulumuz';
-        const tarih = formatDate(document.getElementById('toplantiTarihi').value);
-        const saat = document.getElementById('toplantiSaati').value || '10:00';
-        const yer = document.getElementById('toplantiYeri').value || 'Konferans Salonu';
-        
-        const msg = `Sayın [VELİ_ADI],\n\n${okul} Okul Aile Birliği Genel Kurul toplantısı ${tarih} günü saat ${saat}'te ${yer}'nde gerçekleştirilecektir.\n\nEğitim-öğretim kalitemizi artırmak ve öğrencilerimizin geleceğine yön vermek adına toplantıya katılımlarınızı önemle rica ederiz.\n\nSaygılarımızla,\nOkul İdaresi ve OAB Yönetimi`;
-        
-        const mevcut = document.getElementById('wpMesajMetni').value.trim();
-        if(!mevcut || document.getElementById('wpMesajMetni').dataset.auto === "1") {
-            document.getElementById('wpMesajMetni').value = msg;
-            document.getElementById('wpMesajMetni').dataset.auto = "1";
-        }
-    }
-    
-    function kopyalaWpMesaji() {
-        const copyText = document.getElementById("wpMesajMetni");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
-        alert("Mesaj panoya kopyalandı! WhatsApp gruplarına yapıştırabilirsiniz.");
-    }
-
-    let wpSiraListesi = []; // Toplu gönderim asistanı için dizi
-    let currentWpIndex = 0;
-
-    function wpListeHazirla() {
-        const raw = document.getElementById('wpVeliListesi').value.trim();
-        if(!raw) { alert("Lütfen veli listesini boşluğa yapıştırın."); return; }
-        
-        const lines = raw.split('\n');
-        let tbody = '';
-        let sayac = 1;
-        wpSiraListesi = [];
-        currentWpIndex = 0;
-        
-        lines.forEach(line => {
-            if(!line.trim()) return;
-            
-            let parts = line.split('\t');
-            let isim = "";
-            let telefon = "";
-            
-            if(parts.length >= 2) {
-                isim = parts[0].trim();
-                telefon = parts[1].trim();
-            } else {
-                const match = line.match(/(.*?)(0?\s*5\d{2}\s*\d{3}\s*\d{2}\s*\d{2}|5\d{9})/);
-                if(match) {
-                    isim = match[1].trim();
-                    telefon = match[2].trim();
-                } else {
-                    isim = line.trim(); 
-                }
-            }
-            
-            let cleanPhone = telefon.replace(/\D/g, '');
-            if (cleanPhone.length === 10 && cleanPhone.startsWith('5')) cleanPhone = '90' + cleanPhone;
-            if (cleanPhone.length === 11 && cleanPhone.startsWith('0')) cleanPhone = '90' + cleanPhone.substring(1);
-            
-            let link = "";
-            if(cleanPhone.length >= 12 && cleanPhone.startsWith('90')) {
-                link = `<button class="btn btn-success" style="padding:6px 12px; margin:0;" id="wpBtn_${sayac-1}" onclick="wpGonder('${cleanPhone}', '${isim.replace(/'/g,"\\'")}', this)">Gönder</button>`;
-                wpSiraListesi.push({ phone: cleanPhone, name: isim, originalIndex: sayac-1 });
-            } else {
-                link = `<span style="color:#c0392b; font-size:12px; font-weight:bold;">Numara Yok</span>`;
-            }
-            
-            tbody += `<tr>
-                <td style="text-align:center; font-weight:bold; color:#555;">${sayac++}</td>
-                <td style="font-weight:bold;">${isim}</td>
-                <td>${telefon}</td>
-                <td style="text-align:center;">${link}</td>
-            </tr>`;
-        });
-        
-        let asistanHTML = '';
-        if(wpSiraListesi.length > 0) {
-            asistanHTML = `<div style="background:#2c3e50; padding:15px; border-radius:6px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; color:white;">
-                <div><b>🤖 Gönderim Asistanı:</b> Sırayla göndermek için yandaki butonu kullanın.</div>
-                <button id="wpAsistanBtn" class="btn btn-warning" style="margin:0; width:auto;" onclick="wpAsistanGonder()">Sıradakine Gönder (Kalan: ${wpSiraListesi.length})</button>
-            </div>`;
-        }
-
-        document.getElementById('wpTabloBody').innerHTML = tbody;
-        document.getElementById('wpGonderimAlani').innerHTML = asistanHTML + `<table class="butce-tablo"><thead><tr><th style="width:40px; text-align:center;">Sıra</th><th>Veli Adı Soyadı</th><th>Telefon Numarası</th><th style="width:140px; text-align:center;">İşlem</th></tr></thead><tbody id="wpTabloBodyInner">` + tbody + `</tbody></table>`;
-        document.getElementById('wpGonderimAlani').style.display = 'block';
-    }
-
-    function wpGonder(telefon, isim, btn) {
-        let baseMsg = document.getElementById('wpMesajMetni').value;
-        let finalMsg = baseMsg.replace(/\[VELİ_ADI\]/g, isim); // İsme özel mesajı ayarla
-        const msg = encodeURIComponent(finalMsg);
-        
-        // web.whatsapp.com/send doğrudan Whatsapp Web'e atar. Araya onay sayfası sokmaz.
-        const url = `https://web.whatsapp.com/send?phone=${telefon}&text=${msg}`;
-        window.open(url, '_blank');
-        
-        if(btn) {
-            btn.style.backgroundColor = '#95a5a6';
-            btn.style.boxShadow = 'none';
-            btn.innerText = 'Gönderildi';
-        }
-    }
-
-    function wpAsistanGonder() {
-        if (currentWpIndex >= wpSiraListesi.length) {
-            alert("Tüm listeye gönderim tamamlandı!");
-            return;
-        }
-        
-        const currentData = wpSiraListesi[currentWpIndex];
-        const btn = document.getElementById(`wpBtn_${currentData.originalIndex}`);
-        
-        wpGonder(currentData.phone, currentData.name, btn);
-        currentWpIndex++;
-        
-        const asistanBtn = document.getElementById('wpAsistanBtn');
-        if (currentWpIndex < wpSiraListesi.length) {
-            asistanBtn.innerText = `Sıradakine Gönder (Kalan: ${wpSiraListesi.length - currentWpIndex})`;
-        } else {
-            asistanBtn.innerText = `Tümü Gönderildi!`;
-            asistanBtn.style.backgroundColor = '#27ae60';
-        }
-    }
-
-    // ---------- SEKME MANTIĞI ----------
     function sekmeDegistir(sekme, btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         aktifSekme = sekme;
         
-        document.getElementById('formlarAlani').style.display = 'none';
-        document.getElementById('nasilKullanilirAlani').style.display = 'none';
-        document.getElementById('duyuruAlani').style.display = 'none';
-
         if (sekme === 'nasil') {
+            document.getElementById('formlarAlani').style.display = 'none';
             document.getElementById('nasilKullanilirAlani').style.display = 'block';
-        } else if (sekme === 'duyuru') {
-            document.getElementById('duyuruAlani').style.display = 'block';
-            updateWpMesaji(); 
         } else {
             document.getElementById('formlarAlani').style.display = 'block';
+            document.getElementById('nasilKullanilirAlani').style.display = 'none';
             
             const genelOnlyElements = document.querySelectorAll('.genel-kurul-only');
             genelOnlyElements.forEach(el => {
@@ -1434,7 +1251,6 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         updateEgitimYiliOnceki();
         updateDkTarihleri();
         updateTutanakMetinleri();
-        updateWpMesaji();
     };
 
     // Dinamik metin formatlayıcı
@@ -1575,7 +1391,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         return `
             <div class="pdf-header pdf-cagri"><div class="pdf-logo-container">${okulHtml}</div>T.C.<br>${kurum}<br><strong>${okulBuyuk}</strong> MÜDÜRLÜĞÜ</div>
             <div class="pdf-duyuru-metin pdf-cagri">SAYIN ÖĞRENCİ VELİMİZ</div>
-            <div class="pdf-body pdf-cagri" style="text-indent:0; text-align:center; font-weight:bold;">${top.tarih} ${top.gun.toLocaleUpperCase('tr-TR')} GÜN SAAT ${top.saat}'TE ${top.yer.toLocaleUpperCase('tr-TR')}'NDE OKULUMUZ ÖĞRENCİLERİNİN DEVAM- DEVAMSIZLIK, BAŞARI DURUMLARI VE OKUL AİLE BİRLİĞİNİN SEÇİMİNİ YAPMAK ÜZERE VELİ TOPLANTISI YAPILACAKTIR.<br><br>ANILAN GÜN VE SAAT'TE TOPLANTIYA KATILMANIZI RİCA EDERİM.</div>
+            <div class="pdf-body pdf-cagri" style="text-indent:0; text-align:center; font-weight:bold;">${top.tarih} ${top.gun.toLocaleUpperCase('tr-TR')} GÜNÜ SAAT ${top.saat}'TE ${top.yer.toLocaleUpperCase('tr-TR')}'NDE OKULUMUZ ÖĞRENCİLERİNİN DEVAM- DEVAMSIZLIK, BAŞARI DURUMLARI VE OKUL AİLE BİRLİĞİNİN SEÇİMİNİ YAPMAK ÜZERE VELİ TOPLANTISI YAPILACAKTIR.<br><br>ANILAN GÜN VE SAAT'TE TOPLANTIYA KATILMANIZI RİCA EDERİM.</div>
             <div class="pdf-agenda-title pdf-cagri">GÜNDEM</div><div id="out-gundem" class="pdf-cagri">${gundem}</div>
             <div class="pdf-signature" style="justify-content:flex-end; margin-top:20px;"><div><strong>${mudur}</strong><br><strong>${okul}</strong><br><strong>Okul Müdürü</strong></div></div>
         `;
@@ -1698,7 +1514,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             });
             tablolarHtml += `<table class="pdf-tablo pdf-tablo-100 pdf-veli-tablo" style="font-size:9pt; page-break-inside: avoid;"><thead><tr><th><strong>SIRA NO</strong></th><th><strong>VELİ ADI SOYADI</strong></th><th><strong>VELİ TELEFON</strong></th><th><strong>VELİ İMZA</strong></th><th><strong>ÖĞRENCİNİN ADI SOYADI</strong></th></tr></thead><tbody>${rows}</tbody></table>${i + 30 < satirSayisi ? '<div style="page-break-after: always;"></div>' : ''}`;
         }
-        return `<div style="text-align:center; font-weight:bold; font-size:14pt; margin-bottom:15px;"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ GENEL KURUL TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>${tablolarHtml}`;
+        return `<div style="text-align:center; font-weight:bold; font-size:14pt; margin-bottom:15px;"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ GENEL Kurul TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>${tablolarHtml}`;
     }
 
     // ---------- YÖNETİM KURULU (YK) VE DENETİM KURULU (DK) EVRAKLARI ----------
@@ -1973,23 +1789,18 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
     // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U vb. kısayolları engelle
     document.onkeydown = function(e) {
-        // F12
         if(e.keyCode === 123) {
             return false;
         }
-        // Ctrl+Shift+I
         if(e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) {
             return false;
         }
-        // Ctrl+Shift+C
         if(e.ctrlKey && e.shiftKey && e.keyCode === 'C'.charCodeAt(0)) {
             return false;
         }
-        // Ctrl+Shift+J
         if(e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) {
             return false;
         }
-        // Ctrl+U
         if(e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) {
             return false;
         }
