@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okul Aile Birliği Evrak Otomasyonu</title>
-
-    <!-- Google Search Console Doğrulama Kodu Buraya Gelecek -->
+ 
+   <!-- Google Search Console Doğrulama Kodu Buraya Gelecek -->
     <meta name="google-site-verification" content="SI0tPoV6gAHEQBPdOzU8XyUNV8-AAEZD2Mk_g_GuLPo" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         /* OTONOT GENEL TASARIM SİSTEMİ EŞLEŞTİRMESİ */
         * { box-sizing: border-box; }
@@ -56,6 +56,11 @@
         
         .btn-restore { flex: 1; background-color: #2980b9; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; box-shadow: 0 4px 6px rgba(41, 128, 185, 0.2); display: flex; justify-content: center; align-items: center; gap: 8px;}
         .btn-restore:hover { background-color: #2471a3; }
+        
+        .btn-success { background-color: #27ae60; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;}
+        .btn-success:hover { background-color: #219653; }
+        .btn-warning { background-color: #f39c12; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s;}
+        .btn-warning:hover { background-color: #d68910; }
 
         /* NASIL KULLANILIR STİLLERİ */
         .info-section { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
@@ -92,7 +97,7 @@
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
         .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.25; margin-bottom: 20px; }
-        .pdf-signature { display: flex; justify-content: flex-end; text-align: center; line-height: 1.2; margin-bottom: 20px; }
+        .pdf-signature { display: flex; justify-content: flex-end; text-align: center; line-height: 1.2; margin-bottom: 20px; page-break-inside: avoid; break-inside: avoid;}
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
         #out-gundem { padding-left: 5px; }
         .agenda-item { page-break-inside: avoid; white-space: pre-wrap; line-height: 1.1; margin-bottom: 1px; }
@@ -104,7 +109,7 @@
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
         .pdf-bold { font-weight: bold; }
-        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; page-break-inside: avoid; }
+        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
         .pdf-tut-metin strong { font-weight: bold; }
         .pdf-tut-alt { margin-left: 20px; }
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
@@ -116,10 +121,13 @@
         .pdf-ogretmen-tablo td { padding: 8px 6px; }
         .pdf-veli-tablo { page-break-inside: avoid; }
         .pdf-tut-tarih-ortala { text-align: center; margin: 15px 0 5px 0; font-weight: bold; font-size: 12pt; }
-        .pdf-div-kesme { page-break-inside: avoid; }
-        .pdf-tablo-wrap { page-break-inside: avoid; }
+        .pdf-div-kesme { page-break-inside: avoid; break-inside: avoid; }
         .pdf-bold-text { font-weight: bold; }
         .pdf-ortala-kalın { text-align: center; font-weight: bold; }
+        
+        /* ÖNEMLİ DÜZELTME: Bu alanların PDF motoru tarafından ortadan ikiye kesilmesi engellendi */
+        .pdf-tablo-wrap { page-break-inside: avoid !important; break-inside: avoid !important; display: inline-block; width: 100%; }
+        .pdf-erteleme-notu { page-break-inside: avoid !important; break-inside: avoid !important; display: inline-block; width: 100%; box-sizing: border-box; }
         
         /* Güvenlik (Hibrit Koruma) */
         body { -webkit-user-select: none; -ms-user-select: none; user-select: none; }
@@ -1313,7 +1321,10 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 image: { type: 'jpeg', quality: 1 },
                 html2canvas: { scale: 2, scrollY: 0, windowWidth: document.documentElement.offsetWidth },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'] }
+                pagebreak: { 
+                    mode: ['css', 'legacy'], 
+                    avoid: ['.pdf-erteleme-notu', '.pdf-signature', '.pdf-tablo-wrap', 'tr'] 
+                }
             };
 
             html2pdf().set(opt).from(content).save().then(() => {
@@ -1432,7 +1443,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         if (tur === '1') {
             const eTarih = formatDate(document.getElementById('ertelemeTarihi').value);
             const eGun = getDayName(document.getElementById('ertelemeTarihi').value);
-            ertelemeNotu = `<div class="pdf-erteleme-notu" style="margin:10px 0; padding:10px; border:1px solid #000; background:#f9f9f9; font-weight:bold;"><strong>YETER SAYI SAĞLANAMADIĞI İÇİN TOPLANTININ ERTELENMESİ:</strong><br>Toplantıda Okul Aile Birliği Yönetmeliği'nin 9. maddesinde belirtilen yeterli çoğunluk (<strong>${yeterSayiHesapla()}</strong> adet) sağlanamadığından, aynı madde gereğince çoğunluk aranmaksızın <strong>${eTarih} ${eGun}</strong> günü saat <strong>${top.saat}</strong>'te yeniden toplanmak üzere toplantı ertelenmiştir.</div>`;
+            ertelemeNotu = `<div class="pdf-erteleme-notu" style="margin:10px 0; padding:10px; border:1px solid #000; background:#f9f9f9; font-weight:bold; page-break-inside: avoid; break-inside: avoid; display: inline-block; width: 100%; box-sizing: border-box;"><strong>YETER SAYI SAĞLANAMADIĞI İÇİN TOPLANTININ ERTELENMESİ:</strong><br>Toplantıda Okul Aile Birliği Yönetmeliği'nin 9. maddesinde belirtilen yeterli çoğunluk (<strong>${yeterSayiHesapla()}</strong> adet) sağlanamadığından, aynı madde gereğince çoğunluk aranmaksızın <strong>${eTarih} ${eGun}</strong> günü saat <strong>${top.saat}</strong>'te yeniden toplanmak üzere toplantı ertelenmiştir.</div>`;
             secimMetni = 'Toplantıda yeterli çoğunluk sağlanamadığından seçim yapılamamıştır.';
             tutanakMetni = document.getElementById('tutanakMetni1').value.trim() || '1) ...';
         } else {
@@ -1442,7 +1453,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             secimMetni = `<div style="margin-top:10px;"><div class="pdf-tut-metin"><strong>a)</strong> Yönetim Kurulu üyeliğine <strong>${document.getElementById('secYonetimAsil').value}</strong> seçilmişlerdir.</div><div class="pdf-tut-metin"><strong>b)</strong> Denetleme Kuruluna <strong>${document.getElementById('secDenetimAsil').value}</strong> asil, <strong>${document.getElementById('secDenetimYedek').value}</strong> yedek üye seçilmiştir.</div><div class="pdf-tut-metin"><strong>c)</strong> Okul Disiplin Kuruluna <strong>${document.getElementById('secDisiplin').value}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>d)</strong> Sosyal Etkinlikler Kuruluna <strong>${document.getElementById('secSosyal').value}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>e)</strong> Rehberlik ve Psikolojik Danışma Hizmetleri Yürütme Kuruluna <strong>${document.getElementById('secRehberlik').value}</strong> seçilmiştir.</div></div>`;
             tutanakMetni = document.getElementById('tutanakMetni2').value.trim() || '1) ...';
             if (document.getElementById('cogunlukAranmaz').checked) {
-                ertelemeNotu = `<div style="margin:10px 0; padding:10px; border:1px solid #000; background:#e8f0fe; font-weight:bold;"><strong>İKİNCİ TOPLANTI (ÇOĞUNLUK ARANMAZ)</strong><br>Bu toplantı, Okul Aile Birliği Yönetmeliği'nin 9. maddesi gereğince ilk toplantıda yeterli çoğunluk sağlanamadığı için yapılan ikinci toplantıdır. Çoğunluk aranmaksızın katılan üyelerle toplantı yapılmış ve kararlar katılanların çoğunluğu ile alınmıştır.</div>`;
+                ertelemeNotu = `<div class="pdf-erteleme-notu" style="margin:10px 0; padding:10px; border:1px solid #000; background:#e8f0fe; font-weight:bold; page-break-inside: avoid; break-inside: avoid; display: inline-block; width: 100%; box-sizing: border-box;"><strong>İKİNCİ TOPLANTI (ÇOĞUNLUK ARANMAZ)</strong><br>Bu toplantı, Okul Aile Birliği Yönetmeliği'nin 9. maddesi gereğince ilk toplantıda yeterli çoğunluk sağlanamadığı için yapılan ikinci toplantıdır. Çoğunluk aranmaksızın katılan üyelerle toplantı yapılmış ve kararlar katılanların çoğunluğu ile alınmıştır.</div>`;
             }
         }
         const paragrafHtml = tutanakMetni.split(/\n\s*\n/).filter(p => p.trim() !== '').map(p => `<div class="pdf-tut-metin">${p.replace(/\n/g, '<br>')}</div>`).join('');
@@ -1453,7 +1464,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             <div class="pdf-tut-metin"><strong>${kararTarih}</strong> tarih ve <strong>${kararNo}</strong> sayılı Okul-Aile Birliği Yönetim Kurulu Kararına İstinaden, <strong>${top.tarih} ${top.gun}</strong> günü saat <strong>${top.saat}</strong>'te, Okulumuz <strong>${top.yer}</strong>'nde, MEB Okul Aile Birliği Yönetmeliği uyarınca yeni yönetimin oluşturulması amacı ile okul yönetimi, öğretmenler ve velilerimizin katılımı ile Genel Kurul toplandı. <strong>${top.tarih}</strong> tarihli Okul Aile Birliği toplantısı kararı ve aynı tarihli gündem maddeleri Okul Aile Birliği Denetim Kurulu Üyesi <strong>${dkBaskan}</strong> tarafından okundu. Okul Müdürü <strong>${mudur}</strong>, ilgili gündem maddelerine ekleme yapılabileceğini hatırlattı.</div>
             <div style="font-weight:bold; text-decoration:underline;">GÜNDEM MADDELERİ:</div><div id="out-gundem">${formatGundemHtml()}</div>
             <div style="margin-top:10px;">${paragrafHtml}</div>${ertelemeNotu}
-            ${tur === '2' ? `<div class="pdf-tablo-wrap" style="page-break-inside: avoid;"><div style="font-weight:bold; text-align:center; margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo pdf-tablo-100"><thead><tr><th><strong>Sıra No</strong></th><th><strong>ADI SOYADI</strong></th><th><strong>OKUL AİLE BİRLİĞİNDEKİ GÖREV TANIMI</strong></th><th><strong>İMZA</strong></th></tr></thead><tbody>${oyRows}</tbody></table></div>${secimMetni}` : `<div class="pdf-tut-metin"><strong>Not:</strong> ${secimMetni}</div>`}
+            ${tur === '2' ? `<div class="pdf-tablo-wrap"><div style="font-weight:bold; text-align:center; margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo pdf-tablo-100"><thead><tr><th><strong>Sıra No</strong></th><th><strong>ADI SOYADI</strong></th><th><strong>OKUL AİLE BİRLİĞİNDEKİ GÖREV TANIMI</strong></th><th><strong>İMZA</strong></th></tr></thead><tbody>${oyRows}</tbody></table></div>${secimMetni}` : `<div class="pdf-tut-metin"><strong>Not:</strong> ${secimMetni}</div>`}
             <div class="pdf-tut-tarih-ortala">${top.tarih}</div>
             <div style="text-align:center; margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="display:flex; justify-content:space-around; margin-top:10px;"><div><strong>Divan Kurulu Bşk.</strong><br><strong>${document.getElementById('divanBaskani').value}</strong></div><div><strong>Yazman</strong><br><strong>${document.getElementById('divanKatip').value}</strong></div></div></div>
         `;
@@ -1518,7 +1529,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             });
             tablolarHtml += `<table class="pdf-tablo pdf-tablo-100 pdf-veli-tablo" style="font-size:9pt; page-break-inside: avoid;"><thead><tr><th><strong>SIRA NO</strong></th><th><strong>VELİ ADI SOYADI</strong></th><th><strong>VELİ TELEFON</strong></th><th><strong>VELİ İMZA</strong></th><th><strong>ÖĞRENCİNİN ADI SOYADI</strong></th></tr></thead><tbody>${rows}</tbody></table>${i + 30 < satirSayisi ? '<div style="page-break-after: always;"></div>' : ''}`;
         }
-        return `<div style="text-align:center; font-weight:bold; font-size:14pt; margin-bottom:15px;"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ GENEL Kurul TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>${tablolarHtml}`;
+        return `<div style="text-align:center; font-weight:bold; font-size:14pt; margin-bottom:15px;"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ GENEL KURUL TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>${tablolarHtml}`;
     }
 
     // ---------- YÖNETİM KURULU (YK) VE DENETİM KURULU (DK) EVRAKLARI ----------
