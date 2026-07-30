@@ -119,10 +119,6 @@
         .pdf-ortala-kalın { text-align: center; font-weight: bold; }
         .toplanti-bilgi { background: #e8f0fe; padding: 10px; border-radius: 5px; margin: 10px 0; }
         .toplanti-bilgi strong { color: #0056b3; }
-        .erteleme-grubu { display: block; }
-        .erteleme-grubu.gizli { display: none; }
-        .tutanak-metin-grubu { display: block; }
-        .tutanak-metin-grubu.gizli { display: none; }
         .checkbox-group { margin-top: 10px; }
         .pdf-cagri .pdf-duyuru-metin { margin: 5px 0; }
         .pdf-cagri .pdf-body { margin-bottom: 8px; }
@@ -139,7 +135,7 @@
         <h2>🏫 Okul Aile Birliği Evrak Otomasyonu</h2>
     </div>
 
-    <!-- SEKMELER -->
+    <!-- SEKMELER (OTONOT TASARIMI) -->
     <div class="tab-container">
         <button class="tab-btn active" onclick="sekmeDegistir('genel', this)">📄 Genel Kurul Evrakları</button>
         <button class="tab-btn" onclick="sekmeDegistir('yonetim', this)">📁 Yönetim Kurulu</button>
@@ -166,7 +162,7 @@
             <div class="info-card">
                 <h4>📄 Genel Çalışma Mantığı ve Temel Bilgiler</h4>
                 <ol>
-                    <li><strong>Kurum Bilgileri:</strong> Kurum adı, müdür, başkan ve il/ilçe bilgilerini eksiksiz doldurun. Cihazınızın o anki tarihine (Örn: 2026 yılı) göre sistem, eğitim-öğretim yılını (2026-2027) ve evrak/raporlama tarihlerini otomatik olarak mantıklı bir şablona oturtur.</li>
+                    <li><strong>Kurum Bilgileri:</strong> Kurum adı, müdür, başkan ve il/ilçe bilgilerini eksiksiz doldurun. Cihazınızın o anki tarihine göre sistem, eğitim-öğretim yılını ve evrak/raporlama tarihlerini otomatik olarak mantıklı bir şablona oturtur.</li>
                     <li><strong>Banka Bilgileri:</strong> Özellikle yıl sonu bilançoları ve denetim raporlarında geçecek olan Banka Adı ve IBAN numaralarını ilgili kutucuklara girdiğinizde raporların içine kalın fontla otomatik yansıtılır.</li>
                     <li><strong>Veri Kaydı:</strong> Forma yazdığınız her bilgi cihazınızın tarayıcısına otomatik kaydedilir. Sayfayı kapatıp açsanız bile girdiğiniz okul adları, maddeler ve listeler kaybolmaz.</li>
                     <li><strong>Yedekleme:</strong> Evrak oluştur butonunun yanındaki "Yedekle" butonu ile tüm bilgilerinizi .json dosyası olarak bilgisayarınıza indirebilir, yıllar sonra dahi "Geri Yükle" diyerek birebir eski halinize dönebilirsiniz.</li>
@@ -248,11 +244,11 @@
                 </div>
                 <div class="form-group">
                     <label id="kurumLabel">İl Adı</label>
-                    <input type="text" id="kurumAdi" value="KIRIKKALE">
+                    <input type="text" id="kurumAdi" value="ÖRNEK İL">
                 </div>
                 <div class="form-group full-width">
                     <label>Okul Adı</label>
-                    <input type="text" id="okulAdi" value="Makine ve Kimya Endüstrisi Mesleki Eğitim Merkezi">
+                    <input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi">
                 </div>
                 <div class="form-group full-width">
                     <label>Eğitim Öğretim Yılı</label>
@@ -261,11 +257,11 @@
                 
                 <div class="form-group">
                     <label>Banka Adı ve Şubesi (YK İçin)</label>
-                    <input type="text" id="bankaAdi" value="Ziraat Bankası Kırıkkale Şubesi">
+                    <input type="text" id="bankaAdi" value="Örnek Bankası Örnek Şubesi">
                 </div>
                 <div class="form-group">
                     <label>Banka IBAN No (Raporlar İçin)</label>
-                    <input type="text" id="bankaIban" value="TR 78 0001 0006 3446 7755 6650 01">
+                    <input type="text" id="bankaIban" value="TR00 0000 0000 0000 0000 0000 00">
                 </div>
                 
                 <div class="form-group genel-kurul-only">
@@ -306,11 +302,11 @@
                 
                 <div class="form-group">
                     <label>Okul Müdürü Adı Soyadı</label>
-                    <input type="text" id="mudurAdi" value="Mustafa DURAK" oninput="updateTutanakMetinleri()">
+                    <input type="text" id="mudurAdi" value="Okul Müdürü" oninput="updateTutanakMetinleri()">
                 </div>
                 <div class="form-group">
                     <label>OAB Başkanı Adı Soyadı</label>
-                    <input type="text" id="baskanAdi" value="Yasin VURAL" oninput="updateTutanakMetinleri()">
+                    <input type="text" id="baskanAdi" value="Okul Aile Birliği Başkanı" oninput="updateTutanakMetinleri()">
                 </div>
                 
                 <div class="form-group full-width genel-kurul-only">
@@ -395,14 +391,14 @@
             
             <h3 style="color:#2c3e50; border-top:1px solid #e1e4e8; padding-top:20px; margin-top:25px;">👥 5. Kurul Üyeleri ve Görev Dağılımı</h3>
             <div class="form-grid">
-                <div class="form-group"><label>YK Başkan Yardımcısı</label><input type="text" id="ykBaskanYard" value="Kadir ŞAHİN"></div>
-                <div class="form-group"><label>YK Muhasip</label><input type="text" id="ykMuhasip" value="Ayşe HANCI"></div>
-                <div class="form-group"><label>YK Sekreter</label><input type="text" id="ykSekreter" value="Pembegül CİHAN"></div>
-                <div class="form-group"><label>YK Üye</label><input type="text" id="ykUye" value="Hikmet ERDOĞAN"></div>
+                <div class="form-group"><label>YK Başkan Yardımcısı</label><input type="text" id="ykBaskanYard" value="Başkan Yardımcısı"></div>
+                <div class="form-group"><label>YK Muhasip</label><input type="text" id="ykMuhasip" value="Muhasip Üye"></div>
+                <div class="form-group"><label>YK Sekreter</label><input type="text" id="ykSekreter" value="Sekreter Üye"></div>
+                <div class="form-group"><label>YK Üye</label><input type="text" id="ykUye" value="Yönetim Kurulu Üyesi"></div>
                 
-                <div class="form-group"><label>Denetim Kurulu Başkanı</label><input type="text" id="dkBaskan" value="Esra KÖKSOY"></div>
-                <div class="form-group"><label>DK Öğretmen Üye</label><input type="text" id="dkOgr1" value="Mehmet UZUNTAŞ"></div>
-                <div class="form-group"><label>DK Veli Üye</label><input type="text" id="dkVeli" value="Nazlı DOĞAN"></div>
+                <div class="form-group"><label>Denetim Kurulu Başkanı</label><input type="text" id="dkBaskan" value="Denetim Başkanı"></div>
+                <div class="form-group"><label>DK Öğretmen Üye</label><input type="text" id="dkOgr1" value="Öğretmen Üye"></div>
+                <div class="form-group"><label>DK Veli Üye</label><input type="text" id="dkVeli" value="Veli Üye"></div>
             </div>
         </div>
 
@@ -423,23 +419,16 @@
             <div id="ozel-6" class="ozel-grup">
                 <div class="form-group full-width">
                     <label>Öğretmen Listesi (her satırda: Ad Soyad, Unvan)</label>
-                    <textarea id="ogretmenListesi" rows="10">Görkem KOCAMAN, Müdür Başyardımcısı
-Melahat KARAKUŞ, Müdür Yardımcısı
-Esra KÖKSOY, Okul Rehber Öğretmeni
-Mehmet UZUNTAŞ, Türk Dili ve Edebiyatı Öğretmeni
-Nurcan AYAŞLI, Türk Dili ve Edebiyatı Öğretmeni
-Murat ÇİÇEK, Elektrik/Elektronik Teknolojisi Öğretmeni
-Özkan ÖZMEN, Matematik Öğretmeni
-Hatice ÇETİNDERE SARIBUĞA, İngilizce Öğretmeni
-Yasin ŞENER, Fizik Öğretmeni
-Cansu KALYON, Biyoloji Öğretmeni
-Aliye TOSUN, Tarih Öğretmeni
-Tuğba AKKAŞ, Arapça Öğretmeni
-Emrah ALGÜL, Matematik Öğretmeni
-Mehtap KOCAMAN, Kimya Öğretmeni
-Fatma YAYMAN, Özel Eğitim Öğretmeni
-Yemen ÇALIK, Özel Eğitim Öğretmeni
-Sadettin YURT, Elektrik/Elektronik Teknolojisi Öğretmeni</textarea>
+                    <textarea id="ogretmenListesi" rows="10">Öğretmen Adı 1, Müdür Yardımcısı
+Öğretmen Adı 2, Müdür Yardımcısı
+Öğretmen Adı 3, Okul Rehber Öğretmeni
+Öğretmen Adı 4, Türk Dili ve Edebiyatı Öğretmeni
+Öğretmen Adı 5, Türk Dili ve Edebiyatı Öğretmeni
+Öğretmen Adı 6, Elektrik/Elektronik Teknolojisi Öğretmeni
+Öğretmen Adı 7, Matematik Öğretmeni
+Öğretmen Adı 8, İngilizce Öğretmeni
+Öğretmen Adı 9, Fizik Öğretmeni
+Öğretmen Adı 10, Biyoloji Öğretmeni</textarea>
                 </div>
             </div>
             
@@ -447,35 +436,35 @@ Sadettin YURT, Elektrik/Elektronik Teknolojisi Öğretmeni</textarea>
                 <div class="ozel-grid">
                     <div class="form-group">
                         <label>Divan Başkanı</label>
-                        <input type="text" id="divanBaskani" value="Huriye TAT" oninput="updateTutanakMetinleri()">
+                        <input type="text" id="divanBaskani" value="Divan Başkanı" oninput="updateTutanakMetinleri()">
                     </div>
                     <div class="form-group">
                         <label>Divan Katip (Sekreter)</label>
-                        <input type="text" id="divanKatip" value="Demet ERDOĞAN" oninput="updateTutanakMetinleri()">
+                        <input type="text" id="divanKatip" value="Divan Katibi" oninput="updateTutanakMetinleri()">
                     </div>
                     <div class="form-group full">
                         <label>Oy Dağılımı (her satırda: Ad Soyad, Oy Sayısı, Görev)</label>
-                        <textarea id="oyDagilimi" rows="8" oninput="updateTutanakMetinleri()">YASİN VURAL, 4, YÖN. KUR. ASIL ÜYE
-KADİR ŞAHİN, 3, YÖN. KUR. ASIL ÜYE
-AYŞE HANCI, 2, YÖN. KUR. ASIL ÜYE
-PEMBEGÜL CİHAN, 2, YÖN. KUR. ASIL ÜYE
-HİKMET ERDOĞAN, 2, YÖN. KUR. ASIL ÜYE
-DURSUN ÇAĞLAR, 1, YÖN. KUR. YEDEK ÜYE
-HÜSEYİN GAZİ YILDIRIM, 1, YÖN. KUR. YEDEK ÜYE
-SABRİ YÜKSEL, 1, YÖN. KUR. YEDEK ÜYE
-BÜLENT YURT, 1, YÖN. KUR. YEDEK ÜYE
-YUSUF YILDIRIM, 1, YÖN. KUR. YEDEK ÜYE
-NAZLI DOĞAN, 0, DENETİM KUR. ASİL ÜYE
-DURSUN ALTUN, 0, DENETİM KUR. YEDEK ÜYE
-YASİN VURAL, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
+                        <textarea id="oyDagilimi" rows="8" oninput="updateTutanakMetinleri()">OAB Başkanı Adayı, 4, YÖN. KUR. ASIL ÜYE
+Başkan Yrd. Adayı, 3, YÖN. KUR. ASIL ÜYE
+Muhasip Adayı, 2, YÖN. KUR. ASIL ÜYE
+Sekreter Adayı, 2, YÖN. KUR. ASIL ÜYE
+Üye Adayı, 2, YÖN. KUR. ASIL ÜYE
+Yedek Üye 1, 1, YÖN. KUR. YEDEK ÜYE
+Yedek Üye 2, 1, YÖN. KUR. YEDEK ÜYE
+Yedek Üye 3, 1, YÖN. KUR. YEDEK ÜYE
+Yedek Üye 4, 1, YÖN. KUR. YEDEK ÜYE
+Yedek Üye 5, 1, YÖN. KUR. YEDEK ÜYE
+Denetim Asil Adayı, 0, DENETİM KUR. ASİL ÜYE
+Denetim Yedek Adayı, 0, DENETİM KUR. YEDEK ÜYE
+Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                     </div>
-                    <div class="form-group"><label>Yönetim Kurulu Asil (5 isim virgülle)</label><input type="text" id="secYonetimAsil" value="Yasin VURAL, Kadir ŞAHİN, Ayşe HANCI, Pembegül CİHAN, Hikmet ERDOĞAN" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Yönetim Kurulu Yedek (5 isim virgülle)</label><input type="text" id="secYonetimYedek" value="Dursun ÇAĞLAR, Hüseyin Gazi YILDIRIM, Sabri YÜKSEL, Bülent YURT, Yusuf YILDIRIM" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Denetim Kurulu Asil (1 isim)</label><input type="text" id="secDenetimAsil" value="Nazlı DOĞAN" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Denetim Kurulu Yedek (1 isim)</label><input type="text" id="secDenetimYedek" value="Dursun ALTUN" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Disiplin Kurulu Üyesi (1 isim)</label><input type="text" id="secDisiplin" value="Hasim VURAL" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Sosyal Etkinlikler Kurulu Üyesi (1 isim)</label><input type="text" id="secSosyal" value="Sosyal1" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Rehberlik Kurulu Üyesi (1 isim)</label><input type="text" id="secRehberlik" value="Rehber1" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Yönetim Kurulu Asil (5 isim virgülle)</label><input type="text" id="secYonetimAsil" value="Asil Üye 1, Asil Üye 2, Asil Üye 3, Asil Üye 4, Asil Üye 5" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Yönetim Kurulu Yedek (5 isim virgülle)</label><input type="text" id="secYonetimYedek" value="Yedek Üye 1, Yedek Üye 2, Yedek Üye 3, Yedek Üye 4, Yedek Üye 5" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Denetim Kurulu Asil (1 isim)</label><input type="text" id="secDenetimAsil" value="Denetim Asil Üye" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Denetim Kurulu Yedek (1 isim)</label><input type="text" id="secDenetimYedek" value="Denetim Yedek Üye" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Disiplin Kurulu Üyesi (1 isim)</label><input type="text" id="secDisiplin" value="Disiplin Kurulu Üyesi" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Sosyal Etkinlikler Kurulu Üyesi (1 isim)</label><input type="text" id="secSosyal" value="Sosyal Etkinlikler Üyesi" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Rehberlik Kurulu Üyesi (1 isim)</label><input type="text" id="secRehberlik" value="Rehberlik Kurulu Üyesi" oninput="updateTutanakMetinleri()"></div>
                     <div class="form-group full checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="otomatikGuncelle" checked onchange="updateTutanakMetinleri()">
@@ -531,12 +520,12 @@ Başta siz değerli velilerimiz olmak üzere, okulumuza maddi ve manevi katkıla
                     <label>ÖNCEKİ YIL Gerçekleşen Gelirler (TL)</label>
                     <table class="butce-tablo">
                         <tr><th>Sıra</th><th>Gelirin Cinsi</th><th>Miktar (TL)</th></tr>
-                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="o-gelir" value="5482.01" step="0.01"></td></tr>
+                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
                         <tr><td>2</td><td>Gönüllü Bağış ve Yardımlar</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
                         <tr><td>3</td><td>Kantin Kira Geliri</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
-                        <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="o-gelir" value="1650.00" step="0.01"></td></tr>
+                        <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
                         <tr><td>5</td><td>Etkinlik Organizasyon Gelirleri (Kermes, Atık vb)</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
-                        <tr class="toplam-satir"><td colspan="2">ÖNCEKİ DÖNEM TOPLAM GELİR</td><td id="oGelirToplam">7132.01</td></tr>
+                        <tr class="toplam-satir"><td colspan="2">ÖNCEKİ DÖNEM TOPLAM GELİR</td><td id="oGelirToplam">0.00</td></tr>
                     </table>
                 </div>
                 <div class="form-group full-width">
@@ -664,12 +653,12 @@ Sonuç olarak;
                     <label>YENİ DÖNEM Tahmini Gelir Kalemleri (TL)</label>
                     <table class="butce-tablo" id="gelirTablo">
                         <tr><th>Sıra</th><th>Gelirin Cinsi</th><th>Miktar (TL)</th></tr>
-                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="gelir" value="7132.01" step="0.01"></td></tr>
+                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>2</td><td>Gönüllü Bağış ve Yardımlar</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>3</td><td>Kantin Kira Geliri</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>5</td><td>Etkinlik Organizasyon Gelirleri (Kermes, Atık vb)</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
-                        <tr class="toplam-satir"><td colspan="2">TOPLAM GELİR</td><td id="gelirToplam">7132.01</td></tr>
+                        <tr class="toplam-satir"><td colspan="2">TOPLAM GELİR</td><td id="gelirToplam">0.00</td></tr>
                     </table>
                 </div>
                 <div class="form-group full-width">
@@ -685,11 +674,11 @@ Sonuç olarak;
                 </div>
                 
                 <div class="ozel-grid genel-kurul-only" style="margin-top:20px;">
-                    <div class="form-group"><label>Üye 1</label><input type="text" id="butceUye1" value="Yasin VURAL"></div>
-                    <div class="form-group"><label>Üye 2</label><input type="text" id="butceUye2" value="Kadir ŞAHİN"></div>
-                    <div class="form-group"><label>Üye 3</label><input type="text" id="butceUye3" value="Ayşe HANCI"></div>
-                    <div class="form-group"><label>Üye 4</label><input type="text" id="butceUye4" value="Pembegül CİHAN"></div>
-                    <div class="form-group"><label>Üye 5</label><input type="text" id="butceUye5" value="Hikmet ERDOĞAN"></div>
+                    <div class="form-group"><label>Üye 1</label><input type="text" id="butceUye1" value="OAB Başkanı"></div>
+                    <div class="form-group"><label>Üye 2</label><input type="text" id="butceUye2" value="Başkan Yardımcısı"></div>
+                    <div class="form-group"><label>Üye 3</label><input type="text" id="butceUye3" value="Muhasip Üye"></div>
+                    <div class="form-group"><label>Üye 4</label><input type="text" id="butceUye4" value="Sekreter Üye"></div>
+                    <div class="form-group"><label>Üye 5</label><input type="text" id="butceUye5" value="Yönetim Kurulu Üyesi"></div>
                 </div>
             </div>
             
@@ -732,12 +721,12 @@ Sonuç olarak;
 
     // ---------- BAŞLANGIÇ AYARLARI VE TARİH OTOMASYONU ----------
     function initDefaultDates() {
-        if (localStorage.getItem('oab_egitimYili')) return; // Zaten veri varsa varsayılanları ezme
+        if (localStorage.getItem('oab_egitimYili')) return; 
 
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth() + 1; 
-        const startYear = month < 7 ? year - 1 : year; // Haziran'dan önceyse bir önceki döneme aittir
+        const startYear = month < 7 ? year - 1 : year; 
         const endYear = startYear + 1;
 
         document.getElementById('egitimYili').value = `${startYear}-${endYear}`;
@@ -790,17 +779,14 @@ Sonuç olarak;
                     }
                 }
                 
-                // Sayfayı yenilemek yerine DOM'u anında güncelliyoruz
                 loadFromStorage();
                 
-                // Logo varsa onu da çek
                 const savedOkul = localStorage.getItem('oab_okulLogoBase64');
                 if (savedOkul) { 
                     okulLogoBase64 = savedOkul; 
                     document.getElementById('okulLogoDosyaAdi').textContent = 'Okul logosu yüklendi'; 
                 }
                 
-                // Hesaplamaları tetikle
                 toplantiTuruDegisti(true);
                 yeterSayiHesapla();
                 hesaplaButce();
@@ -809,7 +795,7 @@ Sonuç olarak;
                 updateTutanakMetinleri();
 
                 alert("Yedek başarıyla yüklendi ve tüm veriler ekrana yansıtıldı!");
-                event.target.value = ''; // Dosya seçiciyi sıfırla
+                event.target.value = ''; 
             } catch (err) {
                 alert("Yedek dosyası okunamadı. Lütfen geçerli bir JSON dosyası seçtiğinizden emin olun.");
             }
@@ -910,7 +896,6 @@ Sonuç olarak;
         const metin2Grubu = document.getElementById('tutanakMetni2Grubu');
         const cogunlukGrubu = document.getElementById('cogunlukAranmazGrubu');
 
-        // 1. Toplantıdan 2. Toplantıya Geçişteki Akıllı Otomasyon
         if (!forceLoad && lastToplantiTuru === '1' && currentTuru === '2') {
             let oldToplantiTarihi = document.getElementById('toplantiTarihi').value;
             let oldErtelemeTarihi = document.getElementById('ertelemeTarihi').value;
@@ -1078,9 +1063,8 @@ Sonuç olarak;
         const baskan = document.getElementById('baskanAdi').value || '..................';
         const divanB = document.getElementById('divanBaskani').value || '..................';
         const divanK = document.getElementById('divanKatip').value || '..................';
-        const yil = document.getElementById('egitimYili').value || '2025-2026';
-        const oncekiYil = getOncekiEgitimYili();
         const dkBaskan = document.getElementById('dkBaskan') ? document.getElementById('dkBaskan').value : "..................";
+        const yil = document.getElementById('egitimYili').value || '2025-2026';
         const ykTarih = formatDate(document.getElementById('ykToplantiTarihi').value);
         const ykGun = getDayName(document.getElementById('ykToplantiTarihi').value);
         const ykSaati = document.getElementById('ykToplantiSaati').value || '14:00';
