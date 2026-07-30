@@ -244,11 +244,11 @@
                 </div>
                 <div class="form-group">
                     <label id="kurumLabel">İl Adı</label>
-                    <input type="text" id="kurumAdi" value="ÖRNEK İL">
+                    <input type="text" id="kurumAdi" value="KIRIKKALE">
                 </div>
                 <div class="form-group full-width">
                     <label>Okul Adı</label>
-                    <input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi">
+                    <input type="text" id="okulAdi" value="Makine ve Kimya Endüstrisi Mesleki Eğitim Merkezi">
                 </div>
                 <div class="form-group full-width">
                     <label>Eğitim Öğretim Yılı</label>
@@ -257,11 +257,11 @@
                 
                 <div class="form-group">
                     <label>Banka Adı ve Şubesi (YK İçin)</label>
-                    <input type="text" id="bankaAdi" value="Örnek Bankası Örnek Şubesi">
+                    <input type="text" id="bankaAdi" value="Ziraat Bankası Kırıkkale Şubesi">
                 </div>
                 <div class="form-group">
                     <label>Banka IBAN No (Raporlar İçin)</label>
-                    <input type="text" id="bankaIban" value="TR00 0000 0000 0000 0000 0000 00">
+                    <input type="text" id="bankaIban" value="TR 78 0001 0006 3446 7755 6650 01">
                 </div>
                 
                 <div class="form-group genel-kurul-only">
@@ -520,12 +520,12 @@ Başta siz değerli velilerimiz olmak üzere, okulumuza maddi ve manevi katkıla
                     <label>ÖNCEKİ YIL Gerçekleşen Gelirler (TL)</label>
                     <table class="butce-tablo">
                         <tr><th>Sıra</th><th>Gelirin Cinsi</th><th>Miktar (TL)</th></tr>
-                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
+                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="o-gelir" value="5482.01" step="0.01"></td></tr>
                         <tr><td>2</td><td>Gönüllü Bağış ve Yardımlar</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
                         <tr><td>3</td><td>Kantin Kira Geliri</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
-                        <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
+                        <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="o-gelir" value="1650.00" step="0.01"></td></tr>
                         <tr><td>5</td><td>Etkinlik Organizasyon Gelirleri (Kermes, Atık vb)</td><td><input type="number" class="o-gelir" value="0" step="0.01"></td></tr>
-                        <tr class="toplam-satir"><td colspan="2">ÖNCEKİ DÖNEM TOPLAM GELİR</td><td id="oGelirToplam">0.00</td></tr>
+                        <tr class="toplam-satir"><td colspan="2">ÖNCEKİ DÖNEM TOPLAM GELİR</td><td id="oGelirToplam">7132.01</td></tr>
                     </table>
                 </div>
                 <div class="form-group full-width">
@@ -653,12 +653,12 @@ Sonuç olarak;
                     <label>YENİ DÖNEM Tahmini Gelir Kalemleri (TL)</label>
                     <table class="butce-tablo" id="gelirTablo">
                         <tr><th>Sıra</th><th>Gelirin Cinsi</th><th>Miktar (TL)</th></tr>
-                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
+                        <tr><td>1</td><td>Bir Önceki Dönemden Devir</td><td><input type="number" class="gelir" value="7132.01" step="0.01"></td></tr>
                         <tr><td>2</td><td>Gönüllü Bağış ve Yardımlar</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>3</td><td>Kantin Kira Geliri</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>4</td><td>İşletilebilen Alan Geliri (Kesin teminat farkı)</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
                         <tr><td>5</td><td>Etkinlik Organizasyon Gelirleri (Kermes, Atık vb)</td><td><input type="number" class="gelir" value="0" step="0.01"></td></tr>
-                        <tr class="toplam-satir"><td colspan="2">TOPLAM GELİR</td><td id="gelirToplam">0.00</td></tr>
+                        <tr class="toplam-satir"><td colspan="2">TOPLAM GELİR</td><td id="gelirToplam">7132.01</td></tr>
                     </table>
                 </div>
                 <div class="form-group full-width">
@@ -721,12 +721,12 @@ Sonuç olarak;
 
     // ---------- BAŞLANGIÇ AYARLARI VE TARİH OTOMASYONU ----------
     function initDefaultDates() {
-        if (localStorage.getItem('oab_egitimYili')) return; 
+        if (localStorage.getItem('oab_egitimYili')) return; // Zaten veri varsa varsayılanları ezme
 
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth() + 1; 
-        const startYear = month < 7 ? year - 1 : year; 
+        const startYear = month < 7 ? year - 1 : year; // Haziran'dan önceyse bir önceki döneme aittir
         const endYear = startYear + 1;
 
         document.getElementById('egitimYili').value = `${startYear}-${endYear}`;
@@ -1784,6 +1784,34 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             `;
         }
     }
+
+    // --- GÜVENLİK (KOD KORUMA) ---
+    // Sağ tıklamayı engelle
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U vb. kısayolları engelle
+    document.onkeydown = function(e) {
+        // F12
+        if(e.keyCode === 123) {
+            return false;
+        }
+        // Ctrl+Shift+I
+        if(e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+Shift+C
+        if(e.ctrlKey && e.shiftKey && e.keyCode === 'C'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+Shift+J
+        if(e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+U
+        if(e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) {
+            return false;
+        }
+    };
 </script>
 </body>
 </html>
