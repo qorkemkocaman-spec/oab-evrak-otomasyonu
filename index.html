@@ -132,6 +132,30 @@
         /* Güvenlik (Hibrit Koruma) */
         body { -webkit-user-select: none; -ms-user-select: none; user-select: none; }
         input, textarea, select { -webkit-user-select: text; -ms-user-select: text; user-select: text; }
+
+        /* ---- YENİ KESME ÖNLEYİCİ KURALLAR ---- */
+        .pdf-tut-metin,
+        .pdf-tablo,
+        .pdf-header,
+        .pdf-body,
+        .pdf-agenda-title,
+        .pdf-signature,
+        .pdf-erteleme-notu,
+        .pdf-tablo-wrap,
+        .pdf-cagri,
+        .pdf-veli-tablo,
+        .pdf-ogretmen-tablo,
+        .pdf-div-kesme {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+
+        .pdf-tablo tr,
+        .pdf-tablo tbody tr,
+        .pdf-tablo tfoot tr {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
     </style>
 </head>
 <body>
@@ -1323,7 +1347,21 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak: { 
                     mode: ['css', 'legacy'], 
-                    avoid: ['.pdf-erteleme-notu', '.pdf-signature', '.pdf-tablo-wrap', 'tr'] 
+                    avoid: [
+                        '.pdf-tut-metin', 
+                        '.pdf-tablo', 
+                        '.pdf-header', 
+                        '.pdf-body', 
+                        '.pdf-agenda-title', 
+                        '.pdf-signature', 
+                        '.pdf-erteleme-notu', 
+                        '.pdf-tablo-wrap',
+                        '.pdf-cagri',
+                        '.pdf-veli-tablo',
+                        '.pdf-ogretmen-tablo',
+                        '.pdf-div-kesme',
+                        'tr'
+                    ] 
                 }
             };
 
@@ -1535,25 +1573,25 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     // ---------- YÖNETİM KURULU (YK) VE DENETİM KURULU (DK) EVRAKLARI ----------
     
     const getImzaAlaniYk = (tarih, muh, sek, uye, bYrd, baskan) => `
-        <div style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
+        <div class="pdf-div-kesme" style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
             OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br><strong>${tarih}</strong>
         </div>
-        <div style="display:flex; justify-content:space-around; margin-top:30px; text-align:center; page-break-inside: avoid;">
+        <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:30px; text-align:center; page-break-inside: avoid;">
             <div><strong>${muh}</strong><br><strong>Muhasip</strong></div>
             <div><strong>${sek}</strong><br><strong>Yazman</strong></div>
             <div><strong>${uye}</strong><br><strong>Üye</strong></div>
         </div>
-        <div style="display:flex; justify-content:space-around; margin-top:40px; text-align:center; page-break-inside: avoid;">
+        <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:40px; text-align:center; page-break-inside: avoid;">
             <div><strong>${bYrd}</strong><br><strong>Başkan Yardımcısı</strong></div>
             <div><strong>${baskan}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div>
         </div>
     `;
 
     const getImzaAlaniDk = (tarih, dkBaskan, dkOgr1, dkVeli) => `
-        <div style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
+        <div class="pdf-div-kesme" style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
             DENETİM KURULU<br><strong>${tarih}</strong>
         </div>
-        <div style="display:flex; justify-content:space-around; margin-top:30px; text-align:center; page-break-inside: avoid;">
+        <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:30px; text-align:center; page-break-inside: avoid;">
             <div><strong>${dkBaskan}</strong><br><strong>Başkan</strong></div>
             <div><strong>${dkOgr1}</strong><br><strong>Öğretmen Üye</strong></div>
             <div><strong>${dkVeli}</strong><br><strong>Veli Üye</strong></div>
@@ -1590,14 +1628,14 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             return `
                 <div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${yil}</strong> ÖĞRETİM YILI OKUL AİLE BİRLİĞİ FAALİYET RAPORU</div>
                 <div class="pdf-tut-metin"><strong>${okul}</strong> Okul Aile Birliği olarak, <strong>${ykIlkTopTarihi}</strong> tarihindeki ilk toplantımızda görev dağılımı yapılmış olup, Görev dağılımı aşağıdaki şekilde yapılmıştır.</div>
-                <table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><th><strong>Unvan</strong></th><th><strong>Adı Soyadı</strong></th></tr>
                     <tr><td><strong>Başkan</strong></td><td><strong>${baskan}</strong></td></tr>
                     <tr><td><strong>Başkan Yardımcısı</strong></td><td><strong>${bYrd}</strong></td></tr>
                     <tr><td><strong>Muhasip</strong></td><td><strong>${muh}</strong></td></tr>
                     <tr><td><strong>Sekreter</strong></td><td><strong>${sek}</strong></td></tr>
                     <tr><td><strong>Üye</strong></td><td><strong>${uye}</strong></td></tr>
-                </table>
+                </table></div>
                 <div class="pdf-tut-metin" style="margin-top:15px;">${yk1Faaliyet}</div>
                 ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
                 <div style="page-break-before: always;"></div>
@@ -1607,25 +1645,25 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                     <strong>${oncekiYil}</strong> ÖĞRETİM YILI (ÖNCEKİ DÖNEM)<br>
                     FAALİYET BİLANÇOSU
                 </div>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${oGelir}</tbody></table>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${oGider}</tbody></table>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${oGelir}</tbody></table></div>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${oGider}</tbody></table></div>
                 
                 <div class="pdf-tut-metin" style="margin-top:15px; text-align:center; font-weight:bold;">
                     <strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GENEL TOPLAM
                 </div>
-                <table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><td><strong>1</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GELİRLER TOPLAMI</td><td><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>2</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GİDERLER TOPLAMI</td><td><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>3</strong></td><td>BANKA HESABINDAKİ PARA</td><td><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>4</strong></td><td>KASADAKİ PARA</td><td><strong>0,00 TL</strong></td></tr>
                     <tr><td><strong>5</strong></td><td>SONRAKİ DÖNEME DEVREDEN MİKTAR</td><td><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr>
-                </table>
+                </table></div>
                 ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
                 <div style="page-break-before: always;"></div>
 
                 <div class="pdf-header">OKUL AİLE BİRLİĞİ TAHMİNİ BÜTÇE</div>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİR TAHMİNİ BÜTÇE</strong></th></tr></thead><tbody>${yGelir}</tbody></table>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDER TAHMİNİ BÜTÇE</strong></th></tr></thead><tbody>${yGider}</tbody></table>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİR TAHMİNİ BÜTÇE</strong></th></tr></thead><tbody>${yGelir}</tbody></table></div>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDER TAHMİNİ BÜTÇE</strong></th></tr></thead><tbody>${yGider}</tbody></table></div>
                 ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
             `;
         }
@@ -1676,20 +1714,20 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                     OKUL AİLE BİRLİĞİ FAALİYET BİLANÇOSU<br>
                     (<strong>${basTarih}</strong> - <strong>${bitTarih}</strong> ARASI)
                 </div>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${yGelir}</tbody></table>
-                <table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${yGider}</tbody></table>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${yGelir}</tbody></table></div>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${yGider}</tbody></table></div>
                 
                 <div class="pdf-tut-metin" style="margin-top:15px; text-align:center; font-weight:bold;">
                     <strong>${yil}</strong> EĞİTİM-ÖĞRETİM YILI GENEL TOPLAM (<strong>${basTarih}</strong> - <strong>${bitTarih}</strong> ARASI)
                 </div>
-                <table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><td><strong>1</strong></td><td><strong>${yil}</strong> EĞİTİM-ÖĞRETİM YILI GELİRLER TOPLAMI</td><td><strong>${document.getElementById('gelirToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>2</strong></td><td><strong>${yil}</strong> EĞİTİM-ÖĞRETİM YILI GİDERLER TOPLAMI</td><td><strong>${document.getElementById('giderToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>3</strong></td><td>BANKA HESABINDAKİ PARA</td><td><strong>${document.getElementById('gelirToplam').textContent} TL</strong></td></tr>
                     <tr><td><strong>4</strong></td><td>KASADAKİ PARA</td><td><strong>0,00 TL</strong></td></tr>
                     <tr><td><strong>5</strong></td><td>SONRAKİ DÖNEME DEVREDEN MİKTAR</td><td><strong>${document.getElementById('gelirToplam').textContent} TL</strong></td></tr>
-                </table>
-                <div style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
+                </table></div>
+                <div class="pdf-div-kesme" style="text-align:center; font-weight:bold; margin-top:30px; page-break-inside: avoid;">
                     OKUL AİLE BİRLİĞİ YÖNETİM KURULU ADINA...<br><strong>${bitTarih}</strong><br><br>
                     <strong>${baskan}</strong><br><strong>Okul Aile Birliği Başkanı</strong>
                 </div>
@@ -1717,10 +1755,10 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             return `
                 <div class="pdf-header"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div>
                 <div class="pdf-tut-metin">${metin}</div>
-                <table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><th><strong>Başkan</strong></th><th><strong>Öğretmen Üye</strong></th><th><strong>Veli Üye</strong></th></tr>
                     <tr><td><strong>${dkBaskan}</strong></td><td><strong>${dkOgr1}</strong></td><td><strong>${dkVeli}</strong></td></tr>
-                </table>
+                </table></div>
                 <div style="margin-top:20px;"></div>
                 ${getImzaAlaniDk(dkTarih1, dkBaskan, dkOgr1, dkVeli)}
             `;
@@ -1778,7 +1816,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                     <strong>${ykToplantiTarihi}</strong> - <strong>${dkTarih4}</strong> TARİHLERİ ARASI<br>
                     OKUL AİLE BİRLİĞİ FAALİYET DÖNEMİ NİHAİ RAPORU
                 </div>
-                <table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><th><strong>GELİRİN CİNSİ</strong></th><th><strong>MİKTARI</strong></th><th><strong>GİDERİN CİNSİ</strong></th><th><strong>MİKTARI</strong></th></tr>
                     <tr><td><strong>BİR ÖNCEKİ DÖNEMDEN DEVREDEN TUTAR</strong></td><td><strong>${g1} TL</strong></td><td><strong>BAKIM ONARIM GİDERLERİ</strong></td><td><strong>${d1} TL</strong></td></tr>
                     <tr><td><strong>GÖNÜLLÜ BAĞIŞLAR</strong></td><td><strong>${g2} TL</strong></td><td><strong>KIRTASİYE VE BÜRO MALZEMESİ</strong></td><td><strong>${d2} TL</strong></td></tr>
@@ -1786,8 +1824,8 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                     <tr><td><strong>İŞLETİLEBİLEN ALAN GELİRİ</strong></td><td><strong>${g4} TL</strong></td><td><strong>DİĞER GİDERLER</strong></td><td><strong>${d4} TL</strong></td></tr>
                     <tr><td><strong>ETKİNLİK VE DİĞER GELİRLER</strong></td><td><strong>${g5} TL</strong></td><td></td><td></td></tr>
                     <tr><td><strong>TOPLAM</strong></td><td><strong>${document.getElementById('gelirToplam').textContent} TL</strong></td><td><strong>TOPLAM</strong></td><td><strong>${document.getElementById('giderToplam').textContent} TL</strong></td></tr>
-                </table>
-                <div class="pdf-tut-metin" style="margin-top:20px;"><strong>DENETİM KURULU</strong><br><strong>${ykToplantiTarihi}</strong> ile <strong>${dkTarih4}</strong> tarihleri arası <strong>${okul}</strong> Okul Aile Birliği Gelir ve Gider durumu yukarıya çıkarılmış olup, Okul Aile Birliği gelirler toplamı: <strong>${document.getElementById('gelirToplam').textContent} TL</strong>, Okul Aile Birliği giderler toplamı: <strong>${document.getElementById('giderToplam').textContent} TL</strong> olduğu görülmüş olup, gelirler ve giderlerin usulüne uygun şekilde kayıt altına alındığı tarafımızdan tespit edilmiştir. (<strong>${dkTarih4}</strong>)</div>
+                </table></div>
+                <div class="pdf-tut-metin" style="margin-top:20px;"><br><strong>${ykToplantiTarihi}</strong> ile <strong>${dkTarih4}</strong> tarihleri arası <strong>${okul}</strong> Okul Aile Birliği Gelir ve Gider durumu yukarıya çıkarılmış olup, Okul Aile Birliği gelirler toplamı: <strong>${document.getElementById('gelirToplam').textContent} TL</strong>, Okul Aile Birliği giderler toplamı: <strong>${document.getElementById('giderToplam').textContent} TL</strong> olduğu görülmüş olup, gelirler ve giderlerin usulüne uygun şekilde kayıt altına alındığı tarafımızdan tespit edilmiştir. (<strong>${dkTarih4}</strong>)</div>
                 ${getImzaAlaniDk(dkTarih4, dkBaskan, dkOgr1, dkVeli)}
             `;
         }
