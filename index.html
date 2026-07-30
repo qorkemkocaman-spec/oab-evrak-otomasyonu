@@ -1786,8 +1786,13 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     }
 
     // --- GÜVENLİK (KOD KORUMA) ---
-    // Sağ tıklamayı engelle
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    // Sadece form alanlarında (input, textarea) sağ tıka izin ver, sayfanın geri kalanında engelle
+    document.addEventListener('contextmenu', event => {
+        const tagName = event.target.tagName.toLowerCase();
+        if (tagName !== 'input' && tagName !== 'textarea') {
+            event.preventDefault();
+        }
+    });
 
     // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U vb. kısayolları engelle
     document.onkeydown = function(e) {
