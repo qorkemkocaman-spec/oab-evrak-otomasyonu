@@ -42,6 +42,8 @@
         .btn-backup:hover { background-color: #219653; }
         .btn-restore { flex: 1; background-color: #2980b9; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; box-shadow: 0 4px 6px rgba(41, 128, 185, 0.2); display: flex; justify-content: center; align-items: center; gap: 8px;}
         .btn-restore:hover { background-color: #2471a3; }
+        .btn-ikinci { flex: 1; background-color: #e67e22; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .btn-ikinci:hover { background-color: #d35400; }
         .info-section { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .info-section h3 { color: #3b82f6; margin-top: 0; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f3f5; padding-bottom: 15px;}
         .info-card { border: 1px solid #e1e4e8; border-radius: 6px; padding: 20px; margin-bottom: 20px; background-color: #fafbfc;}
@@ -127,38 +129,28 @@
             <div class="info-card">
                 <h4>📅 Mevzuata Uygun Yıllık Süreç</h4>
                 <ol>
-                    <li><strong>Eylül – Önceki Dönem Kapanışı:</strong> Görevi sona eren Yönetim Kurulu, dönem sonu devir toplantısını yapar ve <strong>Faaliyet Bilançosunu</strong> düzenler. Sonraki iş günü, görevi sona eren Denetim Kurulu <strong>Nihai Denetim Raporunu</strong> hazırlar.</li>
-                    <li><strong>Ekim – Genel Kurul:</strong> Her yıl en geç Ekim ayının sonuna kadar toplanır. Yeter sayı: 100'ün altında 32, 100 ve üzerinde 64 kişi. Sağlanamazsa en geç 30 gün içinde 2. toplantı yapılır, çoğunluk aranmaz.</li>
-                    <li><strong>Ekim – Yeni YK İlk Toplantı:</strong> Genel Kuruldan sonra en kısa sürede (genelde sonraki iş günü) yapılır.</li>
-                    <li><strong>Aylık YK Toplantıları:</strong> Eğitim-öğretim yılı içinde ayda bir toplanılır. Kasım, Ocak, Şubat, Mart, Nisan, Mayıs aylık tutanaklar bu otomasyonla düzenlenir.</li>
-                    <li><strong>Aralık ve Haziran:</strong> YK faaliyet raporları + aynı tarihi takip eden DK denetim raporları.</li>
-                    <li><strong>İlk Kez Kurulan Okullar:</strong> Okul Müdürü, okul açıldıktan sonra en geç 2 ay içinde Genel Kurulu toplar. Önceki YK/DK evrakları aranmaz.</li>
+                    <li><strong>Eylül – Önceki Dönem Kapanışı:</strong> Görevi sona eren Yönetim Kurulu, dönem sonu devir toplantısını yapar ve <strong>Faaliyet Bilançosunu</strong> düzenler. Sonraki iş günü, görevi sona eren Denetim Kurulu <strong>Nihai Denetim Raporunu</strong> hazırlar ve Genel Kurul’a sunar.</li>
+                    <li><strong>Ekim – Genel Kurul:</strong> Her yıl en geç Ekim ayının sonuna kadar toplanır. Yeter sayı: 100’ün altında 32, 100 ve üzerinde 64 veli. Sağlanamazsa en geç 30 gün içinde 2. toplantı yapılır, çoğunluk aranmaz.</li>
+                    <li><strong>Ekim – Yeni YK İlk Toplantı:</strong> Genel Kurul’dan sonraki ilk hafta içinde yapılır. Görev dağılımı, önceki dönem bilançosu ve tahmini bütçe kayıt altına alınır.</li>
+                    <li><strong>Ekim – Yeni DK İlk Toplantı:</strong> YK’dan bir iş günü sonra yapılır. Görev dağılımı, YK’nın denetim planı, bilanço ve bütçe denetim ilkeleri belirlenir.</li>
+                    <li><strong>Kasım–Haziran Aylık YK Toplantıları:</strong> YK her ay toplanır (Aralık ve Haziran’da ayrıca DK denetimi yapılır).</li>
+                    <li><strong>Eylül (sonraki yıl):</strong> Döngü, yeni dönem devir toplantısıyla devam eder.</li>
                 </ol>
             </div>
 
             <div class="info-card">
-                <h4>🗂️ Önceki Dönem vs Yeni Dönem Verileri</h4>
-                <p><strong>Önemli:</strong> Program iki ayrı veri seti kullanır:</p>
+                <h4>🏫 Okul Müdürünün Rolü</h4>
+                <p>Okul müdürü, Yönetim Kurulu veya Denetim Kurulu’nun <strong>doğal üyesi değildir</strong>. Sadece:</p>
                 <ul style="line-height:1.8; font-size:14px;">
-                    <li><strong>Önceki Dönem Verileri:</strong> Yalnızca Eylül Devir Evrakları (`ykEylul`, `dkEylul`) ve YK1'in "Önceki Dönem Bilançosu" bölümünde kullanılır. Bu veriler için <em>ayrı bir panel</em> vardır (Önceki Dönem Kurul Üyeleri + Önceki Yıl Gerçekleşen Gelir/Gider tabloları).</li>
-                    <li><strong>Yeni Dönem Verileri:</strong> YK1 (tahmini bütçe), YK2, YK3, aylık YK raporları ve tüm DK raporlarında kullanılır.</li>
+                    <li>İlk kez OAB kurulan okullarda Genel Kurul çağrısını yapar.</li>
+                    <li>Birliğin işlemlerinin mevzuata uygunluğunu denetler.</li>
                 </ul>
-                <p style="margin-top:15px;">Eylül devir evraklarını oluşturmadan önce, <strong>"Önceki Dönem" panelindeki tüm alanları eksiksiz doldurduğunuzdan emin olun</strong>.</p>
+                <p>Bu nedenle YK/DK tutanaklarında okul müdürünün başkanlığında toplantı ifadesi <strong>yer almaz</strong>.</p>
             </div>
 
             <div class="info-card">
                 <h4>📦 Toplu ZIP İndirme</h4>
-                <p>"📦 Tüm Evrakları ZIP İndir" butonu, o anki seçimlere göre geçerli olan tüm evrakları (Genel Kurul + YK + DK) tek bir ZIP dosyasında birleştirir. ZIP içinde 3 klasör bulunur:</p>
-                <ul style="line-height:1.8; font-size:14px;">
-                    <li><code>Genel_Kurul/</code> – Seçili toplantı türüne göre 1-7 veya 1-10</li>
-                    <li><code>Yonetim_Kurulu/</code> – İlk kuruluş değilse YK Eylül, YK1, aylık raporlar, YK2, YK3</li>
-                    <li><code>Denetim_Kurulu/</code> – İlk kuruluş değilse DK Eylül + DK1, DK2, DK3</li>
-                </ul>
-            </div>
-
-            <div class="info-card">
-                <h4>🔄 Otomatik Tarih Hesaplama</h4>
-                <p>"Eğitim Öğretim Yılı" alanına yıl girdikten sonra "🔄 Tarihleri Otomatik Hesapla" butonuna basın. Tüm tarihler mevzuata uygun olarak otomatik atanır.</p>
+                <p>“📦 Tüm Evrakları ZIP İndir” butonu, o anki seçimlere göre geçerli olan tüm evrakları tek bir ZIP dosyasında birleştirir. İlk kuruluşta Eylül devir evrakları atlanır.</p>
             </div>
 
             <div class="support-card">
@@ -181,7 +173,7 @@
 
         <div id="genelKurulUstAlanlar" class="panel-card genel-kurul-only">
             <h3>📝 1. Toplantı Kurulumu</h3>
-            <div class="info-box">Toplantı Türünü "2. Toplantı" olarak seçtiğinizde Erteleme tarihi otomatik olarak yeni Toplantı Tarihi olacak, Evrak no/Karar no ve Karar tarihleri de buna uygun olarak 1. toplantıdan devredilerek otomatik güncellenecektir.</div>
+            <div class="info-box">Toplantı Türünü “2. Toplantı” olarak seçtiğinizde Erteleme tarihi otomatik olarak yeni Toplantı Tarihi olacak, Evrak no/Karar no ve Karar tarihleri de buna uygun olarak 1. toplantıdan devredilerek otomatik güncellenecektir.</div>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Toplantı Türü</label>
@@ -275,12 +267,13 @@
                     <span id="ertelemeTarihiUyari" class="uyari"></span>
                 </div>
                 <div class="form-group">
-                    <label>Okul Müdürü Adı Soyadı</label>
+                    <label>Okul Müdürü Adı Soyadı (Sadece İlk Kuruluş Çağrılarında İmza Sahibi)</label>
                     <input type="text" id="mudurAdi" value="Okul Müdürü" oninput="updateTutanakMetinleri()">
                 </div>
                 <div class="form-group">
-                    <label>OAB Başkanı Adı Soyadı</label>
+                    <label>Yeni Dönem OAB Başkanı (Ekim'de seçilecek)</label>
                     <input type="text" id="baskanAdi" value="Okul Aile Birliği Başkanı" oninput="updateTutanakMetinleri()">
+                    <small style="color:#6c757d; margin-top:3px;">Genel Kurul'da seçilecek başkan</small>
                 </div>
                 <div class="form-group full-width genel-kurul-only">
                     <label>Ana Gündem Maddeleri (tüm evraklar için)</label>
@@ -294,7 +287,7 @@
 6. Yönetim ve Denetim Kurulları faaliyet raporlarının görüşülmesi ve ibrası
 7. İçinde bulunduğumuz Eğitim Öğretim yılında okulda oluşturulan kurul ve komisyonlara temsilci seçimlerinin yapılması;
     a. Yönetim Kuruluna; 5 asil 5 yedek üyenin seçilmesi.
-    b. Denetleme Kuruluna; üyelerden 1 asil 1 yedek üyenin seçilmesi.
+    b. Denetleme Kuruluna; 3 asil 3 yedek üyenin seçilmesi (2 asil 2 yedek öğretmen, 1 asil 1 yedek veli).
     c. Okul Disiplin Kuruluna 1 veli üyenin seçilmesi.
     d. Sosyal Etkinlikler Kuruluna 1 veli üyenin seçilmesi,
     e. Rehberlik ve Psikolojik Danışma Hizmetleri Yürütme Kuruluna 1 veli üyenin seçilmesi.
@@ -392,9 +385,12 @@
                 <div class="form-group"><label>YK Muhasip</label><input type="text" id="ykMuhasip" value="Muhasip Üye"></div>
                 <div class="form-group"><label>YK Sekreter</label><input type="text" id="ykSekreter" value="Sekreter Üye"></div>
                 <div class="form-group"><label>YK Üye</label><input type="text" id="ykUye" value="Yönetim Kurulu Üyesi"></div>
-                <div class="form-group"><label>Denetim Kurulu Başkanı</label><input type="text" id="dkBaskan" value="Denetim Başkanı" oninput="updateTutanakMetinleri()"></div>
-                <div class="form-group"><label>DK Öğretmen Üye</label><input type="text" id="dkOgr1" value="Öğretmen Üye"></div>
-                <div class="form-group"><label>DK Veli Üye</label><input type="text" id="dkVeli" value="Veli Üye"></div>
+                <div class="form-group"><label>DK Başkan (Öğretmen)</label><input type="text" id="dkBaskan" value="Öğretmen Üye" oninput="updateTutanakMetinleri()"></div>
+                <div class="form-group"><label>DK Başkan Yrd. (Öğretmen)</label><input type="text" id="dkBaskanYrd" value="Öğretmen Üye"></div>
+                <div class="form-group"><label>DK Muhasip (Veli)</label><input type="text" id="dkMuhasip" value="Veli Üye"></div>
+                <div class="form-group"><label>DK Yedek Öğretmen 1</label><input type="text" id="dkYedekOgr1" value="Yedek Öğretmen 1"></div>
+                <div class="form-group"><label>DK Yedek Öğretmen 2</label><input type="text" id="dkYedekOgr2" value="Yedek Öğretmen 2"></div>
+                <div class="form-group"><label>DK Yedek Veli</label><input type="text" id="dkYedekVeli" value="Yedek Veli"></div>
             </div>
         </div>
 
@@ -455,8 +451,8 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                     </div>
                     <div class="form-group"><label>Yönetim Kurulu Asil (5 isim virgülle)</label><input type="text" id="secYonetimAsil" value="Asil Üye 1, Asil Üye 2, Asil Üye 3, Asil Üye 4, Asil Üye 5" oninput="updateTutanakMetinleri()"></div>
                     <div class="form-group"><label>Yönetim Kurulu Yedek (5 isim virgülle)</label><input type="text" id="secYonetimYedek" value="Yedek Üye 1, Yedek Üye 2, Yedek Üye 3, Yedek Üye 4, Yedek Üye 5" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Denetim Kurulu Asil (1 isim)</label><input type="text" id="secDenetimAsil" value="Denetim Asil Üye" oninput="updateTutanakMetinleri()"></div>
-                    <div class="form-group"><label>Denetim Kurulu Yedek (1 isim)</label><input type="text" id="secDenetimYedek" value="Denetim Yedek Üye" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Denetim Kurulu Asil (3 isim virgülle)</label><input type="text" id="secDenetimAsil" value="Öğretmen Asil 1, Öğretmen Asil 2, Veli Asil" oninput="updateTutanakMetinleri()"></div>
+                    <div class="form-group"><label>Denetim Kurulu Yedek (3 isim virgülle)</label><input type="text" id="secDenetimYedek" value="Öğretmen Yedek 1, Öğretmen Yedek 2, Veli Yedek" oninput="updateTutanakMetinleri()"></div>
                     <div class="form-group"><label>Disiplin Kurulu Üyesi (1 isim)</label><input type="text" id="secDisiplin" value="Disiplin Kurulu Üyesi" oninput="updateTutanakMetinleri()"></div>
                     <div class="form-group"><label>Sosyal Etkinlikler Kurulu Üyesi (1 isim)</label><input type="text" id="secSosyal" value="Sosyal Etkinlikler Üyesi" oninput="updateTutanakMetinleri()"></div>
                     <div class="form-group"><label>Rehberlik Kurulu Üyesi (1 isim)</label><input type="text" id="secRehberlik" value="Rehberlik Kurulu Üyesi" oninput="updateTutanakMetinleri()"></div>
@@ -486,7 +482,7 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
             <!-- ÖNCEKİ DÖNEM KURUL ÜYELERİ (Sadece Eylül Devir Evrakları için) -->
             <div id="ozel-oncekiDonem" class="ozel-grup">
                 <div class="info-box" style="background:#fef5e7; border-left-color:#e67e22; color:#7e5109;">
-                    <strong>⚠️ Önceki Dönem Bilgileri:</strong> Bu bölümdeki isimler, <strong>görevi sona eren (bir önceki eğitim-öğretim yılında seçilen)</strong> Yönetim ve Denetim Kurulu üyelerine aittir. Eylül devir evrakları bu bilgileri kullanır.
+                    <strong>⚠️ Önceki Dönem Bilgileri:</strong> Bu bölümdeki isimler, <strong>görevi sona ermiş (bir önceki eğitim-öğretim yılında seçilmiş)</strong> Yönetim ve Denetim Kurulu üyelerine aittir. Eylül Devir evrakları bu bilgileri kullanır.
                 </div>
                 <h4 style="color:#e74c3c; border-bottom:1px solid #e74c3c; padding-bottom:8px;">📌 Önceki Dönem Yönetim Kurulu</h4>
                 <div class="ozel-grid">
@@ -499,9 +495,9 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                 </div>
                 <h4 style="color:#e74c3c; border-bottom:1px solid #e74c3c; padding-bottom:8px; margin-top:20px;">📌 Önceki Dönem Denetim Kurulu</h4>
                 <div class="ozel-grid">
-                    <div class="form-group"><label>Başkan</label><input type="text" id="prevDkBaskan" value="Önceki DK Başkanı"></div>
-                    <div class="form-group"><label>Öğretmen Üye</label><input type="text" id="prevDkOgr1" value="Önceki DK Öğretmen Üye"></div>
-                    <div class="form-group"><label>Veli Üye</label><input type="text" id="prevDkVeli" value="Önceki DK Veli Üye"></div>
+                    <div class="form-group"><label>Başkan (Öğretmen)</label><input type="text" id="prevDkBaskan" value="Önceki DK Başkanı"></div>
+                    <div class="form-group"><label>Başkan Yrd. (Öğretmen)</label><input type="text" id="prevDkBaskanYrd" value="Önceki DK Başkan Yrd."></div>
+                    <div class="form-group"><label>Muhasip (Veli)</label><input type="text" id="prevDkMuhasip" value="Önceki DK Muhasip"></div>
                 </div>
             </div>
 
@@ -615,7 +611,7 @@ Harcamamız ise bulunmamaktadır.</textarea>
                 <div class="form-group full-width">
                     <label>YK Eylül Devir Tutanağı Metni (Düzenlenebilir)</label>
                     <textarea id="ykEylulMetni" rows="14">
-[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [EĞİTİM_YILI] eğitim-öğretim yılı faaliyet dönemini kapatmak ve yeni döneme devir işlemlerini gerçekleştirmek üzere [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde toplanmıştır.
+[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [EĞİTİM_YILI] eğitim-öğretim yılı faaliyet dönemini kapatmak ve yeni döneme devir işlemlerini gerçekleştirmek üzere [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde toplanmıştır.
 
 Toplantıda, Yönetim Kurulunun [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] tarihleri arasındaki gelir-gider durumu, yapılan harcamalar, gerçekleştirilen faaliyetler ve okulun ihtiyaçlarına yönelik çalışmalar görüşülmüştür. Muhasip Üye [MUHASIP] tarafından sunulan gelir-gider tablosuna göre; dönem içinde toplam [GELIR_TOPLAM] TL gelir elde edilmiş, toplam [GIDER_TOPLAM] TL gider yapılmıştır. Banka hesabında kalan mevcut [BANKA_MEVCUT] TL'nin yeni döneme devredilmesine karar verilmiştir.
 
@@ -627,7 +623,7 @@ Yönetim Kurulu, dönem boyunca mevzuata uygun hareket ettiğini, aylık toplant
                 <div class="info-box">Aylık Yönetim Kurulu tutanaklarıdır. Ay ismi seçili evrağa göre otomatik yansıtılır. Metinleri dilerseniz ayrı ayrı düzenleyebilirsiniz.</div>
                 <div class="form-group full-width">
                     <label>Kasım Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykKasimMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykKasimMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -639,7 +635,7 @@ Toplantıda;
                 </div>
                 <div class="form-group full-width">
                     <label>Ocak Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykOcakMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykOcakMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -651,7 +647,7 @@ Toplantıda;
                 </div>
                 <div class="form-group full-width">
                     <label>Şubat Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykSubatMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykSubatMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -663,7 +659,7 @@ Toplantıda;
                 </div>
                 <div class="form-group full-width">
                     <label>Mart Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykMartMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykMartMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -675,7 +671,7 @@ Toplantıda;
                 </div>
                 <div class="form-group full-width">
                     <label>Nisan Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykNisanMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykNisanMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -687,7 +683,7 @@ Toplantıda;
                 </div>
                 <div class="form-group full-width">
                     <label>Mayıs Ayı Toplantı Tutanağı</label>
-                    <textarea id="ykMayisMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Okul Müdürü [MUDUR] başkanlığında [YER]'nde yapmıştır.
+                    <textarea id="ykMayisMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
 
 Toplantıda;
 1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
@@ -700,14 +696,21 @@ Toplantıda;
             </div>
 
             <div id="ozel-dk1" class="ozel-grup">
-                <div class="info-box">Yeni seçilen denetim kurulunun ilk toplantısıdır. Yeni YK'nın göreve başladığını tespit eder.</div>
+                <div class="info-box">Yeni seçilen denetim kurulunun ilk toplantısıdır. Görev dağılımı, yönetim kurulunun denetim planı, bilanço ve bütçe denetim ilkeleri belirlenir.</div>
                 <div class="form-group full-width">
                     <label>DK İlk Toplantı Tutanağı Metni (Düzenlenebilir)</label>
-                    <textarea id="dk1Metni" rows="10">Okul Aile Birliği Denetleme Kurulu [TARİH] tarihinde [OKUL_ADI] Müdür Odasında toplandı. Toplantıda yeni seçilen Denetleme Kurulu üyeleri birbirleriyle tanıştılar.
+                    <textarea id="dk1Metni" rows="20">Okul Aile Birliği Denetleme Kurulu [TARİH] tarihinde [OKUL_ADI] Müdür Odasında toplandı. Toplantıda yeni seçilen Denetleme Kurulu üyeleri birbirleriyle tanıştılar.
 
 Görev dağılımının aşağıdaki gibi olmasına oy birliğiyle karar verildi. ([TARİH])
 
-Ayrıca, yeni seçilen Yönetim Kurulunun görev dağılımını yaptığı, karar defterini tutmaya başladığı, gelir-gider işlemlerini mevzuata uygun olarak yürüttüğü ve okul yönetimiyle iş birliği içinde çalıştığı tarafımızdan tespit edilmiştir. Yönetim Kurulunun önümüzdeki dönemde yapacağı çalışmalarda başarılar dileriz.</textarea>
+Toplantıda ayrıca;
+1. Yeni seçilen Yönetim Kurulunun görev dağılımını yaptığı, karar defterini tutmaya başladığı ve gelir-gider işlemlerini mevzuata uygun olarak yürüttüğü tarafımızdan tespit edilmiştir.
+2. Yönetim Kurulunun [EĞİTİM_YILI] eğitim-öğretim yılı içinde aylık olağan toplantılarını düzenli yapacağı, tüm harcamalarını karar defterine işleyeceği ve belgeleri dosyalayacağı hususunda bilgilendirilmesine,
+3. Denetim Kurulu olarak Yönetim Kurulunun faaliyetlerinin yılda en az iki defa (Aralık ve Haziran aylarında) denetleneceğine, ara raporların Yönetim Kuruluna ve nihai raporun Genel Kurula sunulacağına,
+4. Önceki döneme ait faaliyet bilançosunun ve yeni döneme ait tahmini bütçenin mevzuata uygunluğunun denetleneceğine,
+5. Gelir ve giderlerin belgelendirilmesi, banka işlemlerinin mevzuata uygunluğu ve TEFBİS kayıtlarının düzenli tutulması hususlarında Yönetim Kuruluna gerekli bildirimlerin yapılacağına,
+
+oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
                 </div>
             </div>
 
@@ -767,7 +770,7 @@ Sonuç olarak;
 
             <div id="ozel-dkEylul" class="ozel-grup">
                 <div class="info-box" style="background:#fef5e7; border-left-color:#e67e22; color:#7e5109;">
-                    <strong>📌 Önceki Dönem Denetim Kurulu Nihai Raporu:</strong> Bu rapor, <strong>görevi sona eren Denetim Kurulu</strong> tarafından düzenlenir. Önceki Yönetim Kurulunun dönem içi faaliyetlerini ve devir bilançosunu denetler. İmza sahipleri "Önceki Dönem Denetim Kurulu" alanlarından gelir.
+                    <strong>📌 Önceki Dönem Denetim Kurulu Nihai Raporu:</strong> Bu rapor, <strong>görevi sona eren Denetim Kurulu</strong> tarafından düzenlenir. Önceki Yönetim Kurulunun dönem içi faaliyetlerini ve devir bilançosunu denetler. İmza sahipleri "Önceki Dönem Denetim Kurulu" alanlarından gelir. Rapor, Genel Kurul'a sunulmak üzere hazırlanır.
                 </div>
                 <div class="form-group full-width">
                     <label>DK Eylül Nihai Denetim Raporu Metni (Düzenlenebilir)</label>
@@ -781,7 +784,7 @@ Yapılan incelemede;
 - TEFBİS sistemine gerekli veri girişlerinin yapıldığı ve çıktıların dosyalandığı,
 - Devir işlemlerinin [DEVIR_TARIHI] tarihinde eksiksiz tamamlandığı tespit edilmiştir.
 
-Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kurulu faaliyetlerinin usulüne uygun olduğu, gelir-gider bilançosunun doğru olduğu ve yeni döneme devredilecek tutarın [DEVIR_TUTAR] TL olduğu tarafımızdan onaylanmıştır. İş bu rapor tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kurulu faaliyetlerinin usulüne uygun olduğu, gelir-gider bilançosunun doğru olduğu ve yeni döneme devredilecek tutarın [DEVIR_TUTAR] TL olduğu tarafımızdan onaylanmıştır. İş bu rapor, [TARİH] tarihinde yapılacak Genel Kurul’a sunulmak üzere tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
                 </div>
             </div>
 
@@ -858,7 +861,16 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
     let okulLogoBase64 = '';
     let lastToplantiTuru = '1';
 
-    // ---------- OTOMATİK TARİH HESAPLAMA ----------
+    // ---------- YARDIMCI FONKSİYONLAR ----------
+    function escapeHtml(text) {
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     function formatDateISO(d) {
         const y = d.getFullYear();
         const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -896,29 +908,30 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         return formatDateISO(d);
     }
 
-    function tarihleriOtomatikHesapla() {
+    // ---------- OTOMATİK TARİH HESAPLAMA ----------
+    function tarihleriOtomatikHesapla(showAlert = true) {
         const yilStr = document.getElementById('egitimYili').value.trim();
         const parts = yilStr.split('-');
         if (parts.length !== 2 || isNaN(parseInt(parts[0])) || isNaN(parseInt(parts[1]))) {
-            alert('Eğitim-Öğretim Yılı "2025-2026" formatında olmalıdır.');
+            if (showAlert) alert('Eğitim-Öğretim Yılı "2025-2026" formatında olmalıdır.');
             return;
         }
         const baslangicYil = parseInt(parts[0]);
         const bitisYil = parseInt(parts[1]);
         if (bitisYil !== baslangicYil + 1) {
-            alert('Eğitim-Öğretim Yılı "2025-2026" formatında olmalıdır (ikinci yıl, birinciden 1 fazla olmalı).');
+            if (showAlert) alert('Eğitim-Öğretim Yılı "2025-2026" formatında olmalıdır (ikinci yıl, birinciden 1 fazla olmalı).');
             return;
         }
 
-        // Önceki dönem başlangıç (önceki yılın Genel Kurulu = Ekim son iş günü)
+        // Önceki dönem başlangıç: bir önceki yılın Ekim son iş günü
         const prevDonemBaslangic = getLastWeekdayOfMonth(baslangicYil - 1, 10);
         document.getElementById('prevDonemBaslangic').value = prevDonemBaslangic;
 
-        // Eylül YK Devir (Eylül son iş günü)
+        // Eylül YK Devir (baslangicYil'in Eylül son iş günü)
         const ykEylul = getLastWeekdayOfMonth(baslangicYil, 9);
         document.getElementById('ykEylulTarihi').value = ykEylul;
 
-        // Genel Kurul (Ekim son iş günü)
+        // Genel Kurul (baslangicYil'in Ekim son iş günü)
         const toplantiTarihi = getLastWeekdayOfMonth(baslangicYil, 10);
         document.getElementById('toplantiTarihi').value = toplantiTarihi;
 
@@ -954,12 +967,9 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         document.getElementById('ykMayisTarihi').value = getLastWeekdayOfMonth(bitisYil, 5);
         document.getElementById('ykHaziranTarihi').value = getLastWeekdayBefore(bitisYil, 6);
 
-        // Sayı No
         document.getElementById('sayiNo').value = `${baslangicYil}/165.01/01`;
-        // Önceki Eğitim Yılı
         document.getElementById('oncekiEgitimYili').value = `${baslangicYil - 1}-${baslangicYil}`;
 
-        // Toplantı Türü 2 ise toplantiTarihi = ertelemeTarihi
         if (document.getElementById('toplantiTuru').value === '2') {
             document.getElementById('toplantiTarihi').value = ertelemeTarihi;
         }
@@ -968,7 +978,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         validateTarihler();
         updateTutanakMetinleri();
         saveToStorage();
-        alert('Tüm tarihler mevzuata uygun olarak hesaplandı ve atandı.');
+        if (showAlert) alert('Tüm tarihler mevzuata uygun olarak hesaplandı ve atandı.');
     }
 
     function initDefaultDates() {
@@ -979,7 +989,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         const startYear = month < 7 ? year - 1 : year;
         const endYear = startYear + 1;
         document.getElementById('egitimYili').value = `${startYear}-${endYear}`;
-        tarihleriOtomatikHesapla();
+        tarihleriOtomatikHesapla(false);
     }
 
     // ---------- YEDEKLEME ----------
@@ -1088,17 +1098,17 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
             document.getElementById('kurulTarihleri').classList.add('aktif');
         }
 
-        // Yeni dönem bütçe girişi (gelir/gider) gereken evraklar
+        // Yeni dönem bütçe girişi gereken evraklar
         const needsNewBudget = ['yk1', 'yk2', 'yk3', 'dk2', 'dk3'];
         if (needsNewBudget.includes(val)) document.getElementById('ozel-8').classList.add('aktif');
 
         // Önceki dönem bütçe girişi (o-gelir/o-gider) gereken evraklar
         const needsOldBudget = ['yk1', 'ykEylul', 'dkEylul'];
-        if (needsOldBudget.includes(val)) document.getElementById('ozel-oncekiDonemFinans').classList.add('aktif');
+        if (needsOldBudget.includes(val) && !isIlkKurulus()) document.getElementById('ozel-oncekiDonemFinans').classList.add('aktif');
 
         // Önceki dönem personel paneli gereken evraklar
         const needsPrevPersonnel = ['ykEylul', 'dkEylul'];
-        if (needsPrevPersonnel.includes(val)) document.getElementById('ozel-oncekiDonem').classList.add('aktif');
+        if (needsPrevPersonnel.includes(val) && !isIlkKurulus()) document.getElementById('ozel-oncekiDonem').classList.add('aktif');
 
         if (aktifSekme === 'genel') {
             const target = document.getElementById('ozel-' + val);
@@ -1193,6 +1203,11 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
     function birlikDurumuDegisti() {
         saveToStorage();
         if (aktifSekme === 'yonetim' || aktifSekme === 'denetim') doldurEvrakSec();
+        // İlk kuruluşta önceki dönem panellerini gizle
+        if (isIlkKurulus()) {
+            document.getElementById('ozel-oncekiDonem').classList.remove('aktif');
+            document.getElementById('ozel-oncekiDonemFinans').classList.remove('aktif');
+        }
     }
 
     function isGunuEkle(tarihStr) {
@@ -1307,7 +1322,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
 
 2) Gündemin 2. maddesi gereği, Saygı duruşunda bulunuldu ve İstiklal Marşı okundu.
 
-3) Divan Teşekküllü: Divan Başkanı olarak ${divanB} seçildi. Sekreter olarak ise ${divanK} seçildi.
+3) Divan Teşekkülü: Divan Başkanı olarak ${divanB} seçildi. Sekreter olarak ise ${divanK} seçildi.
 
 4) Okul Müdürü Ve Okul Aile Başk. Konuşması: Okul Müdürü ${mudur} öğrenci velilerini selamlayıp, katılımları için velilere teşekkür etti. Buraya gelmelerinin velinin öğrencilere değer verdiğinin göstergesi olduğunu söyledi. Okul Müdürü velilere genel olarak okulun fiziki yapısı, disiplin durumu, ders işlenişi konusunda velileri bilgilendirdi. Öğrenci devamsızlığı yönünden velilerin duyarlı olmaları gerektiğini söyledi. Okul Aile Birliği Başkanı ${baskan}; ${yil} Eğitim Öğretim yılının sorunsuz geçmesi temennisiyle tüm velilere teşekkür etti.
 
@@ -1377,6 +1392,9 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
     function yeterSayiHesapla() {
         const mevcut = parseInt(document.getElementById('ogrenciMevcudu').value) || 0;
+        // YK: 5 asıl + 5 yedek = 10
+        // DK: 3 asıl + 3 yedek = 6
+        // Toplam asıl+yedek = 16
         const yeterSayi = mevcut >= 100 ? 64 : 32;
         document.getElementById('yeterSayiBilgi').innerHTML = `Yeter sayı: <strong>${yeterSayi}</strong> (Öğrenci mevcudu ${mevcut} – ${mevcut >= 100 ? '≥100' : '<100'})`;
         return yeterSayi;
@@ -1411,10 +1429,18 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     function getOkulAdi() { return document.getElementById('okulAdi').value || ".................."; }
     function getEgitimYili() { return document.getElementById('egitimYili').value || '2025-2026'; }
     function isIlkKurulus() { return document.getElementById('birlikDurumu').value === 'ilk'; }
+    function getPrevBaskan() { 
+        return (document.getElementById('prevBaskan').value || '').trim() 
+               || document.getElementById('baskanAdi').value 
+               || '..................';
+    }
 
     function getGundemArray() { return document.getElementById('gundemMaddeleri').value.split('\n').filter(l => l.trim() !== ''); }
     function formatGundemHtml() {
-        return getGundemArray().map(line => `<div class="agenda-item">${line.replace(/^(\d+[\.\)]\s*|[a-z]\)\s*)/, '<strong>$1</strong>')}</div>`).join('');
+        return getGundemArray().map(line => {
+            const escaped = line.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return `<div class="agenda-item">${escaped.replace(/^(\d+[\.\)]\s*|[a-z]\)\s*)/, '<strong>$1</strong>')}</div>`;
+        }).join('');
     }
 
     function getOgretmenListesi() {
@@ -1442,7 +1468,8 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     function hesaplaButce() {
         let ogt = 0; document.querySelectorAll('.o-gelir').forEach(i => ogt += parseFloat(i.value) || 0); document.getElementById('oGelirToplam').textContent = ogt.toFixed(2);
         let ogdt = 0; document.querySelectorAll('.o-gider').forEach(i => ogdt += parseFloat(i.value) || 0); document.getElementById('oGiderToplam').textContent = ogdt.toFixed(2);
-        let oNet = ogt - ogdt; if (oNet < 0) oNet = 0;
+        let oNet = ogt - ogdt; 
+        if (oNet < 0) oNet = 0; // Negatif devir olmaz
 
         const seciliEvrak = document.getElementById('evrakSec') ? document.getElementById('evrakSec').value : '';
         let gelirInputs = document.querySelectorAll('.gelir');
@@ -1503,7 +1530,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         for (const [key, value] of Object.entries(dict)) {
             const regex = new RegExp(`\\[${key}\\]`, 'g');
-            text = text.replace(regex, `<strong>${value}</strong>`);
+            text = text.replace(regex, `<strong>${escapeHtml(value)}</strong>`);
         }
         return text.replace(/\n/g, '<br>');
     }
@@ -1516,6 +1543,18 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 return;
             }
             const secim = document.getElementById('evrakSec').value;
+
+            if (['ykEylul', 'dkEylul'].includes(secim)) {
+                if (isIlkKurulus()) {
+                    alert('İlk kez kurulan okullarda Eylül devir evrağı oluşturulamaz.');
+                    return;
+                }
+                if (!document.getElementById('prevDonemBaslangic').value) {
+                    alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
+                    return;
+                }
+            }
+
             const tur = document.getElementById('toplantiTuru').value;
             const wrapper = document.getElementById('pdf-wrapper');
             const content = document.getElementById('pdf-content');
@@ -1599,12 +1638,14 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         btn.disabled = true;
         btn.innerHTML = '⏳ Hazırlanıyor...';
 
+        const hatalar = [];
+        let basariliSayisi = 0;
+
         try {
             const zip = new JSZip();
             const tur = document.getElementById('toplantiTuru').value;
             const ilkKurulus = isIlkKurulus();
             const egitimYili = getEgitimYili().replace(/[^0-9-]/g, '');
-            let toplamEvrak = 0;
 
             // GENEL KURUL
             const genelKurulDocs = tur === '1' ? ['1','2','3','4','5','6','7'] : ['1','2','3','4','5','6','7','8','9','10'];
@@ -1615,27 +1656,38 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 '10': '10_Veli_Imza_Sirkusu'
             };
             for (const id of genelKurulDocs) {
-                let html = '';
-                switch(id) {
-                    case '1': html = buildEvrak1(tur); break;
-                    case '2': html = buildEvrak2(tur); break;
-                    case '3': html = buildEvrak3(tur); break;
-                    case '4': html = buildEvrak4(tur); break;
-                    case '5': html = buildEvrak5(tur); break;
-                    case '6': html = buildEvrak6(tur); break;
-                    case '7': html = buildEvrak7(tur); break;
-                    case '8': html = buildEvrak8(tur); break;
-                    case '9': html = buildEvrak9(tur); break;
-                    case '10': html = buildEvrak10(tur); break;
+                const filename = `${genelKurulNames[id]}.pdf`;
+                try {
+                    let html = '';
+                    switch(id) {
+                        case '1': html = buildEvrak1(tur); break;
+                        case '2': html = buildEvrak2(tur); break;
+                        case '3': html = buildEvrak3(tur); break;
+                        case '4': html = buildEvrak4(tur); break;
+                        case '5': html = buildEvrak5(tur); break;
+                        case '6': html = buildEvrak6(tur); break;
+                        case '7': html = buildEvrak7(tur); break;
+                        case '8': html = buildEvrak8(tur); break;
+                        case '9': html = buildEvrak9(tur); break;
+                        case '10': html = buildEvrak10(tur); break;
+                    }
+                    const blob = await generatePDFBlob(html, filename);
+                    zip.file(`Genel_Kurul/${filename}`, blob);
+                    basariliSayisi++;
+                } catch (err) {
+                    hatalar.push(`Genel_Kurul/${filename}: ${err.message || err}`);
                 }
-                const blob = await generatePDFBlob(html, `${genelKurulNames[id]}.pdf`);
-                zip.file(`Genel_Kurul/${genelKurulNames[id]}.pdf`, blob);
-                toplamEvrak++;
             }
 
             // YÖNETİM KURULU
             const ykDocs = [];
-            if (!ilkKurulus) ykDocs.push({ id: 'ykEylul', name: '00_YK_Eylul_Devir_Tutanagi' });
+            if (!ilkKurulus) {
+                if (!document.getElementById('prevDonemBaslangic').value) {
+                    hatalar.push('Yonetim_Kurulu/00_YK_Eylul_Devir_Tutanagi.pdf: Önceki dönem başlangıç tarihi boş');
+                } else {
+                    ykDocs.push({ id: 'ykEylul', name: '00_YK_Eylul_Devir_Tutanagi' });
+                }
+            }
             ykDocs.push(
                 { id: 'yk1', name: '01_YK_Ilk_Toplanti' },
                 { id: 'ykKasim', name: '02_YK_Kasim' },
@@ -1648,10 +1700,15 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 { id: 'yk3', name: '09_YK_Haziran_Sonu' }
             );
             for (const d of ykDocs) {
-                const html = buildYkEvrak(d.id);
-                const blob = await generatePDFBlob(html, `${d.name}.pdf`);
-                zip.file(`Yonetim_Kurulu/${d.name}.pdf`, blob);
-                toplamEvrak++;
+                const filename = `${d.name}.pdf`;
+                try {
+                    const html = buildYkEvrak(d.id);
+                    const blob = await generatePDFBlob(html, filename);
+                    zip.file(`Yonetim_Kurulu/${filename}`, blob);
+                    basariliSayisi++;
+                } catch (err) {
+                    hatalar.push(`Yonetim_Kurulu/${filename}: ${err.message || err}`);
+                }
             }
 
             // DENETİM KURULU
@@ -1660,12 +1717,28 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 { id: 'dk2', name: '02_DK_Aralik_Sonu' },
                 { id: 'dk3', name: '03_DK_Haziran_Sonu' }
             ];
-            if (!ilkKurulus) dkDocs.push({ id: 'dkEylul', name: '04_DK_Eylul_Nihai' });
+            if (!ilkKurulus) {
+                if (!document.getElementById('prevDonemBaslangic').value) {
+                    hatalar.push('Denetim_Kurulu/04_DK_Eylul_Nihai.pdf: Önceki dönem başlangıç tarihi boş');
+                } else {
+                    dkDocs.push({ id: 'dkEylul', name: '04_DK_Eylul_Nihai' });
+                }
+            }
             for (const d of dkDocs) {
-                const html = buildDkEvrak(d.id);
-                const blob = await generatePDFBlob(html, `${d.name}.pdf`);
-                zip.file(`Denetim_Kurulu/${d.name}.pdf`, blob);
-                toplamEvrak++;
+                const filename = `${d.name}.pdf`;
+                try {
+                    const html = buildDkEvrak(d.id);
+                    const blob = await generatePDFBlob(html, filename);
+                    zip.file(`Denetim_Kurulu/${filename}`, blob);
+                    basariliSayisi++;
+                } catch (err) {
+                    hatalar.push(`Denetim_Kurulu/${filename}: ${err.message || err}`);
+                }
+            }
+
+            if (basariliSayisi === 0) {
+                alert('Hiçbir evrak oluşturulamadı. Hatalar:\n\n' + hatalar.join('\n'));
+                return;
             }
 
             const zipBlob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
@@ -1676,7 +1749,11 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             a.click();
             URL.revokeObjectURL(url);
 
-            alert(`✅ ${toplamEvrak} evrak başarıyla ZIP dosyasına eklendi ve indirildi.`);
+            let msg = `✅ ${basariliSayisi} evrak başarıyla ZIP dosyasına eklendi ve indirildi.`;
+            if (hatalar.length > 0) {
+                msg += `\n\n⚠️ ${hatalar.length} evrak oluşturulamadı:\n` + hatalar.join('\n');
+            }
+            alert(msg);
         } catch (error) {
             console.error(error);
             alert('Evraklar hazırlanırken bir hata oluştu: ' + error.message);
@@ -1699,7 +1776,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
     function buildEvrak1(tur) {
         const okul = getOkulAdi(); const okulBuyuk = okul.toLocaleUpperCase('tr-TR');
-        const baskan = document.getElementById('baskanAdi').value || "..................";
+        const baskan = getPrevBaskan(); // Önceki dönem başkanı
         const mudur = document.getElementById('mudurAdi').value || "..................";
         const tarih = formatDate(document.getElementById('yaziTarihi').value);
         const sayi = document.getElementById('sayiNo').value || "..................";
@@ -1732,27 +1809,17 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     }
 
     function buildEvrak2(tur) {
+        if (isIlkKurulus()) {
+            return `<div class="pdf-tut-metin" style="text-align:center; padding:50px;">İlk kez Okul Aile Birliği kurulan okullarda bu evrak kullanılmaz. Genel Kurul çağrısı Okul Müdürü tarafından yapılır.</div>`;
+        }
         const okul = getOkulAdi(); const okulBuyuk = okul.toLocaleUpperCase('tr-TR');
-        const baskan = document.getElementById('baskanAdi').value || "..................";
+        const baskan = getPrevBaskan();
         const mudur = document.getElementById('mudurAdi').value || "..................";
         const tarih = formatDate(document.getElementById('yaziTarihi').value);
         const sayi = document.getElementById('sayiNo').value || "..................";
         const kararTarih = formatDate(document.getElementById('kararTarihi').value);
         const kararNo = document.getElementById('kararNo').value || "....";
         const top = getToplantiBilgileri(tur); const kurum = getKurumBaslik();
-        const ilk = isIlkKurulus();
-
-        if (ilk) {
-            return `
-                <div class="pdf-header">T.C.<br>${kurum}<br><strong>${okulBuyuk}</strong> MÜDÜRLÜĞÜ</div>
-                <div class="pdf-info-row"><div><strong>Sayı &nbsp;&nbsp;: ${sayi}</strong></div><div><strong>${tarih}</strong></div></div>
-                <div class="pdf-subject"><strong>Konu : Okul Aile Birliği Kuruluş Bildirimi</strong></div>
-                <div class="pdf-salutation"><strong>${kurum}</strong> Millî Eğitim Müdürlüğüne</div>
-                <div class="pdf-body">Millî Eğitim Bakanlığı Okul-Aile Birliği Yönetmeliği hükümleri gereğince okulumuzda Okul Aile Birliği kurulması ve Genel Kurul toplantısının yapılması için gerekli hazırlıklar tamamlanmıştır. <strong>${top.tarih} ${top.gun}</strong> günü <strong>${top.yer}</strong>'nde saat <strong>${top.saat}</strong>'da yapılacak olan Genel Kurul toplantısı ile ilgili bilgilerinize arz ederim.</div>
-                <div class="pdf-signature"><div><strong>${mudur}</strong><br><strong>Okul Müdürü</strong></div></div>
-                <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div id="out-gundem">${formatGundemHtml()}</div>
-            `;
-        }
 
         return `
             <div class="pdf-header">T.C.<br>${kurum}<br><strong>${okulBuyuk}</strong> MÜDÜRLÜĞÜ<br>OKUL AİLE BİRLİĞİ BAŞKANLIĞI</div>
@@ -1813,7 +1880,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
     function buildEvrak6(tur) {
         const okulBuyuk = getOkulAdi().toLocaleUpperCase('tr-TR');
-        let rows = ''; getOgretmenListesi().forEach((item, idx) => { rows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${item.ad}</strong></td><td><strong>${item.unvan}</strong></td><td></td></tr>`; });
+        let rows = ''; getOgretmenListesi().forEach((item, idx) => { rows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(item.ad)}</strong></td><td><strong>${escapeHtml(item.unvan)}</strong></td><td></td></tr>`; });
         return `
             <div class="pdf-header" style="margin-bottom:30px;">T.C.<br>${getKurumBaslik()}<br><strong>${okulBuyuk}</strong> MÜDÜRLÜĞÜ<br>OKUL AİLE BİRLİĞİ TOPLANTISI ÖĞRETMENLER DUYURU İMZA SİRKÜSÜ</div>
             <div style="text-align:right; margin:20px 0 30px 0;"><strong>${document.getElementById('mudurAdi').value}</strong><br><strong>Okul Müdürü</strong></div>
@@ -1839,9 +1906,9 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         } else {
             document.getElementById('oyDagilimi').value.split('\n').filter(l => l.trim() !== '').forEach((line, idx) => {
                 const parts = line.split(',').map(s => s.trim());
-                oyRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${parts[0]}</strong></td><td><strong>${parts[2]}</strong></td><td><strong>${parts[1]}</strong></td></tr>`;
+                oyRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(parts[0])}</strong></td><td><strong>${escapeHtml(parts[2] || '')}</strong></td><td><strong>${escapeHtml(parts[1] || '')}</strong></td></tr>`;
             });
-            secimMetni = `<div style="margin-top:10px;"><div class="pdf-tut-metin"><strong>a)</strong> Yönetim Kurulu üyeliğine <strong>${document.getElementById('secYonetimAsil').value}</strong> seçilmişlerdir.</div><div class="pdf-tut-metin"><strong>b)</strong> Denetleme Kuruluna <strong>${document.getElementById('secDenetimAsil').value}</strong> asil, <strong>${document.getElementById('secDenetimYedek').value}</strong> yedek üye seçilmiştir.</div><div class="pdf-tut-metin"><strong>c)</strong> Okul Disiplin Kuruluna <strong>${document.getElementById('secDisiplin').value}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>d)</strong> Sosyal Etkinlikler Kuruluna <strong>${document.getElementById('secSosyal').value}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>e)</strong> Rehberlik ve Psikolojik Danışma Hizmetleri Yürütme Kuruluna <strong>${document.getElementById('secRehberlik').value}</strong> seçilmiştir.</div></div>`;
+            secimMetni = `<div style="margin-top:10px;"><div class="pdf-tut-metin"><strong>a)</strong> Yönetim Kurulu üyeliğine <strong>${escapeHtml(document.getElementById('secYonetimAsil').value)}</strong> seçilmişlerdir.</div><div class="pdf-tut-metin"><strong>b)</strong> Denetleme Kuruluna <strong>${escapeHtml(document.getElementById('secDenetimAsil').value)}</strong> asil, <strong>${escapeHtml(document.getElementById('secDenetimYedek').value)}</strong> yedek üye seçilmiştir.</div><div class="pdf-tut-metin"><strong>c)</strong> Okul Disiplin Kuruluna <strong>${escapeHtml(document.getElementById('secDisiplin').value)}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>d)</strong> Sosyal Etkinlikler Kuruluna <strong>${escapeHtml(document.getElementById('secSosyal').value)}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>e)</strong> Rehberlik ve Psikolojik Danışma Hizmetleri Yürütme Kuruluna <strong>${escapeHtml(document.getElementById('secRehberlik').value)}</strong> seçilmiştir.</div></div>`;
             tutanakMetni = document.getElementById('tutanakMetni2').value.trim() || '1) ...';
             if (document.getElementById('cogunlukAranmaz').checked) {
                 ertelemeNotu = `<div class="pdf-erteleme-notu" style="margin:10px 0; padding:10px; border:1px solid #000; background:#e8f0fe; font-weight:bold;"><strong>İKİNCİ TOPLANTI (ÇOĞUNLUK ARANMAZ)</strong><br>Bu toplantı, Okul Aile Birliği Yönetmeliği'nin 9. maddesi gereğince ilk toplantıda yeterli çoğunluk sağlanamadığı için yapılan ikinci toplantıdır.</div>`;
@@ -1860,7 +1927,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             <div style="margin-top:10px;">${paragrafHtml}</div>${ertelemeNotu}
             ${tur === '2' ? `<div class="pdf-tablo-wrap"><div style="font-weight:bold; text-align:center; margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo pdf-tablo-100"><thead><tr><th><strong>Sıra No</strong></th><th><strong>ADI SOYADI</strong></th><th><strong>GÖREV TANIMI</strong></th><th><strong>İMZA</strong></th></tr></thead><tbody>${oyRows}</tbody></table></div>${secimMetni}` : `<div class="pdf-tut-metin"><strong>Not:</strong> ${secimMetni}</div>`}
             <div class="pdf-tut-tarih-ortala">${top.tarih}</div>
-            <div style="text-align:center; margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="display:flex; justify-content:space-around; margin-top:10px;"><div><strong>Divan Kurulu Bşk.</strong><br><strong>${document.getElementById('divanBaskani').value}</strong></div><div><strong>Yazman</strong><br><strong>${document.getElementById('divanKatip').value}</strong></div></div></div>
+            <div style="text-align:center; margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="display:flex; justify-content:space-around; margin-top:10px;"><div><strong>Divan Kurulu Bşk.</strong><br><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong></div><div><strong>Yazman</strong><br><strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong></div></div></div>
         `;
     }
 
@@ -1870,11 +1937,11 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         let gelirRows = '', giderRows = '', gelirTop = 0, giderTop = 0;
         document.querySelectorAll('.gelir').forEach((inp, idx) => {
             const val = parseFloat(inp.value) || 0; gelirTop += val;
-            gelirRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
+            gelirRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
         });
         document.querySelectorAll('.gider').forEach((inp, idx) => {
             const val = parseFloat(inp.value) || 0; giderTop += val;
-            giderRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
+            giderRows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
         });
         const u1 = document.getElementById('butceUye1').value || '..................';
         const u2 = document.getElementById('butceUye2').value || '..................';
@@ -1888,8 +1955,8 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             <div style="text-align:center; font-weight:bold; font-size:13pt; margin:15px 0 10px 0;">GİDER TAHMİNİ BÜTÇE</div>
             <table class="pdf-tablo pdf-tablo-100"><thead><tr><th><strong>Sıra No</strong></th><th><strong>GİDERİN CİNSİ</strong></th><th><strong>MİKTARI TL</strong></th></tr></thead><tbody>${giderRows}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GİDER TAHMİNİ BÜTÇE</strong></td><td class="pdf-sag"><strong>${giderTop.toFixed(2)} TL</strong></td></tr></tfoot></table>
             <div style="text-align:center; font-weight:bold; margin-top:30px;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU</div>
-            <div style="display:flex; justify-content:space-around; margin-top:20px;"><div style="text-align:center;"><strong>${u1}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${u2}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${u3}</strong><br><strong>Üye</strong></div></div>
-            <div style="display:flex; justify-content:space-around; margin-top:40px;"><div style="text-align:center;"><strong>${u4}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${u5}</strong><br><strong>Üye</strong></div></div>
+            <div style="display:flex; justify-content:space-around; margin-top:20px;"><div style="text-align:center;"><strong>${escapeHtml(u1)}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${escapeHtml(u2)}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${escapeHtml(u3)}</strong><br><strong>Üye</strong></div></div>
+            <div style="display:flex; justify-content:space-around; margin-top:40px;"><div style="text-align:center;"><strong>${escapeHtml(u4)}</strong><br><strong>Üye</strong></div><div style="text-align:center;"><strong>${escapeHtml(u5)}</strong><br><strong>Üye</strong></div></div>
         `;
     }
 
@@ -1897,7 +1964,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         const okul = getOkulAdi(); const okulBuyuk = okul.toLocaleUpperCase('tr-TR');
         const mudur = document.getElementById('mudurAdi').value;
         const top = getToplantiBilgileri(tur); const yil = getEgitimYili();
-        let rows = ''; getOgretmenListesi().forEach((item, idx) => { rows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${item.ad}</strong></td><td><strong>${item.unvan}</strong></td><td></td></tr>`; });
+        let rows = ''; getOgretmenListesi().forEach((item, idx) => { rows += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(item.ad)}</strong></td><td><strong>${escapeHtml(item.unvan)}</strong></td><td></td></tr>`; });
 
         return `
             <div class="pdf-header" style="margin-bottom:30px;">T.C.<br>${getKurumBaslik()}<br><strong>${okulBuyuk}</strong> MÜDÜRLÜĞÜ</div>
@@ -1916,7 +1983,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
         for (let i = 0; i < satirSayisi; i += 30) {
             let rows = '';
             list.slice(i, i + 30).forEach((item, idx) => {
-                rows += `<tr><td><strong>${i + idx + 1}</strong></td><td><strong>${item.ad}</strong></td><td><strong>${item.telefon}</strong></td><td></td><td><strong>${item.ogrenci}</strong></td></tr>`;
+                rows += `<tr><td><strong>${i + idx + 1}</strong></td><td><strong>${escapeHtml(item.ad)}</strong></td><td><strong>${escapeHtml(item.telefon)}</strong></td><td></td><td><strong>${escapeHtml(item.ogrenci)}</strong></td></tr>`;
             });
             tablolarHtml += `<table class="pdf-tablo pdf-tablo-100 pdf-veli-tablo" style="font-size:9pt;"><thead><tr><th><strong>SIRA NO</strong></th><th><strong>VELİ ADI SOYADI</strong></th><th><strong>VELİ TELEFON</strong></th><th><strong>VELİ İMZA</strong></th><th><strong>ÖĞRENCİNİN ADI SOYADI</strong></th></tr></thead><tbody>${rows}</tbody></table>${i + 30 < satirSayisi ? '<div style="page-break-after: always;"></div>' : ''}`;
         }
@@ -1927,22 +1994,22 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
     const getImzaAlaniYk = (tarih, muh, sek, uye, bYrd, baskan) => `
         <div class="pdf-div-kesme" style="text-align:center; font-weight:bold; margin-top:30px;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br><strong>${tarih}</strong></div>
         <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:30px; text-align:center;">
-            <div><strong>${muh}</strong><br><strong>Muhasip</strong></div>
-            <div><strong>${sek}</strong><br><strong>Yazman</strong></div>
-            <div><strong>${uye}</strong><br><strong>Üye</strong></div>
+            <div><strong>${escapeHtml(muh)}</strong><br><strong>Muhasip</strong></div>
+            <div><strong>${escapeHtml(sek)}</strong><br><strong>Yazman</strong></div>
+            <div><strong>${escapeHtml(uye)}</strong><br><strong>Üye</strong></div>
         </div>
         <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:40px; text-align:center;">
-            <div><strong>${bYrd}</strong><br><strong>Başkan Yardımcısı</strong></div>
-            <div><strong>${baskan}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div>
+            <div><strong>${escapeHtml(bYrd)}</strong><br><strong>Başkan Yardımcısı</strong></div>
+            <div><strong>${escapeHtml(baskan)}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div>
         </div>
     `;
 
-    const getImzaAlaniDk = (tarih, dkBaskan, dkOgr1, dkVeli) => `
+    const getImzaAlaniDk = (tarih, dkBaskan, dkBaskanYrd, dkMuhasip) => `
         <div class="pdf-div-kesme" style="text-align:center; font-weight:bold; margin-top:30px;">DENETİM KURULU<br><strong>${tarih}</strong></div>
         <div class="pdf-div-kesme" style="display:flex; justify-content:space-around; margin-top:30px; text-align:center;">
-            <div><strong>${dkBaskan}</strong><br><strong>Başkan</strong></div>
-            <div><strong>${dkOgr1}</strong><br><strong>Öğretmen Üye</strong></div>
-            <div><strong>${dkVeli}</strong><br><strong>Veli Üye</strong></div>
+            <div><strong>${escapeHtml(dkBaskan)}</strong><br><strong>Başkan</strong></div>
+            <div><strong>${escapeHtml(dkBaskanYrd)}</strong><br><strong>Başkan Yrd.</strong></div>
+            <div><strong>${escapeHtml(dkMuhasip)}</strong><br><strong>Muhasip</strong></div>
         </div>
     `;
 
@@ -1972,48 +2039,60 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
         if (secim === 'yk1') {
             let oGelir = '', oGider = '';
-            document.querySelectorAll('.o-gelir').forEach((inp, idx) => { oGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${parseFloat(inp.value).toFixed(2)} TL</strong></td></tr>`; });
-            document.querySelectorAll('.o-gider').forEach((inp, idx) => { oGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${parseFloat(inp.value).toFixed(2)} TL</strong></td></tr>`; });
+            if (!isIlkKurulus()) {
+                document.querySelectorAll('.o-gelir').forEach((inp, idx) => { oGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${parseFloat(inp.value).toFixed(2)} TL</strong></td></tr>`; });
+                document.querySelectorAll('.o-gider').forEach((inp, idx) => { oGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${parseFloat(inp.value).toFixed(2)} TL</strong></td></tr>`; });
+            }
             let yGelir = '', yGider = '', yGelirTop = 0, yGiderTop = 0;
             document.querySelectorAll('.gelir').forEach((inp, idx) => {
                 const val = parseFloat(inp.value) || 0; yGelirTop += val;
-                yGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
+                yGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
             });
             document.querySelectorAll('.gider').forEach((inp, idx) => {
                 const val = parseFloat(inp.value) || 0; yGiderTop += val;
-                yGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
+                yGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${val.toFixed(2)} TL</strong></td></tr>`;
             });
             const yk1Faaliyet = formatMetin('yk1FaaliyetMetni', { 'OKUL_ADI': okul, 'EĞİTİM_YILI': yil, 'BANKA_ADI': bankaAdi });
-            const oNet = (parseFloat(document.getElementById('oGelirToplam').textContent) - parseFloat(document.getElementById('oGiderToplam').textContent)).toFixed(2);
+            const oNet = Math.max(0, 
+                parseFloat(document.getElementById('oGelirToplam').textContent) 
+                - parseFloat(document.getElementById('oGiderToplam').textContent)
+            ).toFixed(2);
+
+            let oncekiBilancoSayfasi = '';
+            if (!isIlkKurulus()) {
+                oncekiBilancoSayfasi = `
+                    <div style="page-break-before: always;"></div>
+                    <div class="pdf-header" style="text-align:center; line-height:1.5;">
+                        <strong>${okulBuyuk}</strong> OKUL AİLE BİRLİĞİ<br>
+                        <strong>${oncekiYil}</strong> ÖĞRETİM YILI (ÖNCEKİ DÖNEM)<br>FAALİYET BİLANÇOSU
+                    </div>
+                    <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${oGelir}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GELİRLER</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr></tfoot></table></div>
+                    <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${oGider}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GİDERLER</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr></tfoot></table></div>
+                    <div class="pdf-tut-metin" style="margin-top:15px; text-align:center; font-weight:bold;"><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GENEL TOPLAM</div>
+                    <div class="pdf-tablo-wrap"><table class="pdf-tablo">
+                        <tr><td><strong>1</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GELİRLER TOPLAMI</td><td><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr>
+                        <tr><td><strong>2</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GİDERLER TOPLAMI</td><td><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr>
+                        <tr><td><strong>3</strong></td><td>BANKA HESABINDAKİ PARA</td><td><strong>${oNet} TL</strong></td></tr>
+                        <tr><td><strong>4</strong></td><td>SONRAKİ DÖNEME DEVREDEN MİKTAR</td><td><strong>${oNet} TL</strong></td></tr>
+                    </table></div>
+                    ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
+                `;
+            }
 
             return `
                 <div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${yil}</strong> ÖĞRETİM YILI OKUL AİLE BİRLİĞİ FAALİYET RAPORU</div>
                 <div class="pdf-tut-metin"><strong>${okul}</strong> Okul Aile Birliği olarak, <strong>${ykIlkTopTarihi}</strong> tarihindeki ilk toplantımızda görev dağılımı yapılmış olup, görev dağılımı aşağıdaki şekilde yapılmıştır.</div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo">
                     <tr><th><strong>Unvan</strong></th><th><strong>Adı Soyadı</strong></th></tr>
-                    <tr><td><strong>Başkan</strong></td><td><strong>${baskan}</strong></td></tr>
-                    <tr><td><strong>Başkan Yardımcısı</strong></td><td><strong>${bYrd}</strong></td></tr>
-                    <tr><td><strong>Muhasip</strong></td><td><strong>${muh}</strong></td></tr>
-                    <tr><td><strong>Sekreter</strong></td><td><strong>${sek}</strong></td></tr>
-                    <tr><td><strong>Üye</strong></td><td><strong>${uye}</strong></td></tr>
+                    <tr><td><strong>Başkan</strong></td><td><strong>${escapeHtml(baskan)}</strong></td></tr>
+                    <tr><td><strong>Başkan Yardımcısı</strong></td><td><strong>${escapeHtml(bYrd)}</strong></td></tr>
+                    <tr><td><strong>Muhasip</strong></td><td><strong>${escapeHtml(muh)}</strong></td></tr>
+                    <tr><td><strong>Sekreter</strong></td><td><strong>${escapeHtml(sek)}</strong></td></tr>
+                    <tr><td><strong>Üye</strong></td><td><strong>${escapeHtml(uye)}</strong></td></tr>
                 </table></div>
                 <div class="pdf-tut-metin" style="margin-top:15px;">${yk1Faaliyet}</div>
                 ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
-                <div style="page-break-before: always;"></div>
-                <div class="pdf-header" style="text-align:center; line-height:1.5;">
-                    <strong>${okulBuyuk}</strong> OKUL AİLE BİRLİĞİ<br>
-                    <strong>${oncekiYil}</strong> ÖĞRETİM YILI (ÖNCEKİ DÖNEM)<br>FAALİYET BİLANÇOSU
-                </div>
-                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİRLER</strong></th></tr></thead><tbody>${oGelir}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GELİRLER</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr></tfoot></table></div>
-                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GİDERLER</strong></th></tr></thead><tbody>${oGider}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GİDERLER</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr></tfoot></table></div>
-                <div class="pdf-tut-metin" style="margin-top:15px; text-align:center; font-weight:bold;"><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GENEL TOPLAM</div>
-                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
-                    <tr><td><strong>1</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GELİRLER TOPLAMI</td><td><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr>
-                    <tr><td><strong>2</strong></td><td><strong>${oncekiYil}</strong> EĞİTİM-ÖĞRETİM YILI GİDERLER TOPLAMI</td><td><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr>
-                    <tr><td><strong>3</strong></td><td>BANKA HESABINDAKİ PARA</td><td><strong>${oNet} TL</strong></td></tr>
-                    <tr><td><strong>4</strong></td><td>SONRAKİ DÖNEME DEVREDEN MİKTAR</td><td><strong>${oNet} TL</strong></td></tr>
-                </table></div>
-                ${getImzaAlaniYk(ykIlkTopTarihi, muh, sek, uye, bYrd, baskan)}
+                ${oncekiBilancoSayfasi}
                 <div style="page-break-before: always;"></div>
                 <div class="pdf-header">OKUL AİLE BİRLİĞİ TAHMİNİ BÜTÇE</div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala"><strong>GELİR TAHMİNİ BÜTÇE</strong></th></tr></thead><tbody>${yGelir}</tbody><tfoot><tr class="pdf-bold"><td colspan="2"><strong>TOPLAM GELİR TAHMİNİ BÜTÇE</strong></td><td class="pdf-sag"><strong>${yGelirTop.toFixed(2)} TL</strong></td></tr></tfoot></table></div>
@@ -2029,7 +2108,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             const gelirTop = parseFloat(document.getElementById('gelirToplam').textContent || 0);
             const giderTop = parseFloat(document.getElementById('giderToplam').textContent || 0);
             const netGelir = (gelirTop - devir).toFixed(2);
-            const bankaMevcut = (gelirTop - giderTop).toFixed(2);
+            const bankaMevcut = Math.max(0, gelirTop - giderTop).toFixed(2);
             const metin = formatMetin('yk2Metni', {
                 'OKUL_ADI': okul, 'TARİH': aralikTarih, 'GÜN': gunIsmi, 'SAAT': '15.40', 'BAŞKAN': baskan, 'B_YRD': bYrd,
                 'RAPOR_YILI': aralikYil, 'ONCEKI_YIL': oncekiYil.split('-')[0] || "2024", 'DEVIR': devir, 'NET_GELIR': netGelir, 'GELIR': gelirTop.toFixed(2), 'GIDER': giderTop.toFixed(2),
@@ -2045,7 +2124,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             const gelirTop = parseFloat(document.getElementById('gelirToplam').textContent || 0);
             const giderTop = parseFloat(document.getElementById('giderToplam').textContent || 0);
             const netGelir = (gelirTop - devir).toFixed(2);
-            const bankaMevcut = (gelirTop - giderTop).toFixed(2);
+            const bankaMevcut = Math.max(0, gelirTop - giderTop).toFixed(2);
             const metin = formatMetin('yk3Metni', {
                 'OKUL_ADI': okul, 'TARİH': haziranTarih, 'GÜN': haziranGun, 'SAAT': '15.40', 'BAŞKAN': baskan, 'B_YRD': bYrd,
                 'RAPOR_YILI': haziranYil, 'ONCEKI_YIL': yil.split('-')[0] || "2025", 'DEVIR': devir, 'NET_GELIR': netGelir, 'GELIR': gelirTop.toFixed(2), 'GIDER': giderTop.toFixed(2),
@@ -2054,20 +2133,23 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             return `<div class="pdf-header"><strong>${okulBuyuk}</strong> OKUL AİLE BİRLİĞİ<br><strong>${haziranYil}</strong> YILI HAZİRAN SONU YÖNETİM KURULU FAALİYET RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniYk(haziranTarih, muh, sek, uye, bYrd, baskan)}`;
         }
         else if (secim === 'ykEylul') {
-            // ÖNCEKİ DÖNEM KAPANIŞI - .o-gelir/.o-gider ve ÖNCEKİ personel kullanır
+            if (isIlkKurulus()) return `<div class="pdf-tut-metin" style="text-align:center; padding:50px;">İlk kez kurulan okullarda bu evrak kullanılmaz.</div>`;
             const eylulTarih = formatDate(document.getElementById('ykEylulTarihi').value);
             const eylulGun = getDayName(document.getElementById('ykEylulTarihi').value);
             const donemBas = formatDate(document.getElementById('prevDonemBaslangic').value);
-            const devirTutar = parseFloat(document.getElementById('oGelirToplam').textContent || 0) - parseFloat(document.getElementById('oGiderToplam').textContent || 0);
+            const devirTutar = Math.max(0, 
+                parseFloat(document.getElementById('oGelirToplam').textContent || 0) 
+                - parseFloat(document.getElementById('oGiderToplam').textContent || 0)
+            );
             const devirTutarStr = devirTutar.toFixed(2);
 
             let yGelir = '', yGider = '';
-            document.querySelectorAll('.o-gelir').forEach((inp, idx) => { yGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${(parseFloat(inp.value) || 0).toFixed(2)} TL</strong></td></tr>`; });
-            document.querySelectorAll('.o-gider').forEach((inp, idx) => { yGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${inp.parentElement.previousElementSibling.textContent}</strong></td><td class="pdf-sag"><strong>${(parseFloat(inp.value) || 0).toFixed(2)} TL</strong></td></tr>`; });
+            document.querySelectorAll('.o-gelir').forEach((inp, idx) => { yGelir += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${(parseFloat(inp.value) || 0).toFixed(2)} TL</strong></td></tr>`; });
+            document.querySelectorAll('.o-gider').forEach((inp, idx) => { yGider += `<tr><td><strong>${idx+1}</strong></td><td><strong>${escapeHtml(inp.parentElement.previousElementSibling.textContent)}</strong></td><td class="pdf-sag"><strong>${(parseFloat(inp.value) || 0).toFixed(2)} TL</strong></td></tr>`; });
 
             const metin = formatMetin('ykEylulMetni', {
                 'OKUL_ADI': okul, 'EĞİTİM_YILI': oncekiYil, 'TARİH': eylulTarih, 'GÜN': eylulGun, 'SAAT': '14:00',
-                'YER': 'Okul Müdürünün Odası', 'MUDUR': document.getElementById('mudurAdi').value, 'MUHASIP': prevMuh,
+                'YER': 'Okul Müdürünün Odası', 'BAŞKAN': prevBaskan, 'MUHASIP': prevMuh,
                 'DÖNEM_BASLANGIC': donemBas, 'DÖNEM_BITIS': eylulTarih,
                 'GELIR_TOPLAM': document.getElementById('oGelirToplam').textContent,
                 'GIDER_TOPLAM': document.getElementById('oGiderToplam').textContent,
@@ -2110,7 +2192,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             const gun = getDayName(document.getElementById(b.tarihId).value);
             const metin = formatMetin(b.metinId, {
                 'OKUL_ADI': okul, 'AY': b.ay, 'TARİH': tarih, 'GÜN': gun, 'SAAT': '14:00',
-                'YER': 'Okul Müdürünün Odası', 'MUDUR': document.getElementById('mudurAdi').value, 'MUHASIP': muh
+                'YER': 'Okul Müdürünün Odası', 'BAŞKAN': baskan, 'MUHASIP': muh
             });
             return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br><strong>${b.ay.toLocaleUpperCase('tr-TR')}</strong> AYI TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniYk(tarih, muh, sek, uye, bYrd, baskan)}`;
         }
@@ -2127,26 +2209,26 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
 
         // Yeni dönem DK
         const dkBaskan = document.getElementById('dkBaskan').value;
-        const dkOgr1 = document.getElementById('dkOgr1').value;
-        const dkVeli = document.getElementById('dkVeli').value;
+        const dkBaskanYrd = document.getElementById('dkBaskanYrd').value;
+        const dkMuhasip = document.getElementById('dkMuhasip').value;
 
         // Önceki dönem DK
         const prevDkBaskan = document.getElementById('prevDkBaskan').value || '..................';
-        const prevDkOgr1 = document.getElementById('prevDkOgr1').value || '..................';
-        const prevDkVeli = document.getElementById('prevDkVeli').value || '..................';
+        const prevDkBaskanYrd = document.getElementById('prevDkBaskanYrd').value || '..................';
+        const prevDkMuhasip = document.getElementById('prevDkMuhasip').value || '..................';
 
         if (secim === 'dk1') {
             const dkTarih1 = formatDate(document.getElementById('dkTarihi1').value);
-            const metin = formatMetin('dk1Metni', { 'OKUL_ADI': okul, 'TARİH': dkTarih1 });
+            const metin = formatMetin('dk1Metni', { 'OKUL_ADI': okul, 'TARİH': dkTarih1, 'EĞİTİM_YILI': yil });
             return `
                 <div class="pdf-header"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div>
                 <div class="pdf-tut-metin">${metin}</div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo">
-                    <tr><th><strong>Başkan</strong></th><th><strong>Öğretmen Üye</strong></th><th><strong>Veli Üye</strong></th></tr>
-                    <tr><td><strong>${dkBaskan}</strong></td><td><strong>${dkOgr1}</strong></td><td><strong>${dkVeli}</strong></td></tr>
+                    <tr><th><strong>Başkan</strong></th><th><strong>Başkan Yrd.</strong></th><th><strong>Muhasip</strong></th></tr>
+                    <tr><td><strong>${escapeHtml(dkBaskan)}</strong></td><td><strong>${escapeHtml(dkBaskanYrd)}</strong></td><td><strong>${escapeHtml(dkMuhasip)}</strong></td></tr>
                 </table></div>
                 <div style="margin-top:20px;"></div>
-                ${getImzaAlaniDk(dkTarih1, dkBaskan, dkOgr1, dkVeli)}
+                ${getImzaAlaniDk(dkTarih1, dkBaskan, dkBaskanYrd, dkMuhasip)}
             `;
         }
         else if (secim === 'dk2') {
@@ -2156,13 +2238,13 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             const gelirTop = parseFloat(document.getElementById('gelirToplam').textContent || 0);
             const giderTop = parseFloat(document.getElementById('giderToplam').textContent || 0);
             const netGelir = (gelirTop - devir).toFixed(2);
-            const bankaMevcut = (gelirTop - giderTop).toFixed(2);
+            const bankaMevcut = Math.max(0, gelirTop - giderTop).toFixed(2);
             const metin = formatMetin('dk2Metni', {
                 'OKUL_ADI': okul, 'TARİH': dkTarih2, 'BANKA_ADI': bankaAd, 'YK_TARİH': '31.12.' + aralikYili, 'EĞİTİM_YILI': yil,
                 'ONCEKI_YIL': oncekiYil.split('-')[0] || "2024", 'RAPOR_YILI': aralikYili, 'DEVIR': devir, 'NET_GELIR': netGelir, 'GELIR': gelirTop.toFixed(2),
                 'GIDER': giderTop.toFixed(2), 'BANKA_IBAN': ib, 'SONRAKİ_YIL': (parseInt(aralikYili) + 1).toString(), 'BANKA_MEVCUT': bankaMevcut
             });
-            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${aralikYili}</strong> YILI OKUL AİLE BİRLİĞİ DENETİM KURULU ARALIK SONU RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkTarih2, dkBaskan, dkOgr1, dkVeli)}`;
+            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${aralikYili}</strong> YILI OKUL AİLE BİRLİĞİ DENETİM KURULU ARALIK SONU RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkTarih2, dkBaskan, dkBaskanYrd, dkMuhasip)}`;
         }
         else if (secim === 'dk3') {
             const dkTarih3 = formatDate(document.getElementById('dkTarihi3').value);
@@ -2172,20 +2254,23 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
             const gelirTop = parseFloat(document.getElementById('gelirToplam').textContent || 0);
             const giderTop = parseFloat(document.getElementById('giderToplam').textContent || 0);
             const netGelir = (gelirTop - devir).toFixed(2);
-            const bankaMevcut = (gelirTop - giderTop).toFixed(2);
+            const bankaMevcut = Math.max(0, gelirTop - giderTop).toFixed(2);
             const metin = formatMetin('dk3Metni', {
                 'OKUL_ADI': okul, 'TARİH': dkTarih3, 'BANKA_ADI': bankaAd, 'YK_TARİH': ykHaziranTarihi, 'EĞİTİM_YILI': yil,
                 'ONCEKI_YIL': yil.split('-')[0] || "2025", 'RAPOR_YILI': haziranYil, 'DEVIR': devir, 'NET_GELIR': netGelir, 'GELIR': gelirTop.toFixed(2),
                 'GIDER': giderTop.toFixed(2), 'BANKA_IBAN': ib, 'BANKA_MEVCUT': bankaMevcut
             });
-            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${haziranYil}</strong> YILI OKUL AİLE BİRLİĞİ DENETİM KURULU HAZİRAN SONU RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkTarih3, dkBaskan, dkOgr1, dkVeli)}`;
+            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br><strong>${haziranYil}</strong> YILI OKUL AİLE BİRLİĞİ DENETİM KURULU HAZİRAN SONU RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkTarih3, dkBaskan, dkBaskanYrd, dkMuhasip)}`;
         }
         else if (secim === 'dkEylul') {
-            // ÖNCEKİ DÖNEM DK NİHAİ RAPORU - ÖNCEKİ personel ve .o-gelir/.o-gider
+            if (isIlkKurulus()) return `<div class="pdf-tut-metin" style="text-align:center; padding:50px;">İlk kez kurulan okullarda bu evrak kullanılmaz.</div>`;
             const dkEylulTarih = formatDate(document.getElementById('dkEylulTarihi').value);
             const ykEylulTarihi = formatDate(document.getElementById('ykEylulTarihi').value);
             const donemBas = formatDate(document.getElementById('prevDonemBaslangic').value);
-            const devirTutar = (parseFloat(document.getElementById('oGelirToplam').textContent || 0) - parseFloat(document.getElementById('oGiderToplam').textContent || 0)).toFixed(2);
+            const devirTutar = Math.max(0, 
+                parseFloat(document.getElementById('oGelirToplam').textContent || 0) 
+                - parseFloat(document.getElementById('oGiderToplam').textContent || 0)
+            ).toFixed(2);
             const metin = formatMetin('dkEylulMetni', {
                 'OKUL_ADI': okul,
                 'DÖNEM_BASLANGIC': donemBas,
@@ -2194,7 +2279,7 @@ c. Yönetim ve Denetim Kurulu raporu kurul üyelerine ibra edilerek oy çokluğu
                 'DEVIR_TARIHI': ykEylulTarihi,
                 'DEVIR_TUTAR': devirTutar
             });
-            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ DENETİM KURULU<br><strong>${oncekiYil}</strong> DÖNEMİ NİHAİ DENETİM RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkEylulTarih, prevDkBaskan, prevDkOgr1, prevDkVeli)}`;
+            return `<div class="pdf-header"><strong>${okulBuyuk}</strong><br>OKUL AİLE BİRLİĞİ DENETİM KURULU<br><strong>${oncekiYil}</strong> DÖNEMİ NİHAİ DENETİM RAPORU</div><div class="pdf-tut-metin">${metin}</div>${getImzaAlaniDk(dkEylulTarih, prevDkBaskan, prevDkBaskanYrd, prevDkMuhasip)}`;
         }
     }
 
