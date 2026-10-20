@@ -106,6 +106,18 @@
                 </ol>
             </div>
             <div class="info-card">
+                <h4>📊 Aylık Toplantı Detayları</h4>
+                <p>Kasım, Ocak, Şubat, Mart, Nisan, Mayıs aylarında Yönetim Kurulu toplantıları için ayrı bir "Aylık Toplantı Detayları" paneli açılır. Bu panelde her ay için:</p>
+                <ul style="line-height:1.8; font-size:14px;">
+                    <li>Önceki toplantıdan devreden tutar</li>
+                    <li>Bu ayın gelir-gider tabloları (kalem kalem)</li>
+                    <li>Yapılan iş ve işlemler</li>
+                    <li>Alınan kararlar</li>
+                    <li>Bir sonraki toplantıya kadar yapılacaklar</li>
+                </ul>
+                <p>girilir. Bu veriler PDF tutanağa otomatik yansıtılır. Her ayın verisi ayrı saklanır; başka bir aya geçtiğinizde o ayın verileri otomatik yüklenir.</p>
+            </div>
+            <div class="info-card">
                 <h4>🏫 Okul Müdürünün Rolü</h4>
                 <p>Okul müdürü, YK veya DK'nın doğal üyesi <strong>değildir</strong>. Sadece ilk kuruluş çağrısını yapar ve birliğin işlemlerinin mevzuata uygunluğunu denetler.</p>
             </div>
@@ -354,6 +366,58 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                 </div>
             </div>
 
+            <!-- AYLIK TOPLANTI DETAYLARI PANELİ -->
+            <div id="ozel-aylik" class="ozel-grup">
+                <div class="info-box" style="background:#fff8e1; border-left-color:#f39c12; color:#7e5109;">
+                    <strong>📊 Aylık Toplantı Detayları:</strong> Bu paneldeki veriler seçili ayın tutanağına yansıtılır. Her ayın verisi ayrı saklanır; başka bir aya geçtiğinizde o ayın verileri otomatik yüklenir. Tutanak textarea'sındaki <code>[!GELIR_TABLOSU!]</code> gibi placeholder'lar PDF üretiminde otomatik doldurulur.
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Önceki Toplantı Tarihi</label>
+                        <input type="date" id="aylikOncekiToplantiTarihi">
+                    </div>
+                    <div class="form-group">
+                        <label>Önceki Toplantıdan Devreden Tutar (TL)</label>
+                        <input type="number" id="aylikDevir" value="0" step="0.01">
+                    </div>
+                </div>
+
+                <h4 style="margin-top:20px; color:#2c3e50; border-bottom:1px solid #e1e4e8; padding-bottom:6px;">💰 Bu Ayın Gelirleri</h4>
+                <table class="butce-tablo">
+                    <tr><th>Gelirin Cinsi</th><th>Miktar (TL)</th></tr>
+                    <tr><td>Gönüllü Bağış ve Yardımlar</td><td><input type="number" class="aylik-gelir" value="0" step="0.01"></td></tr>
+                    <tr><td>Kantin Kira Geliri</td><td><input type="number" class="aylik-gelir" value="0" step="0.01"></td></tr>
+                    <tr><td>İşletilebilen Alan Geliri</td><td><input type="number" class="aylik-gelir" value="0" step="0.01"></td></tr>
+                    <tr><td>Etkinlik Organizasyon Gelirleri</td><td><input type="number" class="aylik-gelir" value="0" step="0.01"></td></tr>
+                    <tr><td>Diğer Gelirler</td><td><input type="number" class="aylik-gelir" value="0" step="0.01"></td></tr>
+                    <tr class="toplam-satir"><td>TOPLAM GELİR</td><td id="aylikGelirToplam">0.00</td></tr>
+                </table>
+
+                <h4 style="margin-top:20px; color:#2c3e50; border-bottom:1px solid #e1e4e8; padding-bottom:6px;">💸 Bu Ayın Giderleri</h4>
+                <table class="butce-tablo">
+                    <tr><th>Giderin Cinsi</th><th>Miktar (TL)</th></tr>
+                    <tr><td>Bakım Onarım Giderleri</td><td><input type="number" class="aylik-gider" value="0" step="0.01"></td></tr>
+                    <tr><td>Kırtasiye ve Büro Malzemesi</td><td><input type="number" class="aylik-gider" value="0" step="0.01"></td></tr>
+                    <tr><td>Etkinlik Organizasyon Giderleri</td><td><input type="number" class="aylik-gider" value="0" step="0.01"></td></tr>
+                    <tr><td>Diğer Giderler</td><td><input type="number" class="aylik-gider" value="0" step="0.01"></td></tr>
+                    <tr class="toplam-satir"><td>TOPLAM GİDER</td><td id="aylikGiderToplam">0.00</td></tr>
+                </table>
+
+                <div class="form-group full-width" style="margin-top:20px;">
+                    <label>Bu Ay İçinde Yapılan İş ve İşlemler</label>
+                    <textarea id="aylikYapilanIsler" rows="4" placeholder="Örn: Sınıfların boya-badana işi tamamlandı, kütüphaneye 50 kitap alındı, kantin denetimi yapıldı..."></textarea>
+                </div>
+                <div class="form-group full-width" style="margin-top:10px;">
+                    <label>Bu Toplantıda Alınan Kararlar</label>
+                    <textarea id="aylikAlinanKararlar" rows="4" placeholder="Örn: 1- Kış ayları için kalorifer bakımının yapılmasına, 2- 29 Ekim Cumhuriyet Bayramı kutlamaları için bütçe ayrılmasına..."></textarea>
+                </div>
+                <div class="form-group full-width" style="margin-top:10px;">
+                    <label>Bir Sonraki Toplantıya Kadar Yapılması Planlananlar</label>
+                    <textarea id="aylikYapilacaklar" rows="4" placeholder="Örn: Kantin sözleşmesinin yenilenmesi, yıl sonu etkinliği için veli görüşmeleri, kütüphane düzenlemesi..."></textarea>
+                </div>
+            </div>
+
             <div id="ozel-oncekiDonem" class="ozel-grup">
                 <div class="info-box" style="background:#fef5e7; border-left-color:#e67e22; color:#7e5109;">
                     <strong>⚠️ Önceki Dönem:</strong> Görevi sona ermiş YK/DK üyeleridir.
@@ -472,78 +536,32 @@ Yönetim Kurulu, dönem boyunca mevzuata uygun hareket ettiğini, aylık toplant
             </div>
 
             <div id="ozel-ykAylik" class="ozel-grup">
-                <div class="info-box">Aylık YK tutanaklarıdır.</div>
+                <div class="info-box" style="background:#fff8e1; border-left-color:#f39c12; color:#7e5109;">
+                    Aylık YK tutanaklarıdır. <strong>Yukarıdaki "Aylık Toplantı Detayları" panelini doldurmayı unutmayın</strong> — gelir-gider tabloları, yapılan işler ve kararlar oradan otomatik olarak tutanağa yansıtılır. Placeholder'ları (<code>[!GELIR_TABLOSU!]</code> vb.) silmeyin.
+                </div>
                 <div class="form-group full-width">
                     <label>Kasım Ayı Tutanağı</label>
-                    <textarea id="ykKasimMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir. Yapılan harcamaların karar defterine işlendiği ve belgelerin dosyalandığı tespit edilmiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykKasimMetni" rows="20"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Ocak Ayı Tutanağı</label>
-                    <textarea id="ykOcakMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykOcakMetni" rows="20"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Şubat Ayı Tutanağı</label>
-                    <textarea id="ykSubatMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykSubatMetni" rows="20"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Mart Ayı Tutanağı</label>
-                    <textarea id="ykMartMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykMartMetni" rows="20"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Nisan Ayı Tutanağı</label>
-                    <textarea id="ykNisanMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykNisanMetni" rows="20"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Mayıs Ayı Tutanağı</label>
-                    <textarea id="ykMayisMetni" rows="9">[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
-
-Toplantıda;
-1. Bir önceki toplantıda alınan kararların uygulanma durumu gözden geçirilmiştir.
-2. [AY] ayı içinde yapılan harcamalar ve gelirler hakkında Muhasip Üye [MUHASIP] bilgi vermiştir.
-3. Okulun [AY] ayı içindeki ihtiyaçları görüşülmüş ve gerekli kararlar alınmıştır.
-4. Bir sonraki toplantıda görüşülmek üzere gündem önerileri belirlenmiştir.
-
-İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+                    <textarea id="ykMayisMetni" rows="20"></textarea>
                 </div>
             </div>
 
@@ -692,6 +710,16 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
     let okulLogoBase64 = '';
     let lastBirlikDurumu = 'mevcut';
     let lastToplantiTuru = '1';
+    let activeMonthCode = null;
+
+    const MONTH_CODES = {
+        'ykKasim': {code: 'kasim', name: 'Kasım'},
+        'ykOcak': {code: 'ocak', name: 'Ocak'},
+        'ykSubat': {code: 'subat', name: 'Şubat'},
+        'ykMart': {code: 'mart', name: 'Mart'},
+        'ykNisan': {code: 'nisan', name: 'Nisan'},
+        'ykMayis': {code: 'mayis', name: 'Mayıs'}
+    };
 
     // ==================== YARDIMCI ====================
     function escapeHtml(t) {
@@ -734,6 +762,47 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         const durum = getToplantiDurumu();
         if (ilk) return durum === 'ilk_erteleme' ? 'tutanakMetni_ilk_erteleme' : 'tutanakMetni_ilk_basarili';
         return durum === 'ilk_erteleme' ? 'tutanakMetni_mevcut_erteleme' : 'tutanakMetni_mevcut_basarili';
+    }
+
+    // ==================== AYLIK VERİ ====================
+    function aylikGet(field, def = '') {
+        if (!activeMonthCode) return def;
+        const v = localStorage.getItem(`oab_aylik_${activeMonthCode}_${field}`);
+        return v !== null ? v : def;
+    }
+    function aylikSet(field, val) {
+        if (!activeMonthCode) return;
+        localStorage.setItem(`oab_aylik_${activeMonthCode}_${field}`, val);
+    }
+
+    function loadAylikData(monthCode) {
+        activeMonthCode = monthCode;
+        document.getElementById('aylikOncekiToplantiTarihi').value = aylikGet('oncekiToplantiTarihi');
+        document.getElementById('aylikDevir').value = aylikGet('devir', '0');
+        document.querySelectorAll('.aylik-gelir').forEach((inp, i) => inp.value = aylikGet('gelir' + i, '0'));
+        document.querySelectorAll('.aylik-gider').forEach((inp, i) => inp.value = aylikGet('gider' + i, '0'));
+        document.getElementById('aylikYapilanIsler').value = aylikGet('yapilan');
+        document.getElementById('aylikAlinanKararlar').value = aylikGet('kararlar');
+        document.getElementById('aylikYapilacaklar').value = aylikGet('yapilacaklar');
+        hesaplaAylik();
+    }
+
+    function saveAylikData() {
+        if (!activeMonthCode) return;
+        aylikSet('oncekiToplantiTarihi', document.getElementById('aylikOncekiToplantiTarihi').value);
+        aylikSet('devir', document.getElementById('aylikDevir').value);
+        document.querySelectorAll('.aylik-gelir').forEach((inp, i) => aylikSet('gelir' + i, inp.value));
+        document.querySelectorAll('.aylik-gider').forEach((inp, i) => aylikSet('gider' + i, inp.value));
+        aylikSet('yapilan', document.getElementById('aylikYapilanIsler').value);
+        aylikSet('kararlar', document.getElementById('aylikAlinanKararlar').value);
+        aylikSet('yapilacaklar', document.getElementById('aylikYapilacaklar').value);
+    }
+
+    function hesaplaAylik() {
+        let g = 0; document.querySelectorAll('.aylik-gelir').forEach(i => g += parseFloat(i.value) || 0);
+        document.getElementById('aylikGelirToplam').textContent = g.toFixed(2);
+        let gi = 0; document.querySelectorAll('.aylik-gider').forEach(i => gi += parseFloat(i.value) || 0);
+        document.getElementById('aylikGiderToplam').textContent = gi.toFixed(2);
     }
 
     // ==================== VARSAYILAN METİNLER ====================
@@ -828,6 +897,42 @@ Toplantıda ayrıca;
 5. Gelir ve giderlerin belgelendirilmesi, banka işlemlerinin mevzuata uygunluğu ve TEFBİS kayıtlarının düzenli tutulması hususlarında Yönetim Kuruluna gerekli bildirimlerin yapılacağına,
 
 oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.`;
+
+    // ==================== AYLIK TUTANAK ŞABLONU ====================
+    const AYLIK_TUTANAK_TEMPLATE = `[OKUL_ADI] Okul Aile Birliği Yönetim Kurulu, [AY] ayı olağan toplantısını [TARİH] [GÜN] günü saat [SAAT]'te Yönetim Kurulu Başkanı [BAŞKAN] başkanlığında [YER]'nde yapmıştır.
+
+Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı sağlanmıştır.
+
+1. Önceki toplantı tutanağı ve alınan kararlar okundu. [ONCEKI_TOPLANTI_TARIHI] tarihli son toplantıda alınan kararların uygulanma durumu gözden geçirildi. Kararların büyük çoğunluğunun uygulandığı, uygulanamayan kararların ise gerekçeleriyle birlikte görüşüldüğü tespit edildi.
+
+2. Muhasip Üye [MUHASIP] tarafından [ONCEKI_TOPLANTI_TARIHI] – [TARİH] tarihleri arasındaki gelir-gider tablosu sunuldu. [ONCEKI_TOPLANTI_TARIHI] tarihi itibarıyla kasadaki mevcut: [DEVIR] TL.
+
+3. [AY] ayı içindeki gelirler:
+
+[!GELIR_TABLOSU!]
+
+4. [AY] ayı içindeki giderler:
+
+[!GIDER_TABLOSU!]
+
+5. Net Durum:
+- Toplam Gelir: [TOPLAM_GELIR] TL
+- Toplam Gider: [TOPLAM_GIDER] TL
+- Dönem Sonu Banka/Kasa Mevcudu: [DONEM_SONU] TL
+
+6. Bu ay içinde yapılan iş ve işlemler:
+
+[!YAPILAN_ISLER!]
+
+7. Bu toplantıda alınan kararlar:
+
+[!ALINAN_KARARLAR!]
+
+8. Bir sonraki toplantıya kadar yapılması planlanan iş ve işlemler:
+
+[!YAPILACAKLAR!]
+
+9. Dilek ve temenniler dinlendi. İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.`;
 
     // ==================== TARİH OTOMASYONU ====================
     function tarihleriOtomatikHesapla(showAlert = true) {
@@ -1095,7 +1200,16 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
             if (val === '8') document.getElementById('ozel-8').classList.add('aktif');
         }
         if (val === 'yk1') document.getElementById('ozel-yk1').classList.add('aktif');
-        if (['ykKasim','ykOcak','ykSubat','ykMart','ykNisan','ykMayis'].includes(val)) document.getElementById('ozel-ykAylik').classList.add('aktif');
+
+        // AYLIK: panel gösterimi + veri yükleme
+        if (MONTH_CODES[val]) {
+            document.getElementById('ozel-ykAylik').classList.add('aktif');
+            document.getElementById('ozel-aylik').classList.add('aktif');
+            loadAylikData(MONTH_CODES[val].code);
+        } else {
+            activeMonthCode = null;
+        }
+
         if (val === 'yk2') document.getElementById('ozel-yk2').classList.add('aktif');
         if (val === 'yk3') document.getElementById('ozel-yk3').classList.add('aktif');
         if (val === 'ykEylul') document.getElementById('ozel-ykEylul').classList.add('aktif');
@@ -1229,7 +1343,14 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
         if (e.target.id && e.target.type !== 'file') localStorage.setItem('oab_'+e.target.id, e.target.type === 'checkbox' ? e.target.checked : e.target.value);
         if (e.target.classList.contains('gelir') || e.target.classList.contains('gider') || e.target.classList.contains('o-gelir') || e.target.classList.contains('o-gider')) hesaplaButce();
 
-        // NOT: birlikDurumu ve toplantiTuru kendi onchange handler'larında tam işleniyor; burada yer almamalı
+        // Aylık panel girdileri
+        if (e.target.classList.contains('aylik-gelir') || e.target.classList.contains('aylik-gider')) {
+            hesaplaAylik();
+            saveAylikData();
+        } else if (e.target.id && e.target.id.startsWith('aylik')) {
+            saveAylikData();
+        }
+
         const tutanakFields = [
             'mudurAdi','baskanAdi','prevBaskan','divanBaskani','divanKatip',
             'secYonetimAsil','secYonetimYedek','secDenetimAsil','secDenetimYedek',
@@ -1264,6 +1385,7 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
                 loadFromStorage();
                 const lg = localStorage.getItem('oab_okulLogoBase64');
                 if (lg) { okulLogoBase64 = lg; document.getElementById('okulLogoDosyaAdi').textContent = 'Logo yüklendi'; }
+                if (activeMonthCode) loadAylikData(activeMonthCode);
                 updateTutanakMetinleri(); updateTutanakGrubuGorunurlugu(); hesaplaButce();
                 alert('Yedek yüklendi!');
                 ev.target.value = '';
@@ -1291,10 +1413,21 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
         }
         return r;
     }
+    // formatMetin — raw HTML placeholder desteği ([!KEY!] formatında)
     function formatMetin(id, dict) {
-        let t = document.getElementById(id).value.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        let t = document.getElementById(id).value;
+        // 1) Önce normal placeholder'ları escape ederek işle (kullanıcı değerleri)
+        t = t.replace(/</g,'&lt;').replace(/>/g,'&gt;');
         for (const [k,v] of Object.entries(dict)) {
-            t = t.replace(new RegExp(`\\[${k}\\]`,'g'), () => `<strong>${escapeHtml(v)}</strong>`);
+            if (!k.startsWith('!')) {
+                t = t.replace(new RegExp(`\\[${k}\\]`,'g'), () => `<strong>${escapeHtml(v)}</strong>`);
+            }
+        }
+        // 2) Raw HTML placeholder'lar ([!KEY!]) - escape edilmeden HTML olarak yorumlanır
+        for (const [k,v] of Object.entries(dict)) {
+            if (k.startsWith('!')) {
+                t = t.replace(new RegExp(`\\[\\!${k.substring(1)}\\!\\]`,'g'), () => v);
+            }
         }
         return t.replace(/\n/g,'<br>');
     }
@@ -1368,7 +1501,6 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
             const tur = document.getElementById('toplantiTuru').value;
             const eg = getEgitimYili().replace(/[^0-9-]/g, '');
 
-            // Eylül devir evrakları için önceki dönem başlangıç tarihi zorunluluğu
             if (!ilk && !document.getElementById('prevDonemBaslangic').value) {
                 alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun (Önceki Dönem panelinde) veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.\n\nNot: YK Eylül ve DK Eylül evrakları için bu tarih zorunludur.');
                 btn.disabled = false;
@@ -1690,11 +1822,53 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
                 </table></div>
                 ${imzaYk(eT, pM, pS, pU, pBY, pB)}`;
         }
-        const ay = {'ykKasim':{ay:'Kasım',tid:'ykKasimTarihi',mid:'ykKasimMetni'},'ykOcak':{ay:'Ocak',tid:'ykOcakTarihi',mid:'ykOcakMetni'},'ykSubat':{ay:'Şubat',tid:'ykSubatTarihi',mid:'ykSubatMetni'},'ykMart':{ay:'Mart',tid:'ykMartTarihi',mid:'ykMartMetni'},'ykNisan':{ay:'Nisan',tid:'ykNisanTarihi',mid:'ykNisanMetni'},'ykMayis':{ay:'Mayıs',tid:'ykMayisTarihi',mid:'ykMayisMetni'}};
-        if (ay[sec]) {
-            const bi = ay[sec], t = formatDate(document.getElementById(bi.tid).value);
-            const m = formatMetin(bi.mid, {'OKUL_ADI':o,'AY':bi.ay,'TARİH':t,'GÜN':getDayName(document.getElementById(bi.tid).value),'SAAT':'14:00','YER':'Okul Müdürünün Odası','BAŞKAN':b,'MUHASIP':mu});
-            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br><strong>${escapeHtml(bi.ay.toLocaleUpperCase('tr-TR'))}</strong> AYI TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div>${imzaYk(t, mu, se, uy, by, b)}`;
+
+        // AYLIK: Zengin tutanak
+        if (MONTH_CODES[sec]) {
+            const mi = MONTH_CODES[sec];
+            const t = formatDate(document.getElementById('yk' + mi.name === 'Kasım' ? '' : '').value); // placeholder
+            // Doğru tarih ID'si:
+            const tarihId = sec + 'Tarihi';
+            const metinId = sec + 'Metni';
+            const ayTarih = formatDate(document.getElementById(tarihId).value);
+            const oncekiTop = formatDate(aylikGet('oncekiToplantiTarihi'));
+
+            const devir = parseFloat(aylikGet('devir')) || 0;
+            const gelirler = [0,1,2,3,4].map(i => parseFloat(aylikGet('gelir' + i)) || 0);
+            const giderler = [0,1,2,3].map(i => parseFloat(aylikGet('gider' + i)) || 0);
+            const gelirLabels = ['Gönüllü Bağış ve Yardımlar', 'Kantin Kira Geliri', 'İşletilebilen Alan Geliri', 'Etkinlik Organizasyon Gelirleri', 'Diğer Gelirler'];
+            const giderLabels = ['Bakım Onarım Giderleri', 'Kırtasiye ve Büro Malzemesi', 'Etkinlik Organizasyon Giderleri', 'Diğer Giderler'];
+
+            const gelirToplam = gelirler.reduce((a,b) => a+b, 0);
+            const giderToplam = giderler.reduce((a,b) => a+b, 0);
+            const donemSonu = devir + gelirToplam - giderToplam;
+
+            let gelirTable = `<table class="pdf-tablo" style="margin:8px 0;"><thead><tr><th>Gelirin Cinsi</th><th style="text-align:right">Miktar (TL)</th></tr></thead><tbody>`;
+            let hasGelir = false;
+            gelirler.forEach((v, i) => { if (v > 0) { hasGelir = true; gelirTable += `<tr><td>${gelirLabels[i]}</td><td style="text-align:right">${v.toFixed(2)} TL</td></tr>`; } });
+            if (!hasGelir) gelirTable += `<tr><td colspan="2" style="text-align:center;font-style:italic;">Bu ay gelir kaydı bulunmamaktadır.</td></tr>`;
+            gelirTable += `</tbody><tfoot><tr><td><strong>TOPLAM</strong></td><td style="text-align:right"><strong>${gelirToplam.toFixed(2)} TL</strong></td></tr></tfoot></table>`;
+
+            let giderTable = `<table class="pdf-tablo" style="margin:8px 0;"><thead><tr><th>Giderin Cinsi</th><th style="text-align:right">Miktar (TL)</th></tr></thead><tbody>`;
+            let hasGider = false;
+            giderler.forEach((v, i) => { if (v > 0) { hasGider = true; giderTable += `<tr><td>${giderLabels[i]}</td><td style="text-align:right">${v.toFixed(2)} TL</td></tr>`; } });
+            if (!hasGider) giderTable += `<tr><td colspan="2" style="text-align:center;font-style:italic;">Bu ay gider kaydı bulunmamaktadır.</td></tr>`;
+            giderTable += `</tbody><tfoot><tr><td><strong>TOPLAM</strong></td><td style="text-align:right"><strong>${giderToplam.toFixed(2)} TL</strong></td></tr></tfoot></table>`;
+
+            const yapilan = (aylikGet('yapilan') || 'Kayıt girilmemiştir.').replace(/\n/g, '<br>');
+            const kararlar = (aylikGet('kararlar') || 'Kayıt girilmemiştir.').replace(/\n/g, '<br>');
+            const yapilacaklar = (aylikGet('yapilacaklar') || 'Kayıt girilmemiştir.').replace(/\n/g, '<br>');
+
+            const m = formatMetin(metinId, {
+                'OKUL_ADI': o, 'AY': mi.name, 'TARİH': ayTarih, 'GÜN': getDayName(document.getElementById(tarihId).value),
+                'SAAT': '14:00', 'YER': 'Okul Müdürünün Odası', 'BAŞKAN': b, 'MUHASIP': mu,
+                'ONCEKI_TOPLANTI_TARIHI': oncekiTop, 'DEVIR': devir.toFixed(2),
+                'TOPLAM_GELIR': gelirToplam.toFixed(2), 'TOPLAM_GIDER': giderToplam.toFixed(2), 'DONEM_SONU': donemSonu.toFixed(2),
+                '!GELIR_TABLOSU': gelirTable, '!GIDER_TABLOSU': giderTable,
+                '!YAPILAN_ISLER': yapilan, '!ALINAN_KARARLAR': kararlar, '!YAPILACAKLAR': yapilacaklar
+            });
+
+            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br><strong>${escapeHtml(mi.name.toLocaleUpperCase('tr-TR'))}</strong> AYI OLAĞAN TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div>${imzaYk(ayTarih, mu, se, uy, by, b)}`;
         }
     }
 
@@ -1754,6 +1928,12 @@ oy birliğiyle karar verildi. İş bu tutanak tarafımızdan tanzim edilerek imz
         if (!yk1.value) yk1.value = isIlkKurulus() ? YK1_FAALIYET_ILK : YK1_FAALIYET_MEVCUT;
         const dk1 = document.getElementById('dk1Metni');
         if (!dk1.value) dk1.value = isIlkKurulus() ? DK1_ILK : DK1_MEVCUT;
+
+        // Aylık tutanaklar boşsa şablonu yükle
+        ['ykKasimMetni','ykOcakMetni','ykSubatMetni','ykMartMetni','ykNisanMetni','ykMayisMetni'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el.value.trim()) el.value = AYLIK_TUTANAK_TEMPLATE;
+        });
 
         const lg = localStorage.getItem('oab_okulLogoBase64');
         if (lg) { okulLogoBase64 = lg; document.getElementById('okulLogoDosyaAdi').textContent = 'Logo yüklendi'; }
