@@ -55,20 +55,21 @@
         .ozel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .ozel-grid .full { grid-column: span 2; }
 
-        /* PDF/WRAPPER - ARTIK SADECE YAZDIRMA İÇİN */
+        /* PDF/WRAPPER - sadece yazdırma için */
         #pdf-wrapper { display: none; width: 100%; position: absolute; top: 0; left: 0; z-index: 9999; background: white; }
         #pdf-content { width: 100%; margin: 0; padding: 0; box-sizing: border-box; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; word-wrap: break-word; overflow-wrap: break-word; }
 
         .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; }
-        .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .pdf-info-row { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .pdf-info-row td { border: none; padding: 0; vertical-align: top; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
-        .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.25; margin-bottom: 20px; }
-        .pdf-signature { display: flex; justify-content: flex-end; text-align: center; line-height: 1.2; margin-bottom: 20px; }
+        .pdf-body { text-align: justify; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
+        .pdf-signature { text-align: right; line-height: 1.2; margin: 20px 0; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
-        .agenda-item { white-space: pre-wrap; line-height: 1.1; margin-bottom: 1px; }
+        .agenda-item { line-height: 1.2; margin-bottom: 2px; }
         .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
-        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; word-wrap: break-word; overflow-wrap: break-word; }
+        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 4px 6px; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
         .pdf-tablo th { background: #eee; }
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
@@ -79,33 +80,18 @@
         .pdf-tut-tarih-ortala { text-align: center; margin: 15px 0 5px 0; font-weight: bold; font-size: 12pt; }
         .pdf-ortala-kalın { text-align: center; font-weight: bold; }
         .pdf-tablo-wrap { page-break-inside: avoid; break-inside: avoid; }
-        .pdf-erteleme-notu { page-break-inside: avoid; break-inside: avoid; }
+        .pdf-erteleme-notu { page-break-inside: avoid; break-inside: avoid; border: 1px solid #000; padding: 10px; margin: 10px 0; }
+        .sig-table { width: 100%; border: none; border-collapse: collapse; margin: 15px 0; page-break-inside: avoid; break-inside: avoid; }
+        .sig-table td { border: none; padding: 8px 5px; text-align: center; vertical-align: top; }
         body { -webkit-user-select: none; user-select: none; }
         input, textarea, select { -webkit-user-select: text; user-select: text; }
 
-        /* ✅ YAZDIRMA - SADECE PDF İÇERİĞİ */
         @media print {
             body > *:not(#pdf-wrapper) { display: none !important; }
-            #pdf-wrapper {
-                display: block !important;
-                position: static !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                z-index: auto !important;
-            }
-            #pdf-content {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                font-size: 11pt;
-            }
-            @page {
-                size: A4;
-                margin: 15mm;
-            }
-            .pdf-tablo, .pdf-tut-metin, .pdf-header, .pdf-signature, .pdf-tablo-wrap {
+            #pdf-wrapper { display: block !important; position: static !important; width: 100% !important; margin: 0 !important; padding: 0 !important; z-index: auto !important; }
+            #pdf-content { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; font-size: 11pt; }
+            @page { size: A4; margin: 15mm; }
+            .pdf-tablo, .pdf-tut-metin, .pdf-header, .pdf-signature, .pdf-tablo-wrap, .sig-table, .pdf-erteleme-notu {
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
@@ -130,24 +116,10 @@
                 <h4>📝 Çıktı Yöntemleri</h4>
                 <p>Program üç farklı çıktı yöntemi sunar:</p>
                 <ol style="line-height:1.8; font-size:14px;">
-                    <li><strong>📝 Word Olarak İndir:</strong> Dosya <code>.doc</code> formatında indirilir. Microsoft Word, LibreOffice veya Google Docs ile açıp düzenleyebilir, imzalayabilir, yazdırabilirsiniz. <strong>Format bozulmaz, sayfa yapısı korunur.</strong></li>
-                    <li><strong>🖨️ Yazdır / PDF Kaydet:</strong> Tarayıcının yazdırma dialog'u açılır. "Hedef" kısmından <strong>"PDF olarak kaydet"</strong> seçerseniz, Chrome'un kendi motoruyla <strong>kusursuz PDF</strong> üretilir (kesme sorunu yok). Doğrudan yazıcıya da gönderebilirsiniz.</li>
-                    <li><strong>📦 Tüm Evrakları ZIP İndir:</strong> Tüm evrakları ayrı ayrı <code>.doc</code> dosyası olarak bir ZIP içinde indirir.</li>
+                    <li><strong>📝 Word Olarak İndir:</strong> Dosya <code>.doc</code> formatında indirilir. Format bozulmaz, sayfa yapısı korunur.</li>
+                    <li><strong>🖨️ Yazdır / PDF Kaydet:</strong> "Hedef" kısmından <strong>"PDF olarak kaydet"</strong> seçilirse kusursuz PDF üretilir.</li>
+                    <li><strong>📦 Tüm Evrakları ZIP İndir:</strong> Tüm evrakları ayrı ayrı <code>.doc</code> olarak ZIP içinde indirir.</li>
                 </ol>
-            </div>
-            <div class="info-card">
-                <h4>📅 Mevzuata Uygun Yıllık Süreç</h4>
-                <ol>
-                    <li><strong>Eylül – Önceki Dönem Kapanışı:</strong> YK devir toplantısı + Faaliyet Bilançosu; sonraki iş günü DK Nihai Denetim Raporu.</li>
-                    <li><strong>Ekim – Genel Kurul:</strong> En geç Ekim sonu. Yeter sayı: 100 altı 32 veli, 100+ 64 veli. Sağlanamazsa 30 gün içinde 2. toplantı.</li>
-                    <li><strong>Ekim – YK İlk Toplantı:</strong> Sonraki iş günü.</li>
-                    <li><strong>Ekim – DK İlk Toplantı:</strong> YK'dan bir iş günü sonra.</li>
-                    <li><strong>Aylık YK:</strong> Kasım, Aralık, Ocak, Şubat, Mart, Nisan, Mayıs, Haziran.</li>
-                </ol>
-            </div>
-            <div class="info-card">
-                <h4>📊 Aylık Toplantı Detayları</h4>
-                <p>Kasım, Ocak, Şubat, Mart, Nisan, Mayıs aylarında YK toplantıları için ayrı panel açılır. Gelir-gider tablosu, yapılan işler, kararlar ve yapılacaklar girilir. Her ayın verisi ayrı saklanır.</p>
             </div>
             <div class="support-card"><h4>Geri Bildirim</h4><div class="email-badge">✉️ gorkemkocaman.tr@gmail.com</div></div>
         </div>
@@ -165,7 +137,7 @@
 
         <div id="genelKurulUstAlanlar" class="panel-card genel-kurul-only">
             <h3>📝 1. Toplantı Kurulumu</h3>
-            <div class="info-box">İlk toplantıda yeter sayı sağlanırsa veya "2. Toplantı" seçilirse tüm evraklar (1-10) kullanılabilir. Aksi halde sadece 1-7 arası evraklar ve erteleme tutanağı üretilir.</div>
+            <div class="info-box">İlk toplantıda yeter sayı sağlanırsa veya "2. Toplantı" seçilirse tüm evraklar (1-10) kullanılabilir.</div>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Toplantı Türü</label>
@@ -184,7 +156,6 @@
                         <input type="checkbox" id="yeterSayiSaglandi" onchange="toplantiTuruDegisti()" checked>
                         <span style="font-weight:600; color:#856404;">İlk toplantıda yeter sayı sağlandı (seçimler yapılabilir)</span>
                     </label>
-                    <small style="color:#856404; margin-top:5px;">İşaretlenmezse erteleme tutanağı oluşturulur (sadece evrak 1-7).</small>
                 </div>
             </div>
         </div>
@@ -206,14 +177,8 @@
                         <option value="ilk">İlk kez Okul Aile Birliği kuruluyor</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label id="kurumLabel">İl Adı</label>
-                    <input type="text" id="kurumAdi" value="ÖRNEK İL">
-                </div>
-                <div class="form-group full-width">
-                    <label>Okul Adı</label>
-                    <input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi">
-                </div>
+                <div class="form-group"><label id="kurumLabel">İl Adı</label><input type="text" id="kurumAdi" value="ÖRNEK İL"></div>
+                <div class="form-group full-width"><label>Okul Adı</label><input type="text" id="okulAdi" value="Örnek Mesleki ve Teknik Anadolu Lisesi"></div>
                 <div class="form-group full-width">
                     <label>Eğitim Öğretim Yılı</label>
                     <div style="display:flex; gap:10px; align-items:center;">
@@ -221,23 +186,14 @@
                         <button type="button" onclick="tarihleriOtomatikHesapla()" style="background:#3498db; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:bold; white-space:nowrap;">🔄 Tarihleri Otomatik Hesapla</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Banka Adı ve Şubesi</label>
-                    <input type="text" id="bankaAdi" value="Örnek Bankası Örnek Şubesi">
-                </div>
-                <div class="form-group">
-                    <label>Banka IBAN No</label>
-                    <input type="text" id="bankaIban" value="TR00 0000 0000 0000 0000 0000 00">
-                </div>
+                <div class="form-group"><label>Banka Adı ve Şubesi</label><input type="text" id="bankaAdi" value="Örnek Bankası Örnek Şubesi"></div>
+                <div class="form-group"><label>Banka IBAN No</label><input type="text" id="bankaIban" value="TR00 0000 0000 0000 0000 0000 00"></div>
                 <div class="form-group genel-kurul-only">
                     <label>YK Karar Tarihi (1. Toplantı İçin En az 15 gün önce!)</label>
                     <input type="date" id="kararTarihi" value="2025-10-15" onchange="kararTarihiDegisti()">
                     <span id="kararTarihiUyari" class="uyari"></span>
                 </div>
-                <div class="form-group genel-kurul-only">
-                    <label>Üst Yazı Tarihi (Otomatik)</label>
-                    <input type="date" id="yaziTarihi" value="2025-10-15" readonly style="background:#e9ecef;">
-                </div>
+                <div class="form-group genel-kurul-only"><label>Üst Yazı Tarihi (Otomatik)</label><input type="date" id="yaziTarihi" value="2025-10-15" readonly style="background:#e9ecef;"></div>
                 <div class="form-group genel-kurul-only"><label>Karar No</label><input type="text" id="kararNo" value="01"></div>
                 <div class="form-group genel-kurul-only"><label>Evrak Sayı No</label><input type="text" id="sayiNo" value="2025/165.01/01"></div>
                 <div class="form-group genel-kurul-only">
@@ -252,14 +208,8 @@
                     <input type="date" id="ertelemeTarihi" value="2025-11-14" onchange="validateTarihler()">
                     <span id="ertelemeTarihiUyari" class="uyari"></span>
                 </div>
-                <div class="form-group">
-                    <label>Okul Müdürü Adı Soyadı</label>
-                    <input type="text" id="mudurAdi" value="Okul Müdürü">
-                </div>
-                <div class="form-group">
-                    <label>Yeni Dönem OAB Başkanı</label>
-                    <input type="text" id="baskanAdi" value="Okul Aile Birliği Başkanı">
-                </div>
+                <div class="form-group"><label>Okul Müdürü Adı Soyadı</label><input type="text" id="mudurAdi" value="Okul Müdürü"></div>
+                <div class="form-group"><label>Yeni Dönem OAB Başkanı</label><input type="text" id="baskanAdi" value="Okul Aile Birliği Başkanı"></div>
                 <div class="form-group full-width genel-kurul-only">
                     <label>Ana Gündem Maddeleri</label>
                     <textarea id="gundemMaddeleri" rows="14"></textarea>
@@ -396,7 +346,7 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
 
             <div id="ozel-aylik" class="ozel-grup">
                 <div class="info-box" style="background:#fff8e1; border-left-color:#f39c12; color:#7e5109;">
-                    <strong>📊 Aylık Toplantı Detayları:</strong> Bu paneldeki veriler seçili ayın tutanağına yansıtılır. Her ayın verisi ayrı saklanır.
+                    <strong>📊 Aylık Toplantı Detayları:</strong> Bu paneldeki veriler seçili ayın tutanağına yansıtılır.
                 </div>
                 <div class="form-grid">
                     <div class="form-group"><label>Önceki Toplantı Tarihi</label><input type="date" id="aylikOncekiToplantiTarihi"></div>
@@ -426,7 +376,7 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
 
                 <div class="form-group full-width" style="margin-top:20px;">
                     <label>Bu Ay İçinde Yapılan İş ve İşlemler</label>
-                    <textarea id="aylikYapilanIsler" rows="4" placeholder="Örn: Sınıfların boya-badana işi tamamlandı, kütüphaneye 50 kitap alındı..."></textarea>
+                    <textarea id="aylikYapilanIsler" rows="4" placeholder="Örn: Sınıfların boya-badana işi tamamlandı..."></textarea>
                 </div>
                 <div class="form-group full-width" style="margin-top:10px;">
                     <label>Bu Toplantıda Alınan Kararlar</label>
@@ -559,38 +509,17 @@ Yönetim Kurulu, dönem boyunca mevzuata uygun hareket ettiğini, aylık toplant
                 <div class="info-box" style="background:#fff8e1; border-left-color:#f39c12; color:#7e5109;">
                     Aylık YK tutanaklarıdır. Yukarıdaki "Aylık Toplantı Detayları" panelini doldurmayı unutmayın.
                 </div>
-                <div class="form-group full-width">
-                    <label>Kasım Ayı Tutanağı</label>
-                    <textarea id="ykKasimMetni" rows="20"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label>Ocak Ayı Tutanağı</label>
-                    <textarea id="ykOcakMetni" rows="20"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label>Şubat Ayı Tutanağı</label>
-                    <textarea id="ykSubatMetni" rows="20"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label>Mart Ayı Tutanağı</label>
-                    <textarea id="ykMartMetni" rows="20"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label>Nisan Ayı Tutanağı</label>
-                    <textarea id="ykNisanMetni" rows="20"></textarea>
-                </div>
-                <div class="form-group full-width">
-                    <label>Mayıs Ayı Tutanağı</label>
-                    <textarea id="ykMayisMetni" rows="20"></textarea>
-                </div>
+                <div class="form-group full-width"><label>Kasım Ayı Tutanağı</label><textarea id="ykKasimMetni" rows="20"></textarea></div>
+                <div class="form-group full-width"><label>Ocak Ayı Tutanağı</label><textarea id="ykOcakMetni" rows="20"></textarea></div>
+                <div class="form-group full-width"><label>Şubat Ayı Tutanağı</label><textarea id="ykSubatMetni" rows="20"></textarea></div>
+                <div class="form-group full-width"><label>Mart Ayı Tutanağı</label><textarea id="ykMartMetni" rows="20"></textarea></div>
+                <div class="form-group full-width"><label>Nisan Ayı Tutanağı</label><textarea id="ykNisanMetni" rows="20"></textarea></div>
+                <div class="form-group full-width"><label>Mayıs Ayı Tutanağı</label><textarea id="ykMayisMetni" rows="20"></textarea></div>
             </div>
 
             <div id="ozel-dk1" class="ozel-grup">
                 <div class="info-box">Yeni seçilen DK'nın ilk toplantısıdır.</div>
-                <div class="form-group full-width">
-                    <label>DK İlk Toplantı Tutanağı</label>
-                    <textarea id="dk1Metni" rows="20"></textarea>
-                </div>
+                <div class="form-group full-width"><label>DK İlk Toplantı Tutanağı</label><textarea id="dk1Metni" rows="20"></textarea></div>
             </div>
 
             <div id="ozel-dk2" class="ozel-grup">
@@ -719,9 +648,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         </div>
     </div>
 
-    <div class="footer-credit">
-        Okul Aile Birliği Evrak Otomasyonu | Tasarlayan ve Geliştiren: <strong>Görkem KOCAMAN</strong>
-    </div>
+    <div class="footer-credit">Okul Aile Birliği Evrak Otomasyonu | Tasarlayan ve Geliştiren: <strong>Görkem KOCAMAN</strong></div>
 </div>
 
 <div id="pdf-wrapper"><div id="pdf-content"></div></div>
@@ -785,7 +712,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         return durum === 'ilk_erteleme' ? 'tutanakMetni_mevcut_erteleme' : 'tutanakMetni_mevcut_basarili';
     }
 
-    // ==================== AYLIK VERİ ====================
+    // Aylık veri
     function aylikGet(field, def = '') {
         if (!activeMonthCode) return def;
         const v = localStorage.getItem(`oab_aylik_${activeMonthCode}_${field}`);
@@ -823,7 +750,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         document.getElementById('aylikGiderToplam').textContent = gi.toFixed(2);
     }
 
-    // ==================== VARSAYILAN METİNLER ====================
+    // Varsayılan metinler
     const ILK_GUNDEM = `1. Açılış ve Yoklama
 2. Divan Teşekkülü (Açık oyla veli üyeler arasından bir divan başkanı ve bir katip seçilmesi)
 3. Saygı duruşu ve İstiklal Marşımızın okunması
@@ -951,7 +878,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
 
 9. Dilek ve temenniler dinlendi. İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.`;
 
-    // ==================== TARİH OTOMASYONU ====================
+    // Tarih otomasyonu
     function tarihleriOtomatikHesapla(showAlert = true) {
         const p = document.getElementById('egitimYili').value.trim().split('-');
         if (p.length !== 2 || isNaN(parseInt(p[0])) || isNaN(parseInt(p[1])) || parseInt(p[1]) !== parseInt(p[0])+1) {
@@ -1007,18 +934,13 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         document.getElementById('dkTarihi3').value = addBusinessDays(v('ykHaziranTarihi'), 1);
         document.getElementById('dkEylulTarihi').value = addBusinessDays(v('ykEylulTarihi'), 1);
     }
-    function updateEgitimYiliOnceki() {
-        const y = document.getElementById('egitimYili').value || '2025-2026';
-        const p = y.split('-');
-        if (p.length === 2 && !isNaN(parseInt(p[0]))) document.getElementById('oncekiEgitimYili').value = `${parseInt(p[0])-1}-${parseInt(p[0])}`;
-    }
     function kararTarihiDegisti() {
         document.getElementById('yaziTarihi').value = document.getElementById('kararTarihi').value;
         validateTarihler();
         updateTutanakMetinleri();
     }
 
-    // ==================== VALİDASYON ====================
+    // Validasyon
     function validateToplantiTarihi() {
         const u = document.getElementById('toplantiTarihiUyari');
         if (document.getElementById('toplantiTuru').value === '1') {
@@ -1074,12 +996,12 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
     function formatGundemHtml() {
         const lines = document.getElementById('gundemMaddeleri').value.split('\n').filter(l => l.trim());
         return lines.map(l => {
-            const e = l.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            const e = escapeHtml(l);
             return `<div class="agenda-item">${e.replace(/^(\d+[\.\)]\s*|[a-z]\)\s*)/,'<strong>$1</strong>')}</div>`;
         }).join('');
     }
 
-    // ==================== TUTANAK METİNLERİ ====================
+    // Tutanak metinleri
     function updateTutanakMetinleri() {
         if (!document.getElementById('otomatikGuncelle').checked) return;
         const mudur = document.getElementById('mudurAdi').value || '..................';
@@ -1124,7 +1046,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         document.getElementById('tutanakGrubu_' + metinId.replace('tutanakMetni_','')).style.display = 'block';
     }
 
-    // ==================== SEKMELER ====================
+    // Sekmeler
     function sekmeDegistir(s, btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1151,46 +1073,15 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         const bas = isBasariliToplanti();
         if (aktifSekme === 'genel') {
             const docs = bas
-                ? [
-                    ['1','1- Veliye Genel Kurul Üst Yazısı'],
-                    ['2', ilk ? '2- Okul Müdürlüğünden MEM\'e Bildirim' : '2- Aile Birliğinden Müdürlüğe Üst Yazı'],
-                    ['3','3- İdareden Personele Duyuru'],
-                    ['4','4- Velilere Okul Çağrı Yazısı'],
-                    ['5','5- Gündem Maddeleri'],
-                    ['6','6- Öğretmen İmza Sirküsü'],
-                    ['7','7- Genel Kurul Toplantı Tutanağı'],
-                    ['8','8- Tahminî Bütçe'],
-                    ['9','9- Kararları Okudum Sirküsü'],
-                    ['10','10- Veli İmza Sirküsü']
-                ]
-                : [
-                    ['1','1- Veliye Genel Kurul Üst Yazısı'],
-                    ['2', ilk ? '2- Okul Müdürlüğünden MEM\'e Bildirim' : '2- Aile Birliğinden Müdürlüğe Üst Yazı'],
-                    ['3','3- İdareden Personele Duyuru'],
-                    ['4','4- Velilere Okul Çağrı Yazısı'],
-                    ['5','5- Gündem Maddeleri'],
-                    ['6','6- Öğretmen İmza Sirküsü'],
-                    ['7','7- Genel Kurul Toplantı Tutanağı (Erteleme)']
-                ];
+                ? [['1','1- Veliye Genel Kurul Üst Yazısı'],['2', ilk ? '2- Okul Müdürlüğünden MEM\'e Bildirim' : '2- Aile Birliğinden Müdürlüğe Üst Yazı'],['3','3- İdareden Personele Duyuru'],['4','4- Velilere Okul Çağrı Yazısı'],['5','5- Gündem Maddeleri'],['6','6- Öğretmen İmza Sirküsü'],['7','7- Genel Kurul Toplantı Tutanağı'],['8','8- Tahminî Bütçe'],['9','9- Kararları Okudum Sirküsü'],['10','10- Veli İmza Sirküsü']]
+                : [['1','1- Veliye Genel Kurul Üst Yazısı'],['2', ilk ? '2- Okul Müdürlüğünden MEM\'e Bildirim' : '2- Aile Birliğinden Müdürlüğe Üst Yazı'],['3','3- İdareden Personele Duyuru'],['4','4- Velilere Okul Çağrı Yazısı'],['5','5- Gündem Maddeleri'],['6','6- Öğretmen İmza Sirküsü'],['7','7- Genel Kurul Toplantı Tutanağı (Erteleme)']];
             sel.innerHTML = docs.map(d => `<option value="${d[0]}">${d[1]}</option>`).join('');
         } else if (aktifSekme === 'yonetim') {
             sel.innerHTML = '';
             if (!ilk) sel.innerHTML += `<option value="ykEylul">YK Eylül – Dönem Sonu Devir</option>`;
-            sel.innerHTML += `
-                <option value="yk1">YK 1- İlk Toplantı</option>
-                <option value="ykKasim">YK - Kasım</option>
-                <option value="yk2">YK 2- Aralık Sonu</option>
-                <option value="ykOcak">YK - Ocak</option>
-                <option value="ykSubat">YK - Şubat</option>
-                <option value="ykMart">YK - Mart</option>
-                <option value="ykNisan">YK - Nisan</option>
-                <option value="ykMayis">YK - Mayıs</option>
-                <option value="yk3">YK 3- Haziran Sonu</option>`;
+            sel.innerHTML += `<option value="yk1">YK 1- İlk Toplantı</option><option value="ykKasim">YK - Kasım</option><option value="yk2">YK 2- Aralık Sonu</option><option value="ykOcak">YK - Ocak</option><option value="ykSubat">YK - Şubat</option><option value="ykMart">YK - Mart</option><option value="ykNisan">YK - Nisan</option><option value="ykMayis">YK - Mayıs</option><option value="yk3">YK 3- Haziran Sonu</option>`;
         } else if (aktifSekme === 'denetim') {
-            sel.innerHTML = `
-                <option value="dk1">DK 1- İlk Toplantı</option>
-                <option value="dk2">DK 2- Aralık Sonu</option>
-                <option value="dk3">DK 3- Haziran Sonu</option>`;
+            sel.innerHTML = `<option value="dk1">DK 1- İlk Toplantı</option><option value="dk2">DK 2- Aralık Sonu</option><option value="dk3">DK 3- Haziran Sonu</option>`;
             if (!ilk) sel.innerHTML += `<option value="dkEylul">DK 4- Eylül Nihai</option>`;
         }
         evrakSecildi();
@@ -1205,9 +1096,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         if (['yk1','ykEylul','dkEylul'].includes(val) && !isIlkKurulus()) document.getElementById('ozel-oncekiDonemFinans').classList.add('aktif');
 
         const needsPrev = ['ykEylul','dkEylul','1','2','3','7'];
-        if (needsPrev.includes(val) && !isIlkKurulus()) {
-            document.getElementById('ozel-oncekiDonem').classList.add('aktif');
-        }
+        if (needsPrev.includes(val) && !isIlkKurulus()) document.getElementById('ozel-oncekiDonem').classList.add('aktif');
 
         if (aktifSekme === 'genel') {
             const t = document.getElementById('ozel-'+val);
@@ -1325,15 +1214,16 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
 
     function saveToStorage() {
         document.querySelectorAll('input, select, textarea').forEach(el => {
-            if (el.id) localStorage.setItem('oab_'+el.id, el.type === 'checkbox' ? el.checked : el.value);
+            if (el.id && el.type !== 'file') {
+                localStorage.setItem('oab_'+el.id, el.type === 'checkbox' ? el.checked : el.value);
+            }
         });
     }
     function loadFromStorage() {
         document.querySelectorAll('input, select, textarea').forEach(el => {
-            if (el.id) {
+            if (el.id && el.type !== 'file') {
                 const v = localStorage.getItem('oab_'+el.id);
                 if (v !== null) {
-                    if (el.type === 'file') return;
                     if (el.type === 'checkbox') el.checked = v === 'true';
                     else el.value = v;
                 }
@@ -1350,13 +1240,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         } else if (e.target.id && e.target.id.startsWith('aylik')) {
             saveAylikData();
         }
-        const tutanakFields = [
-            'mudurAdi','baskanAdi','prevBaskan','divanBaskani','divanKatip',
-            'secYonetimAsil','secYonetimYedek','secDenetimAsil','secDenetimYedek',
-            'secDisiplin','secSosyal','secRehberlik','oyDagilimi',
-            'ykToplantiTarihi','ykToplantiSaati','ykToplantiYeri',
-            'egitimYili','ogrenciMevcudu','yeterSayiSaglandi'
-        ];
+        const tutanakFields = ['mudurAdi','baskanAdi','prevBaskan','divanBaskani','divanKatip','secYonetimAsil','secYonetimYedek','secDenetimAsil','secDenetimYedek','secDisiplin','secSosyal','secRehberlik','oyDagilimi','ykToplantiTarihi','ykToplantiSaati','ykToplantiYeri','egitimYili','ogrenciMevcudu','yeterSayiSaglandi'];
         if (tutanakFields.includes(e.target.id)) updateTutanakMetinleri();
     });
 
@@ -1426,27 +1310,34 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         return t.replace(/\n/g,'<br>');
     }
 
+    // ✅ DÜZELTME: İmza tabloları (flex yerine table)
     const imzaYk = (t, m, s, u, by, b) => `
         <div style="text-align:center; font-weight:bold; margin-top:30px;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br>${t}</div>
-        <div style="display:flex; justify-content:space-around; margin-top:30px; text-align:center;">
-            <div><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</div>
-            <div><br><br><strong>${escapeHtml(s)}</strong><br>Yazman</div>
-            <div><br><br><strong>${escapeHtml(u)}</strong><br>Üye</div>
-        </div>
-        <div style="display:flex; justify-content:space-around; margin-top:40px; text-align:center;">
-            <div><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yardımcısı</div>
-            <div><br><br><strong>${escapeHtml(b)}</strong><br>Okul Aile Birliği Başkanı</div>
-        </div>`;
+        <table class="sig-table">
+            <tr>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</td>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(s)}</strong><br>Yazman</td>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(u)}</strong><br>Üye</td>
+            </tr>
+        </table>
+        <table class="sig-table">
+            <tr>
+                <td style="width:50%;"><br><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yardımcısı</td>
+                <td style="width:50%;"><br><br><br><strong>${escapeHtml(b)}</strong><br>Okul Aile Birliği Başkanı</td>
+            </tr>
+        </table>`;
 
     const imzaDk = (t, b, by, m) => `
         <div style="text-align:center; font-weight:bold; margin-top:30px;">DENETİM KURULU<br>${t}</div>
-        <div style="display:flex; justify-content:space-around; margin-top:30px; text-align:center;">
-            <div><br><br><strong>${escapeHtml(b)}</strong><br>Başkan</div>
-            <div><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yrd.</div>
-            <div><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</div>
-        </div>`;
+        <table class="sig-table">
+            <tr>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(b)}</strong><br>Başkan</td>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yrd.</td>
+                <td style="width:33%;"><br><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</td>
+            </tr>
+        </table>`;
 
-    // ==================== WORD ÇIKTISI ====================
+    // Word çıktısı
     function buildCurrentHTML() {
         const sec = document.getElementById('evrakSec').value;
         const tur = document.getElementById('toplantiTuru').value;
@@ -1459,6 +1350,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         return html;
     }
 
+    // ✅ DÜZELTME: Word CSS - flex yok, table var
     function buildWordDocument(htmlContent, title) {
         return `<!DOCTYPE html>
 <html xmlns:o='urn:schemas-microsoft-com:office:office'
@@ -1496,34 +1388,32 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         }
 
         .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; }
-        .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .pdf-info-row { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .pdf-info-row td { border: none; padding: 0; vertical-align: top; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
-        .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.3; margin-bottom: 20px; }
-        .pdf-signature { text-align: right; margin-bottom: 20px; }
-        .pdf-signature > div { display: inline-block; text-align: center; min-width: 200px; }
+        .pdf-body { text-align: justify; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
+        .pdf-signature { text-align: right; line-height: 1.2; margin: 20px 0; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
-        .agenda-item { white-space: pre-wrap; line-height: 1.2; margin-bottom: 2px; }
+        .agenda-item { line-height: 1.2; margin-bottom: 2px; }
 
-        .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
-        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; }
+        .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; mso-table-lspace: 0pt; mso-table-rspace: 0pt; page-break-inside: avoid; }
+        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 4px 6px; text-align: left; vertical-align: top; mso-line-height-rule: exactly; }
         .pdf-tablo th { background: #eee; font-weight: bold; }
+        .pdf-tablo td.pdf-sag { text-align: right; }
 
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
         .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
         .pdf-logo-container { text-align: center; margin-bottom: 5px; }
-        .pdf-logo-container img { max-height: 150px; width: auto; }
+        .pdf-logo-container img { max-height: 150pt; }
         .pdf-tut-tarih-ortala { text-align: center; margin: 15px 0 5px 0; font-weight: bold; font-size: 12pt; }
         .pdf-ortala-kalın { text-align: center; font-weight: bold; }
-        .pdf-tablo-wrap { }
-        .pdf-erteleme-notu { border: 1px solid #000; padding: 10px; margin: 10px 0; }
-        .pdf-div-kesme { }
-
-        /* Flex fallback for Word */
-        .pdf-tablo-wrap table { width: 100%; }
-        .agenda-item strong { font-weight: bold; }
+        .pdf-tablo-wrap { page-break-inside: avoid; }
+        .pdf-erteleme-notu { border: 1px solid #000; padding: 10px; margin: 10px 0; page-break-inside: avoid; }
+        .sig-table { width: 100%; border: none; border-collapse: collapse; margin: 15px 0; page-break-inside: avoid; }
+        .sig-table td { border: none; padding: 8px 5px; text-align: center; vertical-align: top; }
     </style>
 </head>
 <body>
@@ -1536,7 +1426,6 @@ ${htmlContent}
 
     function downloadWordFile(htmlContent, filename) {
         const wordDoc = buildWordDocument(htmlContent, filename);
-        // BOM ekle - Türkçe karakter için
         const blob = new Blob(['\ufeff', wordDoc], { type: 'application/msword;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -1550,20 +1439,14 @@ ${htmlContent}
 
     function generateWord() {
         try {
-            if (aktifSekme === 'genel' && !validateTarihler()) {
-                alert('Tarih uyarılarını düzeltin!');
-                return;
-            }
+            if (aktifSekme === 'genel' && !validateTarihler()) { alert('Tarih uyarılarını düzeltin!'); return; }
             const sec = document.getElementById('evrakSec').value;
             if ((sec === 'ykEylul' || sec === 'dkEylul') && !document.getElementById('prevDonemBaslangic').value) {
                 alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
                 return;
             }
             const html = buildCurrentHTML();
-            if (!html || html.trim() === '') {
-                alert('Bu evrak için içerik bulunamadı.');
-                return;
-            }
+            if (!html || html.trim() === '') { alert('Bu evrak için içerik bulunamadı.'); return; }
             downloadWordFile(html, `${sec.toUpperCase()}_OAB`);
         } catch (e) {
             console.error('Word üretim hatası:', e);
@@ -1571,23 +1454,17 @@ ${htmlContent}
         }
     }
 
-    // ==================== YAZDIR (PDF Kaydet) ====================
+    // Yazdır / PDF
     function generatePrint() {
         try {
-            if (aktifSekme === 'genel' && !validateTarihler()) {
-                alert('Tarih uyarılarını düzeltin!');
-                return;
-            }
+            if (aktifSekme === 'genel' && !validateTarihler()) { alert('Tarih uyarılarını düzeltin!'); return; }
             const sec = document.getElementById('evrakSec').value;
             if ((sec === 'ykEylul' || sec === 'dkEylul') && !document.getElementById('prevDonemBaslangic').value) {
                 alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
                 return;
             }
             const html = buildCurrentHTML();
-            if (!html || html.trim() === '') {
-                alert('Bu evrak için içerik bulunamadı.');
-                return;
-            }
+            if (!html || html.trim() === '') { alert('Bu evrak için içerik bulunamadı.'); return; }
             document.getElementById('pdf-content').innerHTML = html;
             document.getElementById('pdf-wrapper').style.display = 'block';
 
@@ -1599,7 +1476,6 @@ ${htmlContent}
 
             setTimeout(() => {
                 window.print();
-                // Fallback: bazı tarayıcılarda afterprint tetiklenmez
                 setTimeout(() => {
                     if (document.getElementById('pdf-wrapper').style.display !== 'none') {
                         document.getElementById('pdf-wrapper').style.display = 'none';
@@ -1612,7 +1488,7 @@ ${htmlContent}
         }
     }
 
-    // ==================== ZIP İNDİR (Word) ====================
+    // ZIP indir
     async function tumEvraklariIndir() {
         const btn = document.getElementById('btnZip');
         const orig = btn.innerHTML;
@@ -1626,15 +1502,11 @@ ${htmlContent}
             const eg = getEgitimYili().replace(/[^0-9-]/g, '');
 
             if (!ilk && !document.getElementById('prevDonemBaslangic').value) {
-                alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.\n\nNot: YK Eylül ve DK Eylül evrakları için bu tarih zorunludur.');
-                btn.disabled = false;
-                btn.innerHTML = orig;
-                return;
+                alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
+                btn.disabled = false; btn.innerHTML = orig; return;
             }
 
-            const docxMime = 'application/msword;charset=utf-8';
-
-            // GENEL KURUL
+            // Genel Kurul
             const gD = isBasariliToplanti() ? ['1','2','3','4','5','6','7','8','9','10'] : ['1','2','3','4','5','6','7'];
             const gN = {'1':'01_Veliye_Ust_Yazi','2':'02_Mudurluge_Ust_Yazi','3':'03_Personele_Duyuru','4':'04_Okul_Cagri','5':'05_Gundem','6':'06_Ogretmen_Imza','7':'07_Genel_Kurul_Tutanagi','8':'08_Tahmini_Butce','9':'09_Kararlari_Okudum','10':'10_Veli_Imza'};
             const fns = {'1':buildEvrak1,'2':buildEvrak2,'3':buildEvrak3,'4':buildEvrak4,'5':buildEvrak5,'6':buildEvrak6,'7':buildEvrak7,'8':buildEvrak8,'9':buildEvrak9,'10':buildEvrak10};
@@ -1647,7 +1519,7 @@ ${htmlContent}
                 } catch (e) { hat.push(`Genel_Kurul/${id}: ${e.message}`); }
             }
 
-            // YÖNETİM KURULU
+            // Yönetim Kurulu
             const yD = [];
             if (!ilk) yD.push({id:'ykEylul', name:'00_YK_Eylul_Devir'});
             yD.push({id:'yk1',name:'01_YK_Ilk'},{id:'ykKasim',name:'02_YK_Kasim'},{id:'yk2',name:'03_YK_Aralik'},{id:'ykOcak',name:'04_YK_Ocak'},{id:'ykSubat',name:'05_YK_Subat'},{id:'ykMart',name:'06_YK_Mart'},{id:'ykNisan',name:'07_YK_Nisan'},{id:'ykMayis',name:'08_YK_Mayis'},{id:'yk3',name:'09_YK_Haziran'});
@@ -1663,7 +1535,7 @@ ${htmlContent}
                 } catch (e) { hat.push(`Yonetim_Kurulu/${d.name}: ${e.message}`); }
             }
 
-            // DENETİM KURULU
+            // Denetim Kurulu
             const dD = [{id:'dk1',name:'01_DK_Ilk'},{id:'dk2',name:'02_DK_Aralik'},{id:'dk3',name:'03_DK_Haziran'}];
             if (!ilk) dD.push({id:'dkEylul',name:'04_DK_Eylul_Nihai'});
             for (const d of dD) {
@@ -1694,7 +1566,7 @@ ${htmlContent}
         }
     }
 
-    // ==================== GK EVRAKLARI ====================
+    // Genel Kurul evrakları
     function getTopBilgi() {
         const tur = document.getElementById('toplantiTuru').value;
         const tarihStr = tur === '2' ? document.getElementById('ertelemeTarihi').value : document.getElementById('toplantiTarihi').value;
@@ -1718,19 +1590,19 @@ ${htmlContent}
         const ilk = isIlkKurulus();
         if (ilk) {
             return `<div class="pdf-header">T.C.<br>${escapeHtml(k)}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ</div>
-                <div class="pdf-info-row"><div><strong>Sayı: ${escapeHtml(sy)}</strong></div><div><strong>${escapeHtml(tR)}</strong></div></div>
+                <table class="pdf-info-row"><tr><td><strong>Sayı: ${escapeHtml(sy)}</strong></td><td style="text-align:right;"><strong>${escapeHtml(tR)}</strong></td></tr></table>
                 <div class="pdf-subject"><strong>Konu: Okul Aile Birliği Kuruluşu ve Genel Kurul Toplantısı</strong></div>
                 <div class="pdf-salutation">Sayın Veli;</div>
                 <div class="pdf-body">Millî Eğitim Bakanlığı Okul-Aile Birliği Yönetmeliği hükümleri gereğince okulumuzda Okul Aile Birliği kurulması ve Genel Kurul toplantısının yapılması için Okul Müdürlüğümüzce gerekli hazırlıklar tamamlanmıştır. <strong>${escapeHtml(t.tarih)} ${escapeHtml(t.gun)}</strong> günü <strong>${escapeHtml(t.yer)}</strong>'nde saat <strong>${escapeHtml(t.saat)}</strong>'da yapılacak olan Genel Kurul toplantısına tüm velilerimizin katılması hususunda gereğin bilgilerinize rica ederim.</div>
-                <div class="pdf-signature"><div><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div></div>
+                <div class="pdf-signature"><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div>
                 <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>`;
         }
         return `<div class="pdf-header">T.C.<br>${escapeHtml(k)}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ<br>OKUL AİLE BİRLİĞİ BAŞKANLIĞI</div>
-            <div class="pdf-info-row"><div><strong>Sayı: ${escapeHtml(sy)}</strong></div><div><strong>${escapeHtml(tR)}</strong></div></div>
+            <table class="pdf-info-row"><tr><td><strong>Sayı: ${escapeHtml(sy)}</strong></td><td style="text-align:right;"><strong>${escapeHtml(tR)}</strong></td></tr></table>
             <div class="pdf-subject"><strong>Konu: Okul Aile Birliği Genel Kurul Toplantısı</strong></div>
             <div class="pdf-salutation">Sayın Veli;</div>
             <div class="pdf-body"><strong>${escapeHtml(o)}</strong> Okul Aile Birliği Genel Kurulunun toplanması ve yeni üye seçiminin yapılması için Okul Aile Birliği Yönetim Kurulunun <strong>${escapeHtml(kT)}</strong> tarih ve <strong>${escapeHtml(kN)}</strong> sayılı kararı gereği belirlemiş olduğu gündem maddeleri doğrultusunda <strong>${escapeHtml(t.tarih)} ${escapeHtml(t.gun)}</strong> günü <strong>${escapeHtml(t.yer)}</strong>'nde saat <strong>${escapeHtml(t.saat)}</strong>'da toplantı yapılacaktır. Anılan tarih, gün ve saatte tüm velilerimizin hazır bulunması hususunda gereğin bilgilerinize rica ederim.</div>
-            <div class="pdf-signature"><div><br><br><strong>${escapeHtml(p)}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div></div>
+            <div class="pdf-signature"><br><br><strong>${escapeHtml(p)}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div>
             <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>`;
     }
 
@@ -1744,19 +1616,19 @@ ${htmlContent}
         const ilk = isIlkKurulus();
         if (ilk) {
             return `<div class="pdf-header">T.C.<br>${escapeHtml(k)}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ</div>
-                <div class="pdf-info-row"><div><strong>Sayı: ${escapeHtml(sy)}</strong></div><div><strong>${escapeHtml(tR)}</strong></div></div>
+                <table class="pdf-info-row"><tr><td><strong>Sayı: ${escapeHtml(sy)}</strong></td><td style="text-align:right;"><strong>${escapeHtml(tR)}</strong></td></tr></table>
                 <div class="pdf-subject"><strong>Konu: Okul Aile Birliği Kuruluş Bildirimi</strong></div>
                 <div class="pdf-salutation"><strong>${escapeHtml(k)}</strong> Millî Eğitim Müdürlüğüne</div>
                 <div class="pdf-body">Millî Eğitim Bakanlığı Okul-Aile Birliği Yönetmeliği hükümleri gereğince okulumuzda ilk kez Okul Aile Birliği kurulacaktır. Bu kapsamda <strong>${escapeHtml(t.tarih)} ${escapeHtml(t.gun)}</strong> günü saat <strong>${escapeHtml(t.saat)}</strong>'te <strong>${escapeHtml(t.yer)}</strong>'nde Genel Kurul toplantısı yapılacak olup gerekli hazırlıklar tamamlanmıştır. Bilgilerinize arz ederim.</div>
-                <div class="pdf-signature"><div><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div></div>
+                <div class="pdf-signature"><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div>
                 <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>`;
         }
         return `<div class="pdf-header">T.C.<br>${escapeHtml(k)}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ<br>OKUL AİLE BİRLİĞİ BAŞKANLIĞI</div>
-            <div class="pdf-info-row"><div><strong>Sayı: ${escapeHtml(sy)}</strong></div><div><strong>${escapeHtml(tR)}</strong></div></div>
+            <table class="pdf-info-row"><tr><td><strong>Sayı: ${escapeHtml(sy)}</strong></td><td style="text-align:right;"><strong>${escapeHtml(tR)}</strong></td></tr></table>
             <div class="pdf-subject"><strong>Konu: Okul Aile Birliği Genel Kurul Toplantısı</strong></div>
             <div class="pdf-salutation"><strong>${escapeHtml(o)}</strong> Müdürlüğüne</div>
             <div class="pdf-body"><strong>${escapeHtml(o)}</strong> Okul Aile Birliği Genel Kurulunun toplanması ve yeni üye seçiminin yapılması için belirlenen gündem maddeleri doğrultusunda <strong>${escapeHtml(t.tarih)} ${escapeHtml(t.gun)}</strong> günü <strong>${escapeHtml(t.yer)}</strong>'nde saat <strong>${escapeHtml(t.saat)}</strong>'da toplantı yapılacaktır. Gereğin bilgilerinize rica ederim.</div>
-            <div class="pdf-signature"><div><br><br><strong>${escapeHtml(p)}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div></div>
+            <div class="pdf-signature"><br><br><strong>${escapeHtml(p)}</strong><br><strong>Okul Aile Birliği Başkanı</strong></div>
             <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>`;
     }
 
@@ -1768,11 +1640,11 @@ ${htmlContent}
         const t = getTopBilgi(), k = getKurumBaslik();
         const intro = isIlkKurulus() ? 'Okul Müdürlüğümüzce, Millî Eğitim Bakanlığı Okul-Aile Birliği Yönetmeliği hükümleri gereğince Okul Aile Birliği kurulması için gerekli hazırlıklar tamamlanmıştır.' : `Okul Aile Birliği Yönetim Kurulunun kararı gereği belirlenmiş gündem doğrultusunda`;
         return `<div class="pdf-header">T.C.<br>${escapeHtml(k)}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ</div>
-            <div class="pdf-info-row"><div><strong>Sayı: ${escapeHtml(sy)}</strong></div><div><strong>${escapeHtml(tR)}</strong></div></div>
+            <table class="pdf-info-row"><tr><td><strong>Sayı: ${escapeHtml(sy)}</strong></td><td style="text-align:right;"><strong>${escapeHtml(tR)}</strong></td></tr></table>
             <div class="pdf-subject"><strong>Konu: Okul Aile Birliği Genel Kurul Toplantısı</strong></div>
             <div class="pdf-salutation"><strong>${escapeHtml(o)}</strong> Öğretmenlerine</div>
             <div class="pdf-body">${intro} <strong>${escapeHtml(t.tarih)} ${escapeHtml(t.gun)}</strong> günü <strong>${escapeHtml(t.yer)}</strong>'nde saat <strong>${escapeHtml(t.saat)}</strong>'da toplantı yapılacaktır. Anılan tarih, gün ve saatte tüm öğretmenlerimizin hazır bulunması hususunda gereğin bilgilerinize rica ederim.</div>
-            <div class="pdf-signature"><div><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div></div>
+            <div class="pdf-signature"><br><br><strong>${escapeHtml(m)}</strong><br><strong>Okul Müdürü</strong></div>
             <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>`;
     }
 
@@ -1785,19 +1657,19 @@ ${htmlContent}
             <div class="pdf-duyuru-metin">SAYIN ÖĞRENCİ VELİMİZ</div>
             <div class="pdf-body" style="text-indent:0;text-align:center;font-weight:bold;">${escapeHtml(t.tarih)} ${escapeHtml(t.gun.toLocaleUpperCase('tr-TR'))} GÜNÜ SAAT ${escapeHtml(t.saat)}'TE ${escapeHtml(t.yer.toLocaleUpperCase('tr-TR'))}'NDE OKULUMUZ ÖĞRENCİLERİNİN DEVAM-DEVAMSIZLIK, BAŞARI DURUMLARI VE OKUL AİLE BİRLİĞİNİN SEÇİMİNİ YAPMAK ÜZERE VELİ TOPLANTISI YAPILACAKTIR.<br><br>ANILAN GÜN VE SAAT'TE TOPLANTIYA KATILMANIZI RİCA EDERİM.</div>
             <div class="pdf-agenda-title">GÜNDEM</div><div>${formatGundemHtml()}</div>
-            <div class="pdf-signature" style="margin-top:20px;"><div><br><br><strong>${escapeHtml(m)}</strong><br><strong>${escapeHtml(o)}</strong><br><strong>Okul Müdürü</strong></div></div>`;
+            <div class="pdf-signature" style="margin-top:20px;"><br><br><strong>${escapeHtml(m)}</strong><br><strong>${escapeHtml(o)}</strong><br><strong>Okul Müdürü</strong></div>`;
     }
 
     function buildEvrak5() {
         const ob = getOkulAdi().toLocaleUpperCase('tr-TR');
         return `<div style="text-align:center;font-weight:bold;font-size:14pt;margin-bottom:15px;"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ <strong>${escapeHtml(getEgitimYili())}</strong> SENE BAŞI<br>VELİ TOPLANTISI GÜNDEM MADDELERİ</div>
             <div class="pdf-agenda-title">GÜNDEM MADDELERİ:</div><div>${formatGundemHtml()}</div>
-            <div class="pdf-signature" style="margin-top:20px;"><div><br><br><strong>${escapeHtml(document.getElementById('mudurAdi').value)}</strong><br><strong>Okul Müdürü</strong></div></div>`;
+            <div class="pdf-signature" style="margin-top:20px;"><br><br><strong>${escapeHtml(document.getElementById('mudurAdi').value)}</strong><br><strong>Okul Müdürü</strong></div>`;
     }
 
     function buildEvrak6() {
         const ob = getOkulAdi().toLocaleUpperCase('tr-TR');
-        let r = ''; getOgretmenListesi().forEach((it,i) => { r += `<tr><td>${i+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.unvan)}</td><td></td></tr>`; });
+        let r = ''; getOgretmenListesi().forEach((it,i) => { r += `<tr><td>${i+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.unvan)}</td><td>&nbsp;</td></tr>`; });
         return `<div class="pdf-header" style="margin-bottom:30px;">T.C.<br>${escapeHtml(getKurumBaslik())}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ<br>OKUL AİLE BİRLİĞİ TOPLANTISI ÖĞRETMENLER DUYURU İMZA SİRKÜSÜ</div>
             <div style="text-align:right;margin:20px 0 30px 0;"><br><br><strong>${escapeHtml(document.getElementById('mudurAdi').value)}</strong><br><strong>Okul Müdürü</strong></div>
             <table class="pdf-tablo"><thead><tr><th>Sıra</th><th>Adı Soyadı</th><th>Unvanı</th><th>İmzası</th></tr></thead><tbody>${r}</tbody></table>`;
@@ -1825,7 +1697,7 @@ ${htmlContent}
         if (bas) {
             document.getElementById('oyDagilimi').value.split('\n').filter(l=>l.trim()).forEach((l,i) => {
                 const p = l.split(',').map(x=>x.trim());
-                oy += `<tr><td>${i+1}</td><td>${escapeHtml(p[0])}</td><td>${escapeHtml(p[2]||'')}</td><td>${escapeHtml(p[1]||'')}</td><td></td></tr>`;
+                oy += `<tr><td>${i+1}</td><td>${escapeHtml(p[0])}</td><td>${escapeHtml(p[2]||'')}</td><td>${escapeHtml(p[1]||'')}</td><td>&nbsp;</td></tr>`;
             });
             sm = `<div style="margin-top:10px;"><div class="pdf-tut-metin"><strong>a)</strong> YK üyeliğine <strong>${escapeHtml(document.getElementById('secYonetimAsil').value)}</strong> seçilmişlerdir.</div><div class="pdf-tut-metin"><strong>b)</strong> DK'ya <strong>${escapeHtml(document.getElementById('secDenetimAsil').value)}</strong> asil, <strong>${escapeHtml(document.getElementById('secDenetimYedek').value)}</strong> yedek üye seçilmiştir.</div><div class="pdf-tut-metin"><strong>c)</strong> Okul Disiplin Kuruluna <strong>${escapeHtml(document.getElementById('secDisiplin').value)}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>d)</strong> Sosyal Etkinlikler Kuruluna <strong>${escapeHtml(document.getElementById('secSosyal').value)}</strong> seçilmiştir.</div><div class="pdf-tut-metin"><strong>e)</strong> Rehberlik Kuruluna <strong>${escapeHtml(document.getElementById('secRehberlik').value)}</strong> seçilmiştir.</div></div>`;
         } else {
@@ -1842,7 +1714,13 @@ ${htmlContent}
             <div style="margin-top:10px;">${par}</div>${ert}
             ${bas ? `<div class="pdf-tablo-wrap"><div style="font-weight:bold;text-align:center;margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo"><thead><tr><th>Sıra</th><th>Adı Soyadı</th><th>Görev</th><th>Oy Sayısı</th><th>İmza</th></tr></thead><tbody>${oy}</tbody></table></div>${sm}` : sm}
             <div class="pdf-tut-tarih-ortala">${escapeHtml(t.tarih)}</div>
-            <div style="text-align:center;margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="margin-top:10px;"><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong> (Divan Bşk.) &nbsp;&nbsp; <strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong> (Yazman)</div></div>`;
+            <table class="sig-table">
+                <tr><td colspan="2" style="font-weight:bold;">DİVAN KURULU</td></tr>
+                <tr>
+                    <td style="width:50%;"><br><br><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong><br>(Divan Başkanı)</td>
+                    <td style="width:50%;"><br><br><strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong><br>(Yazman)</td>
+                </tr>
+            </table>`;
     }
 
     function buildEvrak8() {
@@ -1857,22 +1735,26 @@ ${htmlContent}
             <div style="text-align:center;font-weight:bold;font-size:13pt;margin:15px 0 10px 0;">GİDER TAHMİNİ BÜTÇE</div>
             <table class="pdf-tablo"><thead><tr><th>Sıra</th><th>GİDERİN CİNSİ</th><th>MİKTARI TL</th></tr></thead><tbody>${giR}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${giT.toFixed(2)} TL</strong></td></tr></tfoot></table>
             <div style="text-align:center;font-weight:bold;margin-top:30px;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU</div>
-            <div style="text-align:center;margin-top:20px;">
-                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[0])}<br>Üye</div>
-                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[1])}<br>Üye</div>
-                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[2])}<br>Üye</div>
-            </div>
-            <div style="text-align:center;margin-top:40px;">
-                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[3])}<br>Üye</div>
-                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[4])}<br>Üye</div>
-            </div>`;
+            <table class="sig-table">
+                <tr>
+                    <td style="width:33%;"><br><br><strong>${escapeHtml(u[0])}</strong><br>Üye</td>
+                    <td style="width:33%;"><br><br><strong>${escapeHtml(u[1])}</strong><br>Üye</td>
+                    <td style="width:33%;"><br><br><strong>${escapeHtml(u[2])}</strong><br>Üye</td>
+                </tr>
+            </table>
+            <table class="sig-table">
+                <tr>
+                    <td style="width:50%;"><br><br><strong>${escapeHtml(u[3])}</strong><br>Üye</td>
+                    <td style="width:50%;"><br><br><strong>${escapeHtml(u[4])}</strong><br>Üye</td>
+                </tr>
+            </table>`;
     }
 
     function buildEvrak9() {
         const o = getOkulAdi(), ob = o.toLocaleUpperCase('tr-TR');
         const m = document.getElementById('mudurAdi').value;
         const t = getTopBilgi(), y = getEgitimYili();
-        let r = ''; getOgretmenListesi().forEach((it,i) => { r += `<tr><td>${i+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.unvan)}</td><td></td></tr>`; });
+        let r = ''; getOgretmenListesi().forEach((it,i) => { r += `<tr><td>${i+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.unvan)}</td><td>&nbsp;</td></tr>`; });
         return `<div class="pdf-header">T.C.<br>${escapeHtml(getKurumBaslik())}<br><strong>${escapeHtml(ob)}</strong> MÜDÜRLÜĞÜ</div>
             <div style="margin:10px 0;"><strong>Konu:</strong> ${escapeHtml(y)} Eğitim Öğretim Yılı ${escapeHtml(t.tarih)} tarihli Okul Aile Birliği Genel Kurul Toplantısı.</div>
             <div class="pdf-ortala-kalın" style="margin:15px 0;"><strong>${escapeHtml(o)}</strong> Müdürlüğü Öğretmenlerine</div>
@@ -1881,16 +1763,18 @@ ${htmlContent}
             <table class="pdf-tablo"><thead><tr><th>Sıra</th><th>Adı Soyadı</th><th>Unvanı</th><th>İmzası</th></tr></thead><tbody>${r}</tbody></table>`;
     }
 
+    // ✅ DÜZELTME: page-break-before on next table (Word uyumlu)
     function buildEvrak10() {
         const ob = getOkulAdi().toLocaleUpperCase('tr-TR');
         const list = getVeliListesi(), n = list.length;
-        let html = '';
+        let html = `<div style="text-align:center;font-weight:bold;font-size:14pt;margin-bottom:15px;"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ GENEL KURUL TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>`;
         for (let i = 0; i < n; i += 30) {
+            if (i > 0) html += '<br clear="all" style="mso-special-character:line-break;page-break-before:always" />';
             let r = '';
-            list.slice(i,i+30).forEach((it,idx) => { r += `<tr><td>${i+idx+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.telefon)}</td><td></td><td>${escapeHtml(it.ogrenci)}</td></tr>`; });
-            html += `<table class="pdf-tablo" style="font-size:9pt;"><thead><tr><th>SIRA</th><th>VELİ ADI SOYADI</th><th>TELEFON</th><th>İMZA</th><th>ÖĞRENCİ</th></tr></thead><tbody>${r}</tbody></table>${i+30 < n ? '<div style="page-break-after:always;"></div>' : ''}`;
+            list.slice(i,i+30).forEach((it,idx) => { r += `<tr><td>${i+idx+1}</td><td>${escapeHtml(it.ad)}</td><td>${escapeHtml(it.telefon)}</td><td>&nbsp;</td><td>${escapeHtml(it.ogrenci)}</td></tr>`; });
+            html += `<table class="pdf-tablo" style="font-size:9pt;"><thead><tr><th>SIRA</th><th>VELİ ADI SOYADI</th><th>TELEFON</th><th>İMZA</th><th>ÖĞRENCİ</th></tr></thead><tbody>${r}</tbody></table>`;
         }
-        return `<div style="text-align:center;font-weight:bold;font-size:14pt;margin-bottom:15px;"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ GENEL KURUL TOPLANTISI KATILIM İMZA SİRKÜSÜ</div>${html}`;
+        return html;
     }
 
     function buildYkEvrak(sec) {
@@ -1917,29 +1801,33 @@ ${htmlContent}
             const oNet = Math.max(0, parseFloat(document.getElementById('oGelirToplam').textContent) - parseFloat(document.getElementById('oGiderToplam').textContent)).toFixed(2);
             let bilSayfa = '';
             if (!ilk) {
-                bilSayfa = `<div style="page-break-before:always;"></div>
+                bilSayfa = `<br clear="all" style="mso-special-character:line-break;page-break-before:always" />
                     <div class="pdf-header" style="line-height:1.5;"><strong>${escapeHtml(ob)}</strong> OKUL AİLE BİRLİĞİ<br><strong>${escapeHtml(oY)}</strong> ÖĞRETİM YILI (ÖNCEKİ DÖNEM)<br>FAALİYET BİLANÇOSU</div>
                     <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GELİRLER</th></tr></thead><tbody>${oG}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr></tfoot></table></div>
                     <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GİDERLER</th></tr></thead><tbody>${oGi}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr></tfoot></table></div>
                     <div class="pdf-tut-metin" style="margin-top:15px;text-align:center;font-weight:bold;">${escapeHtml(oY)} GENEL TOPLAM</div>
                     <div class="pdf-tablo-wrap"><table class="pdf-tablo">
+                        <tbody>
                         <tr><td>1</td><td>${escapeHtml(oY)} GELİRLER TOPLAMI</td><td>${document.getElementById('oGelirToplam').textContent} TL</td></tr>
                         <tr><td>2</td><td>${escapeHtml(oY)} GİDERLER TOPLAMI</td><td>${document.getElementById('oGiderToplam').textContent} TL</td></tr>
                         <tr><td>3</td><td>BANKA HESABINDAKİ PARA</td><td>${oNet} TL</td></tr>
                         <tr><td>4</td><td>SONRAKİ DÖNEME DEVREDEN</td><td>${oNet} TL</td></tr>
+                        </tbody>
                     </table></div>
                     ${imzaYk(ykT, mu, se, uy, by, b)}`;
             }
             return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br><strong>${escapeHtml(y)}</strong> ÖĞRETİM YILI OKUL AİLE BİRLİĞİ FAALİYET RAPORU</div>
                 <div class="pdf-tut-metin"><strong>${escapeHtml(o)}</strong> Okul Aile Birliği olarak, <strong>${escapeHtml(ykT)}</strong> tarihindeki ilk toplantımızda görev dağılımı yapılmıştır.</div>
-                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><tr><th>Unvan</th><th>Adı Soyadı</th></tr>
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><tbody>
+                    <tr><th>Unvan</th><th>Adı Soyadı</th></tr>
                     <tr><td>Başkan</td><td>${escapeHtml(b)}</td></tr><tr><td>Başkan Yrd.</td><td>${escapeHtml(by)}</td></tr>
                     <tr><td>Muhasip</td><td>${escapeHtml(mu)}</td></tr><tr><td>Sekreter</td><td>${escapeHtml(se)}</td></tr>
-                    <tr><td>Üye</td><td>${escapeHtml(uy)}</td></tr></table></div>
+                    <tr><td>Üye</td><td>${escapeHtml(uy)}</td></tr>
+                </tbody></table></div>
                 <div class="pdf-tut-metin" style="margin-top:15px;">${faal}</div>
                 ${imzaYk(ykT, mu, se, uy, by, b)}
                 ${bilSayfa}
-                <div style="page-break-before:always;"></div>
+                <br clear="all" style="mso-special-character:line-break;page-break-before:always" />
                 <div class="pdf-header">OKUL AİLE BİRLİĞİ TAHMİNİ BÜTÇE</div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GELİR TAHMİNİ</th></tr></thead><tbody>${yG}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${yGT.toFixed(2)} TL</strong></td></tr></tfoot></table></div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GİDER TAHMİNİ</th></tr></thead><tbody>${yGi}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${yGiT.toFixed(2)} TL</strong></td></tr></tfoot></table></div>
@@ -1970,17 +1858,17 @@ ${htmlContent}
             return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ<br><strong>${escapeHtml(oY)}</strong> EĞİTİM-ÖĞRETİM YILI<br>DÖNEM SONU DEVİR TUTANAĞI</div>
                 <div class="pdf-tut-metin">${m}</div>
                 ${imzaYk(eT, pM, pS, pU, pBY, pB)}
-                <div style="page-break-before:always;"></div>
+                <br clear="all" style="mso-special-character:line-break;page-break-before:always" />
                 <div class="pdf-header" style="line-height:1.5;"><strong>${escapeHtml(ob)}</strong> OKUL AİLE BİRLİĞİ<br><strong>${escapeHtml(oY)}</strong> EĞİTİM-ÖĞRETİM YILI<br>DÖNEM SONU FAALİYET BİLANÇOSU<br>(${escapeHtml(dB)} - ${escapeHtml(eT)} ARASI)</div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GELİRLER</th></tr></thead><tbody>${yG}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGelirToplam').textContent} TL</strong></td></tr></tfoot></table></div>
                 <div class="pdf-tablo-wrap"><table class="pdf-tablo"><thead><tr><th colspan="3" class="pdf-ortala">GİDERLER</th></tr></thead><tbody>${yGi}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${document.getElementById('oGiderToplam').textContent} TL</strong></td></tr></tfoot></table></div>
                 <div class="pdf-tut-metin" style="margin-top:15px;text-align:center;font-weight:bold;">${escapeHtml(oY)} GENEL TOPLAM</div>
-                <div class="pdf-tablo-wrap"><table class="pdf-tablo">
+                <div class="pdf-tablo-wrap"><table class="pdf-tablo"><tbody>
                     <tr><td>1</td><td>${escapeHtml(oY)} GELİRLER TOPLAMI</td><td>${document.getElementById('oGelirToplam').textContent} TL</td></tr>
                     <tr><td>2</td><td>${escapeHtml(oY)} GİDERLER TOPLAMI</td><td>${document.getElementById('oGiderToplam').textContent} TL</td></tr>
                     <tr><td>3</td><td>BANKA HESABINDAKİ PARA</td><td>${dev} TL</td></tr>
                     <tr><td>4</td><td>SONRAKİ DÖNEME DEVREDEN</td><td>${dev} TL</td></tr>
-                </table></div>
+                </tbody></table></div>
                 ${imzaYk(eT, pM, pS, pU, pBY, pB)}`;
         }
         if (MONTH_CODES[sec]) {
@@ -2032,7 +1920,7 @@ ${htmlContent}
         if (sec === 'dk1') {
             const t = formatDate(document.getElementById('dkTarihi1').value);
             const m = formatMetin('dk1Metni', {'OKUL_ADI':o,'TARİH':t,'EĞİTİM_YILI':y});
-            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div><div class="pdf-tablo-wrap"><table class="pdf-tablo"><tr><th>Başkan</th><th>Başkan Yrd.</th><th>Muhasip</th></tr><tr><td>${escapeHtml(dB)}</td><td>${escapeHtml(dBY)}</td><td>${escapeHtml(dM)}</td></tr></table></div><div style="margin-top:20px;"></div>${imzaDk(t, dB, dBY, dM)}`;
+            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div><div class="pdf-tablo-wrap"><table class="pdf-tablo"><tbody><tr><th>Başkan</th><th>Başkan Yrd.</th><th>Muhasip</th></tr><tr><td>${escapeHtml(dB)}</td><td>${escapeHtml(dBY)}</td><td>${escapeHtml(dM)}</td></tr></tbody></table></div><div style="margin-top:20px;"></div>${imzaDk(t, dB, dBY, dM)}`;
         }
         if (sec === 'dk2') {
             const t = formatDate(document.getElementById('dkTarihi2').value);
