@@ -53,9 +53,12 @@
         .toplam-satir { font-weight: bold; background: #e8f0fe; color: #0056b3;}
         .ozel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .ozel-grid .full { grid-column: span 2; }
-        #pdf-wrapper { display: none; width: 100%; position: absolute; top: 0; left: 0; z-index: 9999; background: white; }
-        #pdf-content { width: 170mm; margin: 0 auto; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; padding: 15px 0; box-sizing: border-box; }
-        .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; }
+
+        /* ✅ PDF WRAPPER DÜZELTMESİ */
+        #pdf-wrapper { display: none; width: 170mm; position: absolute; top: 0; left: 0; z-index: 9999; background: white; }
+        #pdf-content { width: 170mm; margin: 0; padding: 0; box-sizing: border-box; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; overflow: hidden; word-wrap: break-word; overflow-wrap: break-word; }
+
+        .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; }
         .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
@@ -63,12 +66,17 @@
         .pdf-signature { display: flex; justify-content: flex-end; text-align: center; line-height: 1.2; margin-bottom: 20px; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
         .agenda-item { white-space: pre-wrap; line-height: 1.1; margin-bottom: 1px; }
-        .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 11pt; }
-        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 6px 8px; text-align: left; }
+
+        /* ✅ TABLO DÜZELTMESİ */
+        .pdf-tablo { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
+        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
         .pdf-tablo th { background: #eee; }
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
-        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
+
+        /* ✅ METİN DÜZELTMESİ */
+        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; word-wrap: break-word; overflow-wrap: break-word; }
+
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
         .pdf-logo-container { text-align: center; margin-bottom: 5px; }
         .pdf-logo-container img { max-height: 150px; width: auto; }
@@ -1411,7 +1419,6 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         }
         return r;
     }
-    // formatMetin — hem [KEY] hem [!KEY!] desteği
     function formatMetin(id, dict) {
         let t = document.getElementById(id).value;
         t = t.replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -1470,7 +1477,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             else if (aktifSekme === 'denetim') html = buildDkEvrak(sec);
             c.innerHTML = html;
             const orig = window.scrollY; w.style.display = 'block'; window.scrollTo(0, 0);
-            const opt = { margin:[15,20,15,20], filename:`${sec.toUpperCase()}_OAB.pdf`, image:{type:'jpeg',quality:1}, html2canvas:{scale:2,scrollY:0}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['css','legacy']} };
+            const opt = { margin:[15,20,15,20], filename:`${sec.toUpperCase()}_OAB.pdf`, image:{type:'jpeg',quality:1}, html2canvas:{scale:2,scrollY:0,useCORS:true,letterRendering:true,logging:false}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['css','legacy']} };
             html2pdf().set(opt).from(c).save().then(() => { w.style.display = 'none'; window.scrollTo(0, orig); });
         } catch (e) {
             console.error('PDF üretim hatası:', e);
@@ -1483,7 +1490,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             try {
                 const c = document.getElementById('pdf-content'), w = document.getElementById('pdf-wrapper');
                 c.innerHTML = html; w.style.display = 'block';
-                const opt = { margin:[15,20,15,20], image:{type:'jpeg',quality:1}, html2canvas:{scale:2,scrollY:0}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['css','legacy']} };
+                const opt = { margin:[15,20,15,20], image:{type:'jpeg',quality:1}, html2canvas:{scale:2,scrollY:0,useCORS:true,letterRendering:true,logging:false}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['css','legacy']} };
                 html2pdf().set(opt).from(c).outputPdf('blob').then(b => { w.style.display = 'none'; res(b); }).catch(e => { w.style.display = 'none'; rej(e); });
             } catch (e) { rej(e); }
         });
@@ -1519,11 +1526,8 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             yD.push({id:'yk1',name:'01_YK_Ilk'},{id:'ykKasim',name:'02_YK_Kasim'},{id:'yk2',name:'03_YK_Aralik'},{id:'ykOcak',name:'04_YK_Ocak'},{id:'ykSubat',name:'05_YK_Subat'},{id:'ykMart',name:'06_YK_Mart'},{id:'ykNisan',name:'07_YK_Nisan'},{id:'ykMayis',name:'08_YK_Mayis'},{id:'yk3',name:'09_YK_Haziran'});
             for (const d of yD) {
                 try {
-                    // Aylık evraklar için activeMonthCode geçici olarak ayarlanmalı
                     const prevActiveMonth = activeMonthCode;
-                    if (MONTH_CODES[d.id]) {
-                        activeMonthCode = MONTH_CODES[d.id].code;
-                    }
+                    if (MONTH_CODES[d.id]) activeMonthCode = MONTH_CODES[d.id].code;
                     const h = buildYkEvrak(d.id);
                     activeMonthCode = prevActiveMonth;
                     const b = await generatePDFBlob(h); zip.file(`Yonetim_Kurulu/${d.name}.pdf`, b); ok++;
@@ -1935,8 +1939,6 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         const dk1 = document.getElementById('dk1Metni');
         if (!dk1.value) dk1.value = isIlkKurulus() ? DK1_ILK : DK1_MEVCUT;
 
-        // Aylık tutanaklar: Yeni şablonda [!GELIR_TABLOSU!] gibi placeholder'lar var.
-        // Eski sürümden kalan değerler bu placeholder'ları içermiyorsa şablonu güncelle.
         ['ykKasimMetni','ykOcakMetni','ykSubatMetni','ykMartMetni','ykNisanMetni','ykMayisMetni'].forEach(id => {
             const el = document.getElementById(id);
             if (!el.value.trim() || !el.value.includes('[!GELIR_TABLOSU!]')) {
