@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okul Aile Birliği Evrak Otomasyonu</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         * { box-sizing: border-box; }
@@ -30,13 +29,15 @@
         .checkbox-label input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
         .file-input-wrapper { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #f8f9fa; padding: 10px; border: 1px dashed #ced4da; border-radius: 6px; }
         .btn-actions-container { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
-        .btn-generate { flex: 2; background-color: #f39c12; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
-        .btn-generate:hover { background-color: #d68910; }
+        .btn-generate { flex: 2; background-color: #2980b9; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .btn-generate:hover { background-color: #21618c; }
+        .btn-print { flex: 2; background-color: #e67e22; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .btn-print:hover { background-color: #ca6f1e; }
         .btn-zip { flex: 2; background-color: #8e44ad; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
         .btn-zip:hover { background-color: #7d3c98; }
         .btn-zip:disabled { background-color: #95a5a6; cursor: wait; }
         .btn-backup { flex: 1; background-color: #27ae60; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; }
-        .btn-restore { flex: 1; background-color: #2980b9; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        .btn-restore { flex: 1; background-color: #16a085; color: white; padding: 16px; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; }
         .info-section { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 30px; }
         .info-section h3 { color: #3b82f6; margin-top: 0; border-bottom: 2px solid #f1f3f5; padding-bottom: 15px;}
         .info-card { border: 1px solid #e1e4e8; border-radius: 6px; padding: 20px; margin-bottom: 20px; background-color: #fafbfc;}
@@ -54,46 +55,61 @@
         .ozel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .ozel-grid .full { grid-column: span 2; }
 
-        /* ✅ PDF WRAPPER - SIKI KONTROL */
-        #pdf-wrapper { display: none; width: 170mm; position: absolute; top: 0; left: 0; z-index: 9999; background: white; overflow: hidden; }
-        #pdf-content { width: 170mm; max-width: 170mm; min-width: 170mm; margin: 0; padding: 0; box-sizing: border-box; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; overflow-x: hidden; word-wrap: break-word; overflow-wrap: break-word; }
+        /* PDF/WRAPPER - ARTIK SADECE YAZDIRMA İÇİN */
+        #pdf-wrapper { display: none; width: 100%; position: absolute; top: 0; left: 0; z-index: 9999; background: white; }
+        #pdf-content { width: 100%; margin: 0; padding: 0; box-sizing: border-box; background: white; font-family: 'Times New Roman', Times, serif; color: black; font-size: 12pt; word-wrap: break-word; overflow-wrap: break-word; }
 
-        /* ✅ TÜM ÇOCUKLAR MAX WIDTH KONTROLÜ */
-        #pdf-content * { box-sizing: border-box; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
-        #pdf-content table { table-layout: fixed !important; width: 100% !important; max-width: 100% !important; }
-        #pdf-content td, #pdf-content th { word-break: break-word; word-wrap: break-word; overflow-wrap: break-word; }
-        #pdf-content img { max-width: 100%; height: auto; }
-
-        .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; }
-        .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; gap: 10px; }
+        .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; }
+        .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
-        .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.25; margin-bottom: 20px; word-wrap: break-word; overflow-wrap: break-word; }
+        .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.25; margin-bottom: 20px; }
         .pdf-signature { display: flex; justify-content: flex-end; text-align: center; line-height: 1.2; margin-bottom: 20px; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
-        .agenda-item { white-space: pre-wrap; line-height: 1.1; margin-bottom: 1px; word-wrap: break-word; overflow-wrap: break-word; }
-
-        /* ✅ TABLO KESİN LİMİT */
-        .pdf-tablo { width: 100%; max-width: 100%; table-layout: fixed; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
-        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; overflow: hidden; }
+        .agenda-item { white-space: pre-wrap; line-height: 1.1; margin-bottom: 1px; }
+        .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
+        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; word-wrap: break-word; overflow-wrap: break-word; }
         .pdf-tablo th { background: #eee; }
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
-
-        /* ✅ TUTANAK METNİ KESİN LİMİT */
-        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; word-wrap: break-word; overflow-wrap: break-word; overflow-x: hidden; }
-
+        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
         .pdf-logo-container { text-align: center; margin-bottom: 5px; }
-        .pdf-logo-container img { max-height: 150px; width: auto; max-width: 100%; }
+        .pdf-logo-container img { max-height: 150px; width: auto; }
         .pdf-tut-tarih-ortala { text-align: center; margin: 15px 0 5px 0; font-weight: bold; font-size: 12pt; }
         .pdf-ortala-kalın { text-align: center; font-weight: bold; }
-
-        /* ✅ TABLO WRAP - BLOCK (inline-block DEĞİL!) */
-        .pdf-tablo-wrap { page-break-inside: avoid !important; break-inside: avoid !important; display: block; width: 100%; max-width: 100%; }
-        .pdf-erteleme-notu { page-break-inside: avoid !important; break-inside: avoid !important; width: 100%; max-width: 100%; }
+        .pdf-tablo-wrap { page-break-inside: avoid; break-inside: avoid; }
+        .pdf-erteleme-notu { page-break-inside: avoid; break-inside: avoid; }
         body { -webkit-user-select: none; user-select: none; }
         input, textarea, select { -webkit-user-select: text; user-select: text; }
+
+        /* ✅ YAZDIRMA - SADECE PDF İÇERİĞİ */
+        @media print {
+            body > *:not(#pdf-wrapper) { display: none !important; }
+            #pdf-wrapper {
+                display: block !important;
+                position: static !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                z-index: auto !important;
+            }
+            #pdf-content {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 11pt;
+            }
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            .pdf-tablo, .pdf-tut-metin, .pdf-header, .pdf-signature, .pdf-tablo-wrap {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
@@ -111,19 +127,27 @@
         <div class="info-section">
             <h3>ℹ️ Kullanım Rehberi</h3>
             <div class="info-card">
+                <h4>📝 Çıktı Yöntemleri</h4>
+                <p>Program üç farklı çıktı yöntemi sunar:</p>
+                <ol style="line-height:1.8; font-size:14px;">
+                    <li><strong>📝 Word Olarak İndir:</strong> Dosya <code>.doc</code> formatında indirilir. Microsoft Word, LibreOffice veya Google Docs ile açıp düzenleyebilir, imzalayabilir, yazdırabilirsiniz. <strong>Format bozulmaz, sayfa yapısı korunur.</strong></li>
+                    <li><strong>🖨️ Yazdır / PDF Kaydet:</strong> Tarayıcının yazdırma dialog'u açılır. "Hedef" kısmından <strong>"PDF olarak kaydet"</strong> seçerseniz, Chrome'un kendi motoruyla <strong>kusursuz PDF</strong> üretilir (kesme sorunu yok). Doğrudan yazıcıya da gönderebilirsiniz.</li>
+                    <li><strong>📦 Tüm Evrakları ZIP İndir:</strong> Tüm evrakları ayrı ayrı <code>.doc</code> dosyası olarak bir ZIP içinde indirir.</li>
+                </ol>
+            </div>
+            <div class="info-card">
                 <h4>📅 Mevzuata Uygun Yıllık Süreç</h4>
                 <ol>
                     <li><strong>Eylül – Önceki Dönem Kapanışı:</strong> YK devir toplantısı + Faaliyet Bilançosu; sonraki iş günü DK Nihai Denetim Raporu.</li>
-                    <li><strong>Ekim – Genel Kurul:</strong> En geç Ekim sonu. Yeter sayı: 100 altı 32 veli, 100+ 64 veli. Sağlanamazsa 30 gün içinde 2. toplantı (çoğunluk aranmaz).</li>
+                    <li><strong>Ekim – Genel Kurul:</strong> En geç Ekim sonu. Yeter sayı: 100 altı 32 veli, 100+ 64 veli. Sağlanamazsa 30 gün içinde 2. toplantı.</li>
                     <li><strong>Ekim – YK İlk Toplantı:</strong> Sonraki iş günü.</li>
                     <li><strong>Ekim – DK İlk Toplantı:</strong> YK'dan bir iş günü sonra.</li>
                     <li><strong>Aylık YK:</strong> Kasım, Aralık, Ocak, Şubat, Mart, Nisan, Mayıs, Haziran.</li>
-                    <li><strong>DK Ara Raporları:</strong> Aralık ve Haziran.</li>
                 </ol>
             </div>
             <div class="info-card">
                 <h4>📊 Aylık Toplantı Detayları</h4>
-                <p>Kasım, Ocak, Şubat, Mart, Nisan, Mayıs aylarında Yönetim Kurulu toplantıları için ayrı bir <strong>"Aylık Toplantı Detayları"</strong> paneli açılır. Bu panelde her ay için gelir-gider tablosu, yapılan işler, kararlar ve yapılacaklar girilir. PDF tutanağa otomatik yansıtılır.</p>
+                <p>Kasım, Ocak, Şubat, Mart, Nisan, Mayıs aylarında YK toplantıları için ayrı panel açılır. Gelir-gider tablosu, yapılan işler, kararlar ve yapılacaklar girilir. Her ayın verisi ayrı saklanır.</p>
             </div>
             <div class="support-card"><h4>Geri Bildirim</h4><div class="email-badge">✉️ gorkemkocaman.tr@gmail.com</div></div>
         </div>
@@ -375,14 +399,8 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                     <strong>📊 Aylık Toplantı Detayları:</strong> Bu paneldeki veriler seçili ayın tutanağına yansıtılır. Her ayın verisi ayrı saklanır.
                 </div>
                 <div class="form-grid">
-                    <div class="form-group">
-                        <label>Önceki Toplantı Tarihi</label>
-                        <input type="date" id="aylikOncekiToplantiTarihi">
-                    </div>
-                    <div class="form-group">
-                        <label>Önceki Toplantıdan Devreden Tutar (TL)</label>
-                        <input type="number" id="aylikDevir" value="0" step="0.01">
-                    </div>
+                    <div class="form-group"><label>Önceki Toplantı Tarihi</label><input type="date" id="aylikOncekiToplantiTarihi"></div>
+                    <div class="form-group"><label>Önceki Toplantıdan Devreden Tutar (TL)</label><input type="number" id="aylikDevir" value="0" step="0.01"></div>
                 </div>
 
                 <h4 style="margin-top:20px; color:#2c3e50; border-bottom:1px solid #e1e4e8; padding-bottom:6px;">💰 Bu Ayın Gelirleri</h4>
@@ -408,11 +426,11 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
 
                 <div class="form-group full-width" style="margin-top:20px;">
                     <label>Bu Ay İçinde Yapılan İş ve İşlemler</label>
-                    <textarea id="aylikYapilanIsler" rows="4" placeholder="Örn: Sınıfların boya-badana işi tamamlandı..."></textarea>
+                    <textarea id="aylikYapilanIsler" rows="4" placeholder="Örn: Sınıfların boya-badana işi tamamlandı, kütüphaneye 50 kitap alındı..."></textarea>
                 </div>
                 <div class="form-group full-width" style="margin-top:10px;">
                     <label>Bu Toplantıda Alınan Kararlar</label>
-                    <textarea id="aylikAlinanKararlar" rows="4" placeholder="Örn: 1- Kalorifer bakımının yapılmasına..."></textarea>
+                    <textarea id="aylikAlinanKararlar" rows="4" placeholder="Örn: 1- Kış ayları için kalorifer bakımının yapılmasına..."></textarea>
                 </div>
                 <div class="form-group full-width" style="margin-top:10px;">
                     <label>Bir Sonraki Toplantıya Kadar Yapılması Planlananlar</label>
@@ -692,7 +710,8 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
         </div>
 
         <div class="btn-actions-container">
-            <button class="btn-generate" onclick="generatePDF()">📄 Evrak Oluştur ve İndir</button>
+            <button class="btn-generate" onclick="generateWord()">📝 Word Olarak İndir</button>
+            <button class="btn-print" onclick="generatePrint()">🖨️ Yazdır / PDF Kaydet</button>
             <button class="btn-zip" id="btnZip" onclick="tumEvraklariIndir()">📦 Tüm Evrakları ZIP İndir</button>
             <button class="btn-backup" onclick="yedekle()">💾 Yedekle</button>
             <button class="btn-restore" onclick="document.getElementById('yedekDosya').click()">📂 Geri Yükle</button>
@@ -1427,93 +1446,208 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             <div><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</div>
         </div>`;
 
-    // ==================== PDF ====================
-    // ✅ KRİTİK DÜZELTME: scale: 2 KALDIRILDI, letterRendering KALDIRILDI
-    function generatePDF() {
+    // ==================== WORD ÇIKTISI ====================
+    function buildCurrentHTML() {
+        const sec = document.getElementById('evrakSec').value;
+        const tur = document.getElementById('toplantiTuru').value;
+        let html = '';
+        if (aktifSekme === 'genel') {
+            const map = {'1':buildEvrak1,'2':buildEvrak2,'3':buildEvrak3,'4':buildEvrak4,'5':buildEvrak5,'6':buildEvrak6,'7':buildEvrak7,'8':buildEvrak8,'9':buildEvrak9,'10':buildEvrak10};
+            if (map[sec]) html = map[sec](tur);
+        } else if (aktifSekme === 'yonetim') html = buildYkEvrak(sec);
+        else if (aktifSekme === 'denetim') html = buildDkEvrak(sec);
+        return html;
+    }
+
+    function buildWordDocument(htmlContent, title) {
+        return `<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office'
+      xmlns:w='urn:schemas-microsoft-com:office:word'
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset='utf-8'>
+    <title>${escapeHtml(title)}</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+        @page WordSection1 {
+            size: 21cm 29.7cm;
+            margin: 2cm 2cm 2cm 2cm;
+            mso-page-orientation: portrait;
+            mso-header-margin: 1cm;
+            mso-footer-margin: 1cm;
+        }
+        div.WordSection1 { page: WordSection1; }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+
+        .pdf-header { text-align: center; font-weight: bold; margin-bottom: 15px; line-height: 1.2; }
+        .pdf-info-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .pdf-subject { margin-bottom: 15px; }
+        .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
+        .pdf-body { text-align: justify; text-indent: 40px; line-height: 1.3; margin-bottom: 20px; }
+        .pdf-signature { text-align: right; margin-bottom: 20px; }
+        .pdf-signature > div { display: inline-block; text-align: center; min-width: 200px; }
+        .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
+        .agenda-item { white-space: pre-wrap; line-height: 1.2; margin-bottom: 2px; }
+
+        .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
+        .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 5px 6px; text-align: left; }
+        .pdf-tablo th { background: #eee; font-weight: bold; }
+
+        .pdf-ortala { text-align: center; }
+        .pdf-sag { text-align: right; }
+        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
+        .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
+        .pdf-logo-container { text-align: center; margin-bottom: 5px; }
+        .pdf-logo-container img { max-height: 150px; width: auto; }
+        .pdf-tut-tarih-ortala { text-align: center; margin: 15px 0 5px 0; font-weight: bold; font-size: 12pt; }
+        .pdf-ortala-kalın { text-align: center; font-weight: bold; }
+        .pdf-tablo-wrap { }
+        .pdf-erteleme-notu { border: 1px solid #000; padding: 10px; margin: 10px 0; }
+        .pdf-div-kesme { }
+
+        /* Flex fallback for Word */
+        .pdf-tablo-wrap table { width: 100%; }
+        .agenda-item strong { font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="WordSection1">
+${htmlContent}
+</div>
+</body>
+</html>`;
+    }
+
+    function downloadWordFile(htmlContent, filename) {
+        const wordDoc = buildWordDocument(htmlContent, filename);
+        // BOM ekle - Türkçe karakter için
+        const blob = new Blob(['\ufeff', wordDoc], { type: 'application/msword;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function generateWord() {
         try {
-            if (aktifSekme === 'genel' && !validateTarihler()) { alert('Tarih uyarılarını düzeltin!'); return; }
+            if (aktifSekme === 'genel' && !validateTarihler()) {
+                alert('Tarih uyarılarını düzeltin!');
+                return;
+            }
             const sec = document.getElementById('evrakSec').value;
             if ((sec === 'ykEylul' || sec === 'dkEylul') && !document.getElementById('prevDonemBaslangic').value) {
                 alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
                 return;
             }
-            const tur = document.getElementById('toplantiTuru').value;
-            const w = document.getElementById('pdf-wrapper'), c = document.getElementById('pdf-content');
-            let html = '';
-            if (aktifSekme === 'genel') {
-                const map = {'1':buildEvrak1,'2':buildEvrak2,'3':buildEvrak3,'4':buildEvrak4,'5':buildEvrak5,'6':buildEvrak6,'7':buildEvrak7,'8':buildEvrak8,'9':buildEvrak9,'10':buildEvrak10};
-                if (map[sec]) html = map[sec](tur);
-            } else if (aktifSekme === 'yonetim') html = buildYkEvrak(sec);
-            else if (aktifSekme === 'denetim') html = buildDkEvrak(sec);
-            c.innerHTML = html;
-            const orig = window.scrollY;
-            w.style.display = 'block';
-            window.scrollTo(0, 0);
-            const opt = {
-                margin: [15, 20, 15, 20],
-                filename: `${sec.toUpperCase()}_OAB.pdf`,
-                image: {type: 'jpeg', quality: 0.98},
-                html2canvas: {scrollY: 0, useCORS: true, logging: false, backgroundColor: '#ffffff'},
-                jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
-                pagebreak: {mode: ['css', 'legacy'], avoid: '.pdf-tablo-wrap, .pdf-tut-metin, .pdf-signature'}
-            };
-            html2pdf().set(opt).from(c).save().then(() => {
-                w.style.display = 'none';
-                window.scrollTo(0, orig);
-            });
+            const html = buildCurrentHTML();
+            if (!html || html.trim() === '') {
+                alert('Bu evrak için içerik bulunamadı.');
+                return;
+            }
+            downloadWordFile(html, `${sec.toUpperCase()}_OAB`);
         } catch (e) {
-            console.error('PDF üretim hatası:', e);
-            alert('Evrak oluşturulamadı.\n\nHata detayı: ' + (e && e.message ? e.message : e) + '\n\nLütfen formdaki tüm alanları kontrol edin.');
+            console.error('Word üretim hatası:', e);
+            alert('Word dosyası oluşturulamadı.\n\nHata: ' + (e && e.message ? e.message : e));
         }
     }
 
-    function generatePDFBlob(html) {
-        return new Promise((res, rej) => {
-            try {
-                const c = document.getElementById('pdf-content'), w = document.getElementById('pdf-wrapper');
-                c.innerHTML = html;
-                w.style.display = 'block';
-                const opt = {
-                    margin: [15, 20, 15, 20],
-                    image: {type: 'jpeg', quality: 0.98},
-                    html2canvas: {scrollY: 0, useCORS: true, logging: false, backgroundColor: '#ffffff'},
-                    jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
-                    pagebreak: {mode: ['css', 'legacy'], avoid: '.pdf-tablo-wrap, .pdf-tut-metin, .pdf-signature'}
-                };
-                html2pdf().set(opt).from(c).outputPdf('blob').then(b => {
-                    w.style.display = 'none';
-                    res(b);
-                }).catch(e => {
-                    w.style.display = 'none';
-                    rej(e);
-                });
-            } catch (e) { rej(e); }
-        });
+    // ==================== YAZDIR (PDF Kaydet) ====================
+    function generatePrint() {
+        try {
+            if (aktifSekme === 'genel' && !validateTarihler()) {
+                alert('Tarih uyarılarını düzeltin!');
+                return;
+            }
+            const sec = document.getElementById('evrakSec').value;
+            if ((sec === 'ykEylul' || sec === 'dkEylul') && !document.getElementById('prevDonemBaslangic').value) {
+                alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
+                return;
+            }
+            const html = buildCurrentHTML();
+            if (!html || html.trim() === '') {
+                alert('Bu evrak için içerik bulunamadı.');
+                return;
+            }
+            document.getElementById('pdf-content').innerHTML = html;
+            document.getElementById('pdf-wrapper').style.display = 'block';
+
+            const afterPrintHandler = () => {
+                document.getElementById('pdf-wrapper').style.display = 'none';
+                window.removeEventListener('afterprint', afterPrintHandler);
+            };
+            window.addEventListener('afterprint', afterPrintHandler);
+
+            setTimeout(() => {
+                window.print();
+                // Fallback: bazı tarayıcılarda afterprint tetiklenmez
+                setTimeout(() => {
+                    if (document.getElementById('pdf-wrapper').style.display !== 'none') {
+                        document.getElementById('pdf-wrapper').style.display = 'none';
+                    }
+                }, 1000);
+            }, 200);
+        } catch (e) {
+            console.error('Yazdırma hatası:', e);
+            alert('Yazdırma başlatılamadı.\n\nHata: ' + (e && e.message ? e.message : e));
+        }
     }
 
+    // ==================== ZIP İNDİR (Word) ====================
     async function tumEvraklariIndir() {
         const btn = document.getElementById('btnZip');
         const orig = btn.innerHTML;
-        btn.disabled = true; btn.innerHTML = '⏳ Hazırlanıyor...';
+        btn.disabled = true;
+        btn.innerHTML = '⏳ Hazırlanıyor...';
         const hat = []; let ok = 0;
         try {
             const zip = new JSZip();
             const ilk = isIlkKurulus();
             const tur = document.getElementById('toplantiTuru').value;
             const eg = getEgitimYili().replace(/[^0-9-]/g, '');
+
             if (!ilk && !document.getElementById('prevDonemBaslangic').value) {
-                alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.');
+                alert('Lütfen "Önceki Dönem Görev Başlangıç Tarihi" alanını doldurun veya "🔄 Tarihleri Otomatik Hesapla" butonuna basın.\n\nNot: YK Eylül ve DK Eylül evrakları için bu tarih zorunludur.');
                 btn.disabled = false;
                 btn.innerHTML = orig;
                 return;
             }
+
+            const docxMime = 'application/msword;charset=utf-8';
+
+            // GENEL KURUL
             const gD = isBasariliToplanti() ? ['1','2','3','4','5','6','7','8','9','10'] : ['1','2','3','4','5','6','7'];
             const gN = {'1':'01_Veliye_Ust_Yazi','2':'02_Mudurluge_Ust_Yazi','3':'03_Personele_Duyuru','4':'04_Okul_Cagri','5':'05_Gundem','6':'06_Ogretmen_Imza','7':'07_Genel_Kurul_Tutanagi','8':'08_Tahmini_Butce','9':'09_Kararlari_Okudum','10':'10_Veli_Imza'};
             const fns = {'1':buildEvrak1,'2':buildEvrak2,'3':buildEvrak3,'4':buildEvrak4,'5':buildEvrak5,'6':buildEvrak6,'7':buildEvrak7,'8':buildEvrak8,'9':buildEvrak9,'10':buildEvrak10};
             for (const id of gD) {
-                try { const h = fns[id](tur); const b = await generatePDFBlob(h); zip.file(`Genel_Kurul/${gN[id]}.pdf`, b); ok++; }
-                catch (e) { hat.push(`Genel_Kurul/${id}: ${e.message}`); }
+                try {
+                    const h = fns[id](tur);
+                    const doc = buildWordDocument(h, gN[id]);
+                    zip.file(`Genel_Kurul/${gN[id]}.doc`, doc);
+                    ok++;
+                } catch (e) { hat.push(`Genel_Kurul/${id}: ${e.message}`); }
             }
+
+            // YÖNETİM KURULU
             const yD = [];
             if (!ilk) yD.push({id:'ykEylul', name:'00_YK_Eylul_Devir'});
             yD.push({id:'yk1',name:'01_YK_Ilk'},{id:'ykKasim',name:'02_YK_Kasim'},{id:'yk2',name:'03_YK_Aralik'},{id:'ykOcak',name:'04_YK_Ocak'},{id:'ykSubat',name:'05_YK_Subat'},{id:'ykMart',name:'06_YK_Mart'},{id:'ykNisan',name:'07_YK_Nisan'},{id:'ykMayis',name:'08_YK_Mayis'},{id:'yk3',name:'09_YK_Haziran'});
@@ -1523,23 +1657,41 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
                     if (MONTH_CODES[d.id]) activeMonthCode = MONTH_CODES[d.id].code;
                     const h = buildYkEvrak(d.id);
                     activeMonthCode = prevActiveMonth;
-                    const b = await generatePDFBlob(h); zip.file(`Yonetim_Kurulu/${d.name}.pdf`, b); ok++;
+                    const doc = buildWordDocument(h, d.name);
+                    zip.file(`Yonetim_Kurulu/${d.name}.doc`, doc);
+                    ok++;
                 } catch (e) { hat.push(`Yonetim_Kurulu/${d.name}: ${e.message}`); }
             }
+
+            // DENETİM KURULU
             const dD = [{id:'dk1',name:'01_DK_Ilk'},{id:'dk2',name:'02_DK_Aralik'},{id:'dk3',name:'03_DK_Haziran'}];
             if (!ilk) dD.push({id:'dkEylul',name:'04_DK_Eylul_Nihai'});
             for (const d of dD) {
-                try { const h = buildDkEvrak(d.id); const b = await generatePDFBlob(h); zip.file(`Denetim_Kurulu/${d.name}.pdf`, b); ok++; }
-                catch (e) { hat.push(`Denetim_Kurulu/${d.name}: ${e.message}`); }
+                try {
+                    const h = buildDkEvrak(d.id);
+                    const doc = buildWordDocument(h, d.name);
+                    zip.file(`Denetim_Kurulu/${d.name}.doc`, doc);
+                    ok++;
+                } catch (e) { hat.push(`Denetim_Kurulu/${d.name}: ${e.message}`); }
             }
+
             if (ok === 0) { alert('Hiçbir evrak oluşturulamadı:\n' + hat.join('\n')); return; }
+
             const zb = await zip.generateAsync({type:'blob', compression:'DEFLATE'});
-            const a = document.createElement('a'); a.href = URL.createObjectURL(zb); a.download = `OAB_Evraklar_${eg}.zip`; a.click();
-            let m = `✅ ${ok} evrak ZIP'e eklendi.`;
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(zb);
+            a.download = `OAB_Evraklar_${eg}.zip`;
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+            let m = `✅ ${ok} evrak (Word formatında) ZIP'e eklendi.`;
             if (hat.length) m += `\n\n⚠️ ${hat.length} hata:\n` + hat.join('\n');
             alert(m);
-        } catch (e) { alert('ZIP hatası: ' + e.message); }
-        finally { btn.disabled = false; btn.innerHTML = orig; document.getElementById('pdf-wrapper').style.display = 'none'; }
+        } catch (e) {
+            alert('ZIP hatası: ' + e.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = orig;
+        }
     }
 
     // ==================== GK EVRAKLARI ====================
@@ -1665,9 +1817,9 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         if (!bas) {
             const eT = formatDate(document.getElementById('ertelemeTarihi').value);
             const eG = getDayName(document.getElementById('ertelemeTarihi').value);
-            ert = `<div class="pdf-erteleme-notu" style="margin:10px 0;padding:10px;border:1px solid #000;background:#f9f9f9;font-weight:bold;"><strong>YETER SAYI SAĞLANAMADIĞI İÇİN TOPLANTININ ERTELENMESİ:</strong><br>Toplantıda Okul Aile Birliği Yönetmeliği'nin 9. maddesinde belirtilen yeterli çoğunluk (<strong>${yeterSayiHesapla()}</strong> veli) sağlanamadığından, aynı madde gereğince çoğunluk aranmaksızın <strong>${escapeHtml(eT)} ${escapeHtml(eG)}</strong> günü saat <strong>${escapeHtml(t.saat)}</strong>'te yeniden toplanmak üzere toplantı ertelenmiştir.</div>`;
+            ert = `<div class="pdf-erteleme-notu"><strong>YETER SAYI SAĞLANAMADIĞI İÇİN TOPLANTININ ERTELENMESİ:</strong><br>Toplantıda Okul Aile Birliği Yönetmeliği'nin 9. maddesinde belirtilen yeterli çoğunluk (<strong>${yeterSayiHesapla()}</strong> veli) sağlanamadığından, aynı madde gereğince çoğunluk aranmaksızın <strong>${escapeHtml(eT)} ${escapeHtml(eG)}</strong> günü saat <strong>${escapeHtml(t.saat)}</strong>'te yeniden toplanmak üzere toplantı ertelenmiştir.</div>`;
         } else if (tur === '2') {
-            ert = `<div class="pdf-erteleme-notu" style="margin:10px 0;padding:10px;border:1px solid #000;background:#e8f0fe;font-weight:bold;"><strong>İKİNCİ TOPLANTI (ÇOĞUNLUK ARANMAZ):</strong> Bu toplantı, Okul Aile Birliği Yönetmeliği'nin 9. maddesi gereğince ilk toplantıda yeterli çoğunluk sağlanamadığı için yapılan ikinci toplantıdır.</div>`;
+            ert = `<div class="pdf-erteleme-notu"><strong>İKİNCİ TOPLANTI (ÇOĞUNLUK ARANMAZ):</strong> Bu toplantı, Okul Aile Birliği Yönetmeliği'nin 9. maddesi gereğince ilk toplantıda yeterli çoğunluk sağlanamadığı için yapılan ikinci toplantıdır.</div>`;
         }
         let sm = '', oy = '';
         if (bas) {
@@ -1690,7 +1842,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             <div style="margin-top:10px;">${par}</div>${ert}
             ${bas ? `<div class="pdf-tablo-wrap"><div style="font-weight:bold;text-align:center;margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo"><thead><tr><th>Sıra</th><th>Adı Soyadı</th><th>Görev</th><th>Oy Sayısı</th><th>İmza</th></tr></thead><tbody>${oy}</tbody></table></div>${sm}` : sm}
             <div class="pdf-tut-tarih-ortala">${escapeHtml(t.tarih)}</div>
-            <div style="text-align:center;margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="display:flex;justify-content:space-around;margin-top:10px;"><div><br><br><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong><br>Divan Bşk.</div><div><br><br><strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong><br>Yazman</div></div></div>`;
+            <div style="text-align:center;margin-top:10px;"><div><strong>DİVAN KURULU</strong></div><div style="margin-top:10px;"><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong> (Divan Bşk.) &nbsp;&nbsp; <strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong> (Yazman)</div></div>`;
     }
 
     function buildEvrak8() {
@@ -1705,8 +1857,15 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
             <div style="text-align:center;font-weight:bold;font-size:13pt;margin:15px 0 10px 0;">GİDER TAHMİNİ BÜTÇE</div>
             <table class="pdf-tablo"><thead><tr><th>Sıra</th><th>GİDERİN CİNSİ</th><th>MİKTARI TL</th></tr></thead><tbody>${giR}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${giT.toFixed(2)} TL</strong></td></tr></tfoot></table>
             <div style="text-align:center;font-weight:bold;margin-top:30px;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU</div>
-            <div style="display:flex;justify-content:space-around;margin-top:20px;"><div><br><br>${escapeHtml(u[0])}<br>Üye</div><div><br><br>${escapeHtml(u[1])}<br>Üye</div><div><br><br>${escapeHtml(u[2])}<br>Üye</div></div>
-            <div style="display:flex;justify-content:space-around;margin-top:40px;"><div><br><br>${escapeHtml(u[3])}<br>Üye</div><div><br><br>${escapeHtml(u[4])}<br>Üye</div></div>`;
+            <div style="text-align:center;margin-top:20px;">
+                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[0])}<br>Üye</div>
+                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[1])}<br>Üye</div>
+                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[2])}<br>Üye</div>
+            </div>
+            <div style="text-align:center;margin-top:40px;">
+                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[3])}<br>Üye</div>
+                <div style="display:inline-block;margin:0 10px;"><br><br>${escapeHtml(u[4])}<br>Üye</div>
+            </div>`;
     }
 
     function buildEvrak9() {
