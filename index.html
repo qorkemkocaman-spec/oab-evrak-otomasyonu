@@ -64,7 +64,7 @@
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
         
-        /* ✅ DÜZELTME: İki yana yasla yerine sola yasla */
+        /* Sola yaslı metinler */
         .pdf-body { text-align: left; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
         .pdf-signature { text-align: right; line-height: 1.2; margin: 20px 0; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
@@ -76,7 +76,6 @@
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
         
-        /* ✅ DÜZELTME: Tutanak metinleri sola yaslı */
         .pdf-tut-metin { text-align: left; line-height: 1.3; margin-bottom: 10px; }
         
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
@@ -592,7 +591,7 @@ Yapılan incelemede;
 - TEFBİS sistemine gerekli veri girişlerinin yapıldığı ve çıktıların dosyalandığı,
 - Devir işlemlerinin [DEVIR_TARIHI] tarihinde eksiksiz tamamlandığı tespit edilmiştir.
 
-Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kurulu faaliyetlerinin usulüne uygun olduğu, gelir-gider bilançosunun doğru olduğu ve yeni döneme devredilecek tutarın [DEVIR_TUTAR] TL olduğu tarafımızdan onaylanmıştır. İş bu rapor, Genel Kurul'a sunulmak üzere tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
+Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kurulu faaliyetlerinin usulüne uygun olduğu, gelir-gider bilançosunun doğru olduğu ve yeni döneme devredilecek tutarın [DEVIR_TUTAR] TL olduğu tarafımızdan onaylanmıştır. İş bu rapor, [GENEL_KURUL_TARIHI] tarihinde yapılacak olan Genel Kurul'a sunulmak üzere tarafımızdan tanzim edilerek imza altına alınmıştır.</textarea>
                 </div>
             </div>
 
@@ -1376,7 +1375,6 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         return t.replace(/\n/g,'<br>');
     }
 
-    // ✅ DÜZELTME: İmza tabloları page-break-inside: avoid DIV ve satır bazlı koruma ile sarıldı
     const imzaYk = (t, m, s, u, by, b) => `
         <div style="page-break-inside: avoid; mso-table-layout-alt: fixed;">
         <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; page-break-inside: avoid; mso-table-layout-alt:fixed; margin-top:20px;">
@@ -2041,8 +2039,9 @@ ${htmlContent}
             const t = formatDate(document.getElementById('dkEylulTarihi').value);
             const ykE = formatDate(document.getElementById('ykEylulTarihi').value);
             const dBas = formatDate(document.getElementById('prevDonemBaslangic').value);
+            const genelKurulTar = formatDate(document.getElementById('toplantiTarihi').value); // DÜZELTME: Genel Kurul Tarihi eklendi
             const d = Math.max(0, parseFloat(document.getElementById('oGelirToplam').textContent||0) - parseFloat(document.getElementById('oGiderToplam').textContent||0)).toFixed(2);
-            const m = formatMetin('dkEylulMetni', {'OKUL_ADI':o,'DÖNEM_BASLANGIC':dBas,'DÖNEM_BITIS':ykE,'TARİH':t,'DEVIR_TARIHI':ykE,'DEVIR_TUTAR':d});
+            const m = formatMetin('dkEylulMetni', {'OKUL_ADI':o,'DÖNEM_BASLANGIC':dBas,'DÖNEM_BITIS':ykE,'TARİH':t,'DEVIR_TARIHI':ykE,'DEVIR_TUTAR':d,'GENEL_KURUL_TARIHI':genelKurulTar});
             return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ DENETİM KURULU<br><strong>${escapeHtml(oY)}</strong> DÖNEMİ NİHAİ DENETİM RAPORU</div><div class="pdf-tut-metin">${m}</div>${imzaDk(t, pB, pBY, pM)}`;
         }
         return '<div style="text-align:center;padding:20px;">Bu evrak için içerik tanımlanmamış.</div>';
