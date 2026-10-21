@@ -257,7 +257,7 @@
                 <div class="form-group"><label>YK Üye</label><input type="text" id="ykUye" value="Yönetim Kurulu Üyesi"></div>
                 <div class="form-group"><label>DK Başkan (Öğretmen)</label><input type="text" id="dkBaskan" value="Öğretmen Üye"></div>
                 <div class="form-group"><label>DK Başkan Yrd. (Öğretmen)</label><input type="text" id="dkBaskanYrd" value="Öğretmen Üye"></div>
-                <div class="form-group"><label>DK Muhasip (Veli)</label><input type="text" id="dkMuhasip" value="Veli Üye"></div>
+                <div class="form-group"><label>DK Veli Üye</label><input type="text" id="dkMuhasip" value="Veli Üye"></div>
                 <div class="form-group"><label>DK Yedek Öğretmen 1</label><input type="text" id="dkYedekOgr1" value="Yedek Öğretmen 1"></div>
                 <div class="form-group"><label>DK Yedek Öğretmen 2</label><input type="text" id="dkYedekOgr2" value="Yedek Öğretmen 2"></div>
                 <div class="form-group"><label>DK Yedek Veli</label><input type="text" id="dkYedekVeli" value="Yedek Veli"></div>
@@ -409,7 +409,7 @@ Disiplin Adayı, 0, OKUL DİSİPLİN KURULU ÜYESİ</textarea>
                 <div class="ozel-grid">
                     <div class="form-group"><label>Başkan (Öğretmen)</label><input type="text" id="prevDkBaskan" value="Önceki DK Başkanı"></div>
                     <div class="form-group"><label>Başkan Yrd. (Öğretmen)</label><input type="text" id="prevDkBaskanYrd" value="Önceki DK Başkan Yrd."></div>
-                    <div class="form-group"><label>Muhasip (Veli)</label><input type="text" id="prevDkMuhasip" value="Önceki DK Muhasip"></div>
+                    <div class="form-group"><label>Veli Üye</label><input type="text" id="prevDkMuhasip" value="Önceki DK Veli Üye"></div>
                 </div>
             </div>
 
@@ -659,7 +659,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
 <div id="pdf-wrapper"><div id="pdf-content"></div></div>
 
 <script>
-    const APP_VERSION = '2.0'; // Sürüm kontrolü için eklendi
+    const APP_VERSION = '2.1'; // Sürüm kontrolü için eklendi
     let aktifSekme = 'genel';
     let okulLogoBase64 = '';
     let lastBirlikDurumu = 'mevcut';
@@ -1425,7 +1425,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
                 <tr style="page-break-inside: avoid;">
                     <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(b)}</strong><br>Başkan</td>
                     <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yrd.</td>
-                    <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</td>
+                    <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(m)}</strong><br>Veli Üye</td>
                 </tr>
             </tbody>
         </table>
@@ -2034,7 +2034,7 @@ ${htmlContent}
         if (sec === 'dk1') {
             const t = formatDate(document.getElementById('dkTarihi1').value);
             const m = formatMetin('dk1Metni', {'OKUL_ADI':o,'TARİH':t,'EĞİTİM_YILI':y});
-            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div><div class="pdf-tablo-wrap"><table class="pdf-tablo" style="width:100%; table-layout:fixed;"><colgroup><col style="width:33.33%"><col style="width:33.33%"><col style="width:33.34%"></colgroup><tbody><tr><th>Başkan</th><th>Başkan Yrd.</th><th>Muhasip</th></tr><tr><td>${escapeHtml(dB)}</td><td>${escapeHtml(dBY)}</td><td>${escapeHtml(dM)}</td></tr></tbody></table></div><div style="margin-top:20px;"></div>${imzaDk(t, dB, dBY, dM)}`;
+            return `<div class="pdf-header"><strong>${escapeHtml(ob)}</strong><br>OKUL AİLE BİRLİĞİ DENETLEME KURULU TOPLANTI TUTANAĞI</div><div class="pdf-tut-metin">${m}</div><div class="pdf-tablo-wrap"><table class="pdf-tablo" style="width:100%; table-layout:fixed;"><colgroup><col style="width:33.33%"><col style="width:33.33%"><col style="width:33.34%"></colgroup><tbody><tr><th>Başkan</th><th>Başkan Yrd.</th><th>Veli Üye</th></tr><tr><td>${escapeHtml(dB)}</td><td>${escapeHtml(dBY)}</td><td>${escapeHtml(dM)}</td></tr></tbody></table></div><div style="margin-top:20px;"></div>${imzaDk(t, dB, dBY, dM)}`;
         }
         if (sec === 'dk2') {
             const t = formatDate(document.getElementById('dkTarihi2').value);
