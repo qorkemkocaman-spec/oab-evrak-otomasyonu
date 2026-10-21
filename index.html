@@ -186,7 +186,7 @@
                 <div class="form-group full-width">
                     <label>Eğitim Öğretim Yılı</label>
                     <div style="display:flex; gap:10px; align-items:center;">
-                        <input type="text" id="egitimYili" value="2025-2026" style="flex:1;">
+                        <input type="text" id="egitimYili" value="2025-2026" style="flex:1;" readonly>
                         <button type="button" onclick="tarihleriOtomatikHesapla()" style="background:#3498db; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:bold; white-space:nowrap;">🔄 Tarihleri Otomatik Hesapla</button>
                     </div>
                 </div>
@@ -200,9 +200,10 @@
                 <div class="form-group genel-kurul-only"><label>Üst Yazı Tarihi (Otomatik)</label><input type="date" id="yaziTarihi" value="2025-10-15" readonly style="background:#e9ecef;"></div>
                 <div class="form-group genel-kurul-only"><label>Karar No</label><input type="text" id="kararNo" value="01"></div>
                 <div class="form-group genel-kurul-only"><label>Evrak Sayı No</label><input type="text" id="sayiNo" value="2025/165.01/01"></div>
-                <div class="form-group genel-kurul-only">
-                    <label>Toplantı Tarihi (1. Toplantı)</label>
-                    <input type="date" id="toplantiTarihi" value="2025-10-30" onchange="validateTarihler();">
+                <div class="form-group genel-kurul-only" style="background:#e8f4fd; padding:10px; border-radius:6px; border:1px solid #b8d4f0;">
+                    <label style="color:#1e6091;">📌 Genel Kurul Toplantı Tarihi (Baz Tarih)</label>
+                    <input type="date" id="toplantiTarihi" value="2025-10-30" onchange="toplantiTarihiDegisti()" style="border-color:#3498db; font-weight:bold;">
+                    <small style="color:#1e6091; margin-top:4px;">Değiştirdiğinizde tüm tarihler otomatik güncellenir.</small>
                     <span id="toplantiTarihiUyari" class="uyari"></span>
                 </div>
                 <div class="form-group genel-kurul-only"><label>Toplantı Saati</label><input type="time" id="toplantiSaati" value="10:15"></div>
@@ -659,7 +660,7 @@ Sonuç olarak; [DÖNEM_BASLANGIC] – [DÖNEM_BITIS] dönemine ait Yönetim Kuru
 <div id="pdf-wrapper"><div id="pdf-content"></div></div>
 
 <script>
-    const APP_VERSION = '2.1'; // Sürüm kontrolü için eklendi
+    const APP_VERSION = '2.2'; // Sürüm kontrolü için eklendi
     let aktifSekme = 'genel';
     let okulLogoBase64 = '';
     let lastBirlikDurumu = 'mevcut';
@@ -912,17 +913,34 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
 9. Dilek ve temenniler dinlendi. İş bu tutanak tarafımızdan tanzim edilerek imza altına alınmıştır.`;
 
     function tarihleriOtomatikHesapla(showAlert = true) {
-        const p = document.getElementById('egitimYili').value.trim().split('-');
-        if (p.length !== 2 || isNaN(parseInt(p[0])) || isNaN(parseInt(p[1])) || parseInt(p[1]) !== parseInt(p[0])+1) {
-            if (showAlert) alert('Eğitim-Öğretim Yılı "2025-2026" formatında olmalıdır.');
+        const topVal = document.getElementById('toplantiTarihi').value;
+        if (!topVal) {
+            if (showAlert) alert('Lütfen önce Genel Kurul Toplantı Tarihini seçin.');
             return;
         }
-        const bas = parseInt(p[0]), bit = parseInt(p[1]);
-        document.getElementById('prevDonemBaslangic').value = getLastWeekdayOfMonth(bas-1, 10);
-        document.getElementById('ykEylulTarihi').value = getLastWeekdayOfMonth(bas, 9);
-        const top = getLastWeekdayOfMonth(bas, 10);
-        document.getElementById('toplantiTarihi').value = top;
-        let karar = subtractDays(top, 15);
+        const topDate = parseLocalDate(topVal);
+        if (isNaN(topDate)) {
+            if (showAlert) alert('Geçersiz toplantı tarihi.');
+            return;
+        }
+        const topYil = topDate.getFullYear();
+        const topAy = topDate.getMonth() + 1;
+
+        let bas, bit;
+        if (topAy >= 9) { // Eylül, Ekim, Kasım, Aralık
+            bas = topYil;
+            bit = topYil + 1;
+        } else { // Ocak - Ağustos
+            bas = topYil - 1;
+            bit = topYil;
+        }
+
+        document.getElementById('egitimYili').value = `${bas}-${bit}`;
+        document.getElementById('oncekiEgitimYili').value = `${bas-1}-${bas}`;
+        document.getElementById('sayiNo').value = `${bas}/165.01/01`;
+
+        // Karar Tarihi (Toplantıdan en az 15 gün önce, iş günü)
+        let karar = subtractDays(topVal, 15);
         let kd = parseLocalDate(karar);
         if (!isNaN(kd)) {
             while (kd.getDay() === 0 || kd.getDay() === 6) kd.setDate(kd.getDate()-1);
@@ -930,15 +948,23 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         }
         document.getElementById('kararTarihi').value = karar;
         document.getElementById('yaziTarihi').value = karar;
-        let ert = addBusinessDays(top, 14);
-        const topD = parseLocalDate(top), ertD = parseLocalDate(ert);
+
+        // Erteleme Tarihi (Toplantıdan 14 iş günü sonra, en fazla 30 gün)
+        let ert = addBusinessDays(topVal, 14);
+        const topD = parseLocalDate(topVal), ertD = parseLocalDate(ert);
         if (!isNaN(topD) && !isNaN(ertD) && (ertD - topD) / 86400000 > 30) {
-            let d = parseLocalDate(top); d.setDate(d.getDate()+30);
+            let d = parseLocalDate(topVal); d.setDate(d.getDate()+30);
             while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate()-1);
             ert = formatDateISO(d);
         }
         document.getElementById('ertelemeTarihi').value = ert;
-        document.getElementById('ykToplantiTarihi').value = addBusinessDays(top, 1);
+
+        // YK İlk Toplantı (Toplantıdan 1 iş günü sonra)
+        document.getElementById('ykToplantiTarihi').value = addBusinessDays(topVal, 1);
+
+        // Sabit tarihler (Eğitim yılı bazlı)
+        document.getElementById('prevDonemBaslangic').value = getLastWeekdayOfMonth(bas-1, 10);
+        document.getElementById('ykEylulTarihi').value = getLastWeekdayOfMonth(bas, 9);
         document.getElementById('ykKasimTarihi').value = getLastWeekdayOfMonth(bas, 11);
         document.getElementById('ykAralikTarihi').value = getLastWeekdayBefore(bas, 12);
         document.getElementById('ykOcakTarihi').value = getLastWeekdayOfMonth(bit, 1);
@@ -947,19 +973,19 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         document.getElementById('ykNisanTarihi').value = getLastWeekdayOfMonth(bit, 4);
         document.getElementById('ykMayisTarihi').value = getLastWeekdayOfMonth(bit, 5);
         document.getElementById('ykHaziranTarihi').value = getLastWeekdayBefore(bit, 6);
-        document.getElementById('sayiNo').value = `${bas}/165.01/01`;
-        document.getElementById('oncekiEgitimYili').value = `${bas-1}-${bas}`;
+
         updateDkTarihleri();
         validateTarihler();
         updateTutanakMetinleri();
         saveToStorage();
-        if (showAlert) alert('Tarihler hesaplandı.');
+        if (showAlert) alert('Tüm tarihler Genel Kurul Toplantı Tarihine göre başarıyla güncellendi.');
     }
     function initDefaultDates() {
         if (localStorage.getItem('oab_egitimYili')) return;
         const n = new Date(), y = n.getFullYear(), m = n.getMonth()+1;
         const s = m < 7 ? y-1 : y;
-        document.getElementById('egitimYili').value = `${s}-${s+1}`;
+        const defaultTop = getLastWeekdayOfMonth(s, 10);
+        document.getElementById('toplantiTarihi').value = defaultTop;
         tarihleriOtomatikHesapla(false);
     }
     function updateDkTarihleri() {
@@ -973,6 +999,12 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         document.getElementById('yaziTarihi').value = document.getElementById('kararTarihi').value;
         validateTarihler();
         updateTutanakMetinleri();
+    }
+    function toplantiTarihiDegisti() {
+        tarihleriOtomatikHesapla(false);
+        validateTarihler();
+        updateTutanakMetinleri();
+        saveToStorage();
     }
 
     function validateToplantiTarihi() {
