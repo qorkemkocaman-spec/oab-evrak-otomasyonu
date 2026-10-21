@@ -63,16 +63,22 @@
         .pdf-info-row td { border: none; padding: 0; vertical-align: top; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
-        .pdf-body { text-align: justify; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
+        
+        /* ✅ DÜZELTME: İki yana yasla yerine sola yasla */
+        .pdf-body { text-align: left; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
         .pdf-signature { text-align: right; line-height: 1.2; margin: 20px 0; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
-        .agenda-item { line-height: 1.25; margin: 0 0 3px 0; word-wrap: break-word; overflow-wrap: break-word; }
+        .agenda-item { line-height: 1.25; margin: 0 0 3px 0; word-wrap: break-word; overflow-wrap: break-word; text-align: left; }
+        
         .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; table-layout: fixed; }
         .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 4px 6px; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
         .pdf-tablo th { background: #eee; }
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
-        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
+        
+        /* ✅ DÜZELTME: Tutanak metinleri sola yaslı */
+        .pdf-tut-metin { text-align: left; line-height: 1.3; margin-bottom: 10px; }
+        
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
         .pdf-logo-container { text-align: center; margin-bottom: 5px; }
         .pdf-logo-container img { height: 5cm; width: auto; }
@@ -1370,35 +1376,44 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         return t.replace(/\n/g,'<br>');
     }
 
+    // ✅ DÜZELTME: İmza tabloları page-break-inside: avoid DIV ve satır bazlı koruma ile sarıldı
     const imzaYk = (t, m, s, u, by, b) => `
-        <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; mso-table-layout-alt:fixed;">
+        <div style="page-break-inside: avoid; mso-table-layout-alt: fixed;">
+        <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; page-break-inside: avoid; mso-table-layout-alt:fixed; margin-top:20px;">
             <colgroup><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.70%"></colgroup>
             <tbody>
-                <tr><td colspan="6" style="border:none; padding:20px 5px 6px 5px; text-align:center; font-weight:bold;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br>${escapeHtml(t)}</td></tr>
-                <tr>
+                <tr style="page-break-inside: avoid;">
+                    <td colspan="6" style="border:none; padding:10px 5px 6px 5px; text-align:center; font-weight:bold;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU<br>${escapeHtml(t)}</td>
+                </tr>
+                <tr style="page-break-inside: avoid;">
                     <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</td>
                     <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(s)}</strong><br>Yazman</td>
                     <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u)}</strong><br>Üye</td>
                 </tr>
-                <tr>
+                <tr style="page-break-inside: avoid;">
                     <td colspan="3" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yardımcısı</td>
                     <td colspan="3" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(b)}</strong><br>Okul Aile Birliği Başkanı</td>
                 </tr>
             </tbody>
-        </table>`;
+        </table>
+        </div>`;
 
     const imzaDk = (t, b, by, m) => `
-        <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; mso-table-layout-alt:fixed;">
+        <div style="page-break-inside: avoid; mso-table-layout-alt: fixed;">
+        <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; page-break-inside: avoid; mso-table-layout-alt:fixed; margin-top:20px;">
             <colgroup><col style="width:33.33%"><col style="width:33.33%"><col style="width:33.34%"></colgroup>
             <tbody>
-                <tr><td colspan="3" style="border:none; padding:20px 5px 6px 5px; text-align:center; font-weight:bold;">DENETİM KURULU<br>${escapeHtml(t)}</td></tr>
-                <tr>
+                <tr style="page-break-inside: avoid;">
+                    <td colspan="3" style="border:none; padding:10px 5px 6px 5px; text-align:center; font-weight:bold;">DENETİM KURULU<br>${escapeHtml(t)}</td>
+                </tr>
+                <tr style="page-break-inside: avoid;">
                     <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(b)}</strong><br>Başkan</td>
                     <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(by)}</strong><br>Başkan Yrd.</td>
                     <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(m)}</strong><br>Muhasip</td>
                 </tr>
             </tbody>
-        </table>`;
+        </table>
+        </div>`;
 
     function buildCurrentHTML() {
         const sec = document.getElementById('evrakSec').value;
@@ -1455,10 +1470,11 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
         .pdf-info-row td { border: none; padding: 0; vertical-align: top; }
         .pdf-subject { margin-bottom: 15px; }
         .pdf-salutation { text-align: center; font-weight: bold; margin-bottom: 10px; }
-        .pdf-body { text-align: justify; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
+        
+        .pdf-body { text-align: left; text-indent: 1.27cm; line-height: 1.3; margin-bottom: 20px; }
         .pdf-signature { text-align: right; line-height: 1.2; margin: 20px 0; }
         .pdf-agenda-title { font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
-        .agenda-item { line-height: 1.25; margin: 0 0 3px 0; word-wrap: break-word; overflow-wrap: break-word; }
+        .agenda-item { line-height: 1.25; margin: 0 0 3px 0; word-wrap: break-word; overflow-wrap: break-word; text-align: left; }
 
         .pdf-tablo { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; table-layout: fixed; mso-table-layout-alt: fixed; page-break-inside: avoid; }
         .pdf-tablo th, .pdf-tablo td { border: 1px solid #000; padding: 4px 6px; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
@@ -1467,7 +1483,7 @@ Toplantıya Yönetim Kurulu üyeleri katılmış olup toplantı yeter sayısı s
 
         .pdf-ortala { text-align: center; }
         .pdf-sag { text-align: right; }
-        .pdf-tut-metin { text-align: justify; line-height: 1.3; margin-bottom: 10px; }
+        .pdf-tut-metin { text-align: left; line-height: 1.3; margin-bottom: 10px; }
         .pdf-duyuru-metin { font-size: 14pt; font-weight: bold; text-align: center; margin: 5px 0; }
         .pdf-logo-container { text-align: center; margin-bottom: 5px; }
         .pdf-logo-container img { height: 5cm; width: auto; }
@@ -1792,11 +1808,11 @@ ${htmlContent}
             <div style="margin-top:10px;">${par}</div>${ert}
             ${bas ? `<div class="pdf-tablo-wrap"><div style="font-weight:bold;text-align:center;margin:10px 0;">OYLARIN DAĞILIMI</div><table class="pdf-tablo" style="width:100%; table-layout:fixed;"><colgroup><col style="width:8%"><col style="width:27%"><col style="width:25%"><col style="width:15%"><col style="width:25%"></colgroup><thead><tr><th>Sıra</th><th>Adı Soyadı</th><th>Görev</th><th>Oy Sayısı</th><th>İmza</th></tr></thead><tbody>${oy}</tbody></table></div>${sm}` : sm}
             <div class="pdf-tut-tarih-ortala">${escapeHtml(t.tarih)}</div>
-            <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; mso-table-layout-alt:fixed;">
+            <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; page-break-inside: avoid; mso-table-layout-alt:fixed; margin-top:20px;">
                 <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
                 <tbody>
-                    <tr><td colspan="2" style="border:none; padding:6px; text-align:center; font-weight:bold;">DİVAN KURULU</td></tr>
-                    <tr>
+                    <tr style="page-break-inside: avoid;"><td colspan="2" style="border:none; padding:6px; text-align:center; font-weight:bold;">DİVAN KURULU</td></tr>
+                    <tr style="page-break-inside: avoid;">
                         <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(document.getElementById('divanBaskani').value)}</strong><br>(Divan Başkanı)</td>
                         <td style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(document.getElementById('divanKatip').value)}</strong><br>(Yazman)</td>
                     </tr>
@@ -1815,21 +1831,23 @@ ${htmlContent}
             <table class="pdf-tablo" style="width:100%; table-layout:fixed;"><colgroup><col style="width:8%"><col style="width:62%"><col style="width:30%"></colgroup><thead><tr><th>Sıra</th><th>GELİRİN CİNSİ</th><th>MİKTARI TL</th></tr></thead><tbody>${gR}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${gT.toFixed(2)} TL</strong></td></tr></tfoot></table>
             <div style="text-align:center;font-weight:bold;font-size:13pt;margin:15px 0 10px 0;">GİDER TAHMİNİ BÜTÇE</div>
             <table class="pdf-tablo" style="width:100%; table-layout:fixed;"><colgroup><col style="width:8%"><col style="width:62%"><col style="width:30%"></colgroup><thead><tr><th>Sıra</th><th>GİDERİN CİNSİ</th><th>MİKTARI TL</th></tr></thead><tbody>${giR}</tbody><tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td class="pdf-sag"><strong>${giT.toFixed(2)} TL</strong></td></tr></tfoot></table>
-            <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; mso-table-layout-alt:fixed;">
+            <div style="page-break-inside: avoid; mso-table-layout-alt: fixed;">
+            <table class="sig-table" style="width:100%; table-layout:fixed; border-collapse:collapse; border:none; page-break-inside: avoid; mso-table-layout-alt:fixed; margin-top:20px;">
                 <colgroup><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.66%"><col style="width:16.70%"></colgroup>
                 <tbody>
-                    <tr><td colspan="6" style="border:none; padding:20px 5px 6px 5px; text-align:center; font-weight:bold;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU</td></tr>
-                    <tr>
+                    <tr style="page-break-inside: avoid;"><td colspan="6" style="border:none; padding:10px 5px 6px 5px; text-align:center; font-weight:bold;">OKUL AİLE BİRLİĞİ YÖNETİM KURULU</td></tr>
+                    <tr style="page-break-inside: avoid;">
                         <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u[0])}</strong><br>Üye</td>
                         <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u[1])}</strong><br>Üye</td>
                         <td colspan="2" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u[2])}</strong><br>Üye</td>
                     </tr>
-                    <tr>
+                    <tr style="page-break-inside: avoid;">
                         <td colspan="3" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u[3])}</strong><br>Üye</td>
                         <td colspan="3" style="border:none; padding:6px 5px; text-align:center; vertical-align:top;"><br><br><strong>${escapeHtml(u[4])}</strong><br>Üye</td>
                     </tr>
                 </tbody>
-            </table>`;
+            </table>
+            </div>`;
     }
 
     function buildEvrak9() {
@@ -2059,7 +2077,6 @@ ${htmlContent}
         hesaplaButce();
         validateTarihler();
         updateDkTarihleri();
-        // ✅ Sadece tutanak boşsa üret (kullanıcı düzenlemesini koru)
         const mid = getToplantiMetinId();
         const midEl = document.getElementById(mid);
         if (midEl && !midEl.value.trim()) updateTutanakMetinleri();
